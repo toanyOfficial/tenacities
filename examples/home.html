@@ -1,0 +1,759 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Tenacities (1)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="34611511-877d-80f4-88b1-df7ba093a643" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="Tenacities.png"/></div><h1 class="page-title" dir="auto">Tenacities (1)</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="34611511-877d-818f-832a-e0a9e440a418"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Tenacity + ies<br/>: 의지를 가진 사람들</div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="34611511-877d-8198-b04e-cbee75744083"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="34611511-877d-810f-b5c9-ef16d049a261" class="">Tena + cities<br/>: 의지를 가진 사람들이 만들어갈 Seamless world</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="34611511-877d-819b-aa50-dcff5269cfc5" class="">
+</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-8100-96f1-eb899f3b8710" class="">저희 Tenacities는 22년 03월, Metaverse를 목표로 설립된 회사입니다.</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-8103-9090-c30b973689e9" class="">
+</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-81b6-9d69-cd7e62f0f2d2" class="">저는 어렸을 때 부터 하나의 ‘세상’을 만들고 싶었습니다.</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-8194-bf8e-e936fcbcf8db" class="">사업체, 즉 회사도 ‘하나의 세상’이기 때문에 자연스럽게 창업의 길을 걷게 되었던 것 같습니다.</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-815c-8fce-e50830c3fed7" class="">
+</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-81c7-b2b3-c4ce65d0eb63" class="">다양한 시도와 실패, 경험과 성장을 반복하던 중 ‘메타버스’라는 키워드가 찾아왔습니다.</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-8192-8ee7-ecb1499313df" class="">메타버스에 대해 자세히 알지 못했지만 운명적인 키워드로 다가왔습니다.</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-81dd-8885-d48a882a4a52" class="">메타버스는 그 자체로 ‘하나의 세상’이기 때문입니다.</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-81c2-8ba3-ce33300e0b4c" class="">
+</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-8118-b747-d0195fccf125" class="">고리타분한 격언이지만 저는 ‘수신제가치국평천하’라는 렌즈를 통해 세상을 바라봅니다.</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-81f6-95ea-cb965921ad1c" class="">나 자신이 하나의 세상이듯<br/>내 가정도 하나의 세상이고<br/>더 나아가 회사도 하나의 세상이기 때문입니다.</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-81dc-a63e-e358cf5e759d" class="">하지만 저는 다스릴 나라도 없고 천하를 평정할 생각 역시 없기 때문에</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-8137-8a79-d3f837ddfdff" class="">제 식대로 조금은 변형한, ‘修身 齊家 治社 愛天下’라는 가치관을 바탕으로 제 인식과 인생을 확장해나갑니다.<br/></p></div><div style="display:contents" dir="auto"><h1 id="34611511-877d-8178-8dc7-c81d1f34d885" class="">⚖️ 治社</h1></div><div style="display:contents" dir="auto"><hr id="34611511-877d-81b4-aac2-dbfd49269e5a"/></div><div style="display:contents" dir="auto"><p id="34611511-877d-811b-bcf4-f72b27353a99" class="">저희 Tenacities는 Metaverse를 목표로 하지만 학계에서 논의되는 Metaverse와는 견해가 많이 다를 수 있습니다. </p></div><div style="display:contents" dir="auto"><div id="34611511-877d-8182-bc5c-c4ff27a6bafd" class="column-list"><div style="display:contents" dir="auto"><div id="34611511-877d-81e5-8540-cec9694c3119" style="width:50%" class="column"><div style="display:contents" dir="auto"><h3 id="34611511-877d-81df-9aac-c2e3c00830af" class="">1️⃣ Metaverse에 대한 오해와 본질</h3></div><div style="display:contents" dir="auto"><p id="34611511-877d-813f-a51b-d398b4f80ab4" class="">많은 사람들이 Metaverse, 3D World, 가상현실을 혼동하곤 합니다. 저희 Tenacities 역시 시작은 그러하였습니다.</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-81f4-b805-f959c67f7486" class="">
+</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-8180-a132-db81fe00ea68" class="">하지만 탐구를 거듭한 결과 저희는 Seamless world가 Metaverse의 본질이라고 해석하였습니다.</p></div><div style="display:contents" dir="auto"><h3 id="34611511-877d-81f1-a644-f05458d4782c" class="">2️⃣ Seamless world란</h3></div><div style="display:contents" dir="auto"><p id="34611511-877d-817a-a8dc-cf03769b9da7" class="">‘나’라는 존재는 언제 어느곳에서든 연속된 상태로, Seamless한 상태로 존재합니다.</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-8151-b661-e40964435f72" class="">
+</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-81b0-8e7c-ea9b12d3dcc5" class="">내가 초등학교를 졸업하고 중학교에 입학했을 때, 나는 중학교라는 사회에서의 구성원으로 활동 할 수 없습니다. 해당 학교의 관리시스템에 내 인적사항을 등록하고 학번을 발급받기 전까지는요. 나는 Seamless하지만 World가 Seamless하지 못합니다. 중앙화 된 관리 시스템 때문이지요.</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-81ba-9610-e560c27ecab0" class="">
+</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-8184-955f-e6704c40c2c1" class="">내가 한국에서 미국으로 넘어갔을 때도 마찬가지입니다. 미국의 관리시스템에 ‘나’라는 사람의 인적정보가 등록되지 않으면 나는 구성원으로서 존재 할 수 없습니다.</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-811a-99e0-cdfd9f2f1106" class="">
+</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-81cc-8593-eb3a30b03b36" class="">‘Metaverse’와 ‘탈중앙화’가 불가분의 관계인 것은 정치적인 관점이 아니라 Seamless한 생존을 염원하는 인간 본성 관점의 이야기입니다. Coin, NFT, Block chain등이 함께 거론되는 것도 마찬가지이지요.</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-8174-ae93-cc257fb70a7c" class="">
+</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-81e6-92e6-ec690a08b13b" class="">
+</p></div></div></div><div style="display:contents" dir="auto"><div id="34611511-877d-8165-98dd-e5d4bfc4ecfc" style="width:50%" class="column"><div style="display:contents" dir="auto"><h3 id="34611511-877d-8107-89ba-f81e68270da4" class="">3️⃣ Tenacities의 Seamless World</h3></div><div style="display:contents" dir="auto"><p id="34611511-877d-8146-b6e0-ed63d828ad70" class="">저희 Tenacities는, Seamless world 구축에 있어 가장 중요한 세가지 본질을 ‘주거, 식음, 노동’으로 규정하였습니다.</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-8119-9dc1-c8c2cef22c18" class="">
+</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-81b9-8eb0-f237d40c87ac" class="">많은 일자리가 AI로 대체되고있는 현재와 미래일지라도 노동의 본질을 영위하고, 그 본질을 영위 할 수 있는 주거와 식음의 Eco system이 갖춰진다면 인간은 삶의 의지를 이어나갈 수 있을 것입니다.</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-81a9-a71c-f18491ffe059" class="">
+</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-81c8-8344-d6b589a0156a" class="">저희는 전 세계 어디를 가더라도. 심지어 화성으로 인류가 이주하게 되더라도 위 세가지 관점에서의 자급자족이 이루어지는 Seamless world 구축을 목표로 합니다.</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-81f5-8194-fefb0d8d9584" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="34611511-877d-81b5-b85c-f677ac74bcd3" class="">4️⃣ Tenacities와 Seamless World</h3></div><div style="display:contents" dir="auto"><p id="34611511-877d-8111-8042-fd4e017da8b0" class="">저희 Tenacities는 ‘의지를 가진 사람에게 보다 많은 기회가 제공되는 세상’을 염원합니다.</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-81ee-ab3b-cb739bc686e5" class="">
+</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-815f-8298-f50ce5d1fe41" class="">보다 나은 삶을 가꾸어나갈 의지가 있는 사람들이 모인 집단 Tenacities.</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-8188-9bfd-f8d3ce9f8ae8" class="">
+</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-81f6-adc2-ca03f94b604f" class="">우리 Tenacities는 의지를 가진 사람들이 자유롭게 삶을 영위하는 Metaverse를 목표로 합니다.</p></div><div style="display:contents" dir="auto"><p id="34611511-877d-81f3-9060-db069cc7fa1c" class="">
+</p></div></div></div></div></div><div style="display:contents" dir="auto"><h2 id="34611511-877d-8195-9662-fcb717bd2d7b" class="block-color-gray_background"><strong>🎨 CI</strong></h2></div><div style="display:contents" dir="ltr"><figure id="34611511-877d-8135-80cc-c2fb0d605e7e" class="link-to-page"><a href="Logo%2034611511877d813580ccc2fb0d605e7e.html"><img class="icon" src="Tenacities%201.png"/>Logo</a></figure></div><div style="display:contents" dir="ltr"><figure id="34611511-877d-812c-be61-fa873c26cc04" class="link-to-page"><a href="%EC%A1%B0%EC%A7%81%EB%8F%84%2034611511877d812cbe61fa873c26cc04.html"><span class="icon">🏢</span>조직도</a></figure></div><div style="display:contents" dir="auto"><h2 id="34611511-877d-814c-8af6-ec431517735c" class="block-color-gray_background">📜 연혁</h2></div><div style="display:contents" dir="ltr"><figure id="34611511-877d-817a-bd8c-dae59c0d098f" class="link-to-page"><a href="2022%2003%20(%EC%A3%BC)%ED%85%8C%EB%84%88%EC%8B%9C%ED%8B%B0%EC%A6%88%20%EC%84%A4%EB%A6%BD%20%EB%B0%8F%20%EC%82%AC%EC%97%85%EA%B0%9C%EC%8B%9C%2034611511877d817abd8cdae59c0d098f.html"><img class="icon" src="Tenacities%202.png"/>2022.03. (주)테너시티즈 설립 및 사업개시</a></figure></div><div style="display:contents" dir="ltr"><figure id="34611511-877d-81cd-8865-c5a2717f660f" class="link-to-page"><a href="2022%2005%20%EA%B8%B0%EC%88%A0%EB%B3%B4%EC%A6%9D%EA%B8%B0%EA%B8%88%202%EC%96%B5%EC%9B%90%20%EA%B8%B0%EC%88%A0%EC%8B%AC%EC%82%AC%20%EC%8A%B9%EC%9D%B8%2034611511877d81cd8865c5a2717f660f.html"><img class="icon" src="Tenacities%202.png"/>2022.05. 기술보증기금 2억원 기술심사 승인</a></figure></div><div style="display:contents" dir="ltr"><figure id="34611511-877d-815e-8516-db42b3b64acd" class="link-to-page"><a href="2022%2008%20Social%20Metaverse%20Toany%20%EB%A1%A0%EC%B9%AD%2034611511877d815e8516db42b3b64acd.html"><img class="icon" src="%EC%97%A0%EB%B8%94%EB%9F%BC.png"/>2022.08. Social Metaverse Toany 론칭</a></figure></div><div style="display:contents" dir="auto"><div id="34611511-877d-815f-b3a4-ece817716aaf" class="column-list"></div></div><div style="display:contents" dir="ltr"><figure id="34611511-877d-811b-88de-c64c687603ec" class="link-to-page"><a href="2023%2005%20NIPA_%EB%A9%94%ED%83%80%EB%B2%84%EC%8A%A4%EC%B4%88%EA%B8%B0%EA%B8%B0%EC%97%85%20%EC%9D%B8%ED%94%84%EB%9D%BC%20%EC%A7%80%EC%9B%90%EC%82%AC%EC%97%85%20%EC%B5%9C%EC%A2%85%EC%84%A0%EB%B0%9C%2034611511877d811b88dec64c687603ec.html"><img class="icon" src="Tenacities%202.png"/>2023.05. NIPA_메타버스초기기업 인프라 지원사업 최종선발</a></figure></div><div style="display:contents" dir="ltr"><figure id="34611511-877d-812c-b5ea-d719e93355c4" class="link-to-page"><a href="2023%2006%20Kpop%20rhythm%20game%20Duet%20tae-bo%2034611511877d812cb5ead719e93355c4.html"><img class="icon" src="%EA%B7%B8%EB%A6%BC1.png"/>2023.06. Kpop rhythm game Duet tae-bo</a></figure></div><div style="display:contents" dir="ltr"><figure id="34611511-877d-81f2-933f-f8619fd56214" class="link-to-page"><a href="2023%2012%20%EB%8B%A8%EA%B8%B0%EC%9E%84%EB%8C%80%EC%A4%91%EA%B0%9C%20%ED%94%8C%EB%9E%AB%ED%8F%BC%20%EB%82%98%EB%9E%98%ED%95%98%EC%9A%B0%EC%8A%A4%20%EC%99%B8%EC%A3%BC%EA%B0%9C%EB%B0%9C%20%EB%B0%8F%20%EB%9F%B0%EC%B9%AD%2034611511877d81f2933ff8619fd56214.html"><img class="icon" src="square_logo.png"/>2023.12. 단기임대중개 플랫폼 나래하우스 외주개발 및 런칭</a></figure></div><div style="display:contents" dir="ltr"><figure id="34611511-877d-816f-bc0b-c089bfe266b4" class="link-to-page"><a href="2024%2006%20%EB%8B%A8%EA%B8%B0%EC%9E%84%EB%8C%80%ED%86%B5%ED%95%A9%EA%B4%80%EB%A6%AC%EC%84%9C%EB%B9%84%EC%8A%A4%20Concierge%20Gangnam%2034611511877d816fbc0bc089bfe266b4.html"><img class="icon" src="Concierge_logo_C2.png"/>2024.06. 단기임대통합관리서비스 Concierge Gangnam</a></figure></div><div style="display:contents" dir="ltr"><figure id="34611511-877d-81b6-af11-c920806634af" class="link-to-page"><a href="2024%2012%20%EC%BB%A8%EC%8B%9C%EC%96%B4%EC%A7%80+%EC%99%B8%EC%8B%9D%EC%97%85%20%EC%97%B0%EB%A7%A4%EC%B6%9C%2013%EC%96%B5%20%EB%8B%AC%EC%84%B1%2034611511877d81b6af11c920806634af.html"><img class="icon" src="favicon-removebg-preview.png"/>2024.12. 컨시어지+외식업 연매출 13억 달성</a></figure></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
