@@ -125,23 +125,28 @@ main > section,
 
 .context > .container > p {
   margin-top: 0;
-  max-width: 80ch;
+  max-width: 72ch;
   color: var(--ink-soft);
 }
 
-.context article {
-  background: #fff;
-  border: 1px solid var(--line);
-  border-left: 4px solid rgba(231, 29, 54, .35);
-  border-radius: 10px;
-  padding: 1.05rem 1.1rem;
-  margin: .95rem 0;
+.context h3 {
+  margin: 2.1rem 0 .65rem;
+  font-family: "Newsreader", "Noto Sans KR", serif;
+  font-size: 1.32rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--ink-soft);
 }
 
-.context h3 {
-  margin: 0 0 .5rem;
-  font-size: 1.03rem;
-  color: var(--crimson-dark);
+.context p {
+  margin: 0 0 1rem;
+  max-width: 72ch;
+  color: var(--ink-soft);
+}
+
+.context .lead {
+  margin-bottom: 1.4rem;
+  color: var(--text);
 }
 
 .card-grid {
@@ -223,7 +228,10 @@ footer .container {
 }
 .section-divided { border-top: 1px solid var(--line); }
 
-.reading-width { max-width: 920px; }
+.reading-width {
+  max-width: 920px;
+  padding-left: clamp(.2rem, 1.2vw, .8rem);
+}
 .lead {
   margin: .2rem 0 0;
   color: var(--ink-soft);
