@@ -589,3 +589,26 @@ body.home-snap {
 .hero-concept-sub {
   font-size: clamp(.95rem, 1.2vw, 1.01rem);
 }
+
+/* STEP5 background section layout */
+.background-section {
+  background:
+    linear-gradient(180deg, #faf9f7 0%, #f6f3ef 100%);
+}
+.background-section .reading-width {
+  width: min(100%, 920px);
+  max-width: 920px;
+  margin-inline: auto;
+}
+.background-section .section-title {
+  margin-bottom: 1rem;
+}
+.background-section .source-p {
+  margin-bottom: .95rem;
+}
+
+@media (max-width: 1024px) {
+  .background-section .reading-width {
+    width: min(100%, 900px);
+  }
+}
