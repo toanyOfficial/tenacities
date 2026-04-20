@@ -768,3 +768,23 @@ main h2 + p,
 main h3 + p {
   margin-top: .35rem;
 }
+
+/* STEP13-1 philosophy section full-width shell */
+.home-snap .philosophy-shell,
+.home-snap .philosophy-inner {
+  width: 100%;
+}
+.home-snap .philosophy-inner .reading-width {
+  width: min(100%, 920px);
+  max-width: 920px;
+  margin-inline: auto;
+}
+
+/* STEP13-2 hide philosophy internal scrollbar, keep scroll behavior */
+.home-snap .philosophy-inner {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.home-snap .philosophy-inner::-webkit-scrollbar {
+  display: none;
+}

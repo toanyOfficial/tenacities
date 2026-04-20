@@ -62,6 +62,9 @@
   const prevSection = document.getElementById('background');
   const nextSection = document.getElementById('ci');
   let lock = false;
+  let boundaryArmed = null; // 'top' | 'bottom' | null
+  let boundaryArmedAt = 0;
+  const NEXT_INPUT_GAP = 140;
 
   const jumpTo = (el) => {
     if (!el) return;
@@ -79,20 +82,42 @@
           return;
         }
 
+        const now = performance.now();
         const atTop = philosophyInner.scrollTop <= 0;
         const atBottom = philosophyInner.scrollTop + philosophyInner.clientHeight >= philosophyInner.scrollHeight - 1;
 
+        // reset arm while actively reading inside content
+        if (!atTop && !atBottom) {
+          boundaryArmed = null;
+          return;
+        }
+
         if (e.deltaY < 0 && atTop) {
           e.preventDefault();
-          jumpTo(prevSection);
+          if (boundaryArmed === 'top' && now - boundaryArmedAt > NEXT_INPUT_GAP) {
+            boundaryArmed = null;
+            jumpTo(prevSection);
+          } else {
+            boundaryArmed = 'top';
+            boundaryArmedAt = now;
+          }
           return;
         }
 
         if (e.deltaY > 0 && atBottom) {
           e.preventDefault();
-          jumpTo(nextSection);
+          if (boundaryArmed === 'bottom' && now - boundaryArmedAt > NEXT_INPUT_GAP) {
+            boundaryArmed = null;
+            jumpTo(nextSection);
+          } else {
+            boundaryArmed = 'bottom';
+            boundaryArmedAt = now;
+          }
           return;
         }
+
+        // opposite-direction input at boundary disarms
+        boundaryArmed = null;
       },
       { passive: false }
     );
