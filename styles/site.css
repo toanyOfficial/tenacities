@@ -487,9 +487,11 @@ body.home-snap {
 }
 
 .home-snap .section-screen {
+  height: 100vh;
   min-height: 100vh;
   display: flex;
   align-items: center;
+  overflow: hidden;
 }
 
 .home-snap .section-screen > .container {
@@ -499,7 +501,9 @@ body.home-snap {
 /* Brand Philosophy exception: free internal scroll while keeping section boundary snap */
 .home-snap .philosophy-section {
   display: block;
+  height: auto;
   min-height: auto;
+  overflow: visible;
   padding-top: clamp(3rem, 5vw, 5rem);
   padding-bottom: clamp(3rem, 5vw, 5rem);
 }
@@ -513,6 +517,7 @@ body.home-snap {
 @media (max-width: 767px) {
   body.home-snap { scroll-padding-top: 92px; }
   .home-snap .section-screen {
+    height: 100dvh;
     min-height: 100dvh;
     align-items: flex-start;
     padding-top: 1.6rem;
