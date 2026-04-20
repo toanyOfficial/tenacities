@@ -526,3 +526,23 @@ body.home-snap {
     width: calc(100% - 1.2rem);
   }
 }
+
+/* STEP3 typography applied per source paragraph block */
+.source-p {
+  margin: 0 0 .88rem;
+  color: var(--ink-soft);
+  font-size: clamp(.99rem, 1.2vw, 1.06rem);
+  line-height: 1.86;
+  letter-spacing: -0.004em;
+  max-width: 72ch;
+}
+
+#background .source-p,
+#philosophy .source-p {
+  padding-left: .1rem;
+}
+
+#philosophy h3 {
+  margin-top: 1.85rem;
+  margin-bottom: .45rem;
+}
