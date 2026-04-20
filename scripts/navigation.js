@@ -1,5 +1,7 @@
 (() => {
   const doc = document.documentElement;
+  const scroller = document.querySelector('.home-snap .snap-root') || window;
+  const isElementScroller = scroller !== window;
 
   const track = document.createElement('div');
   track.className = 'progress-track';
@@ -10,23 +12,21 @@
   track.appendChild(fill);
   document.body.prepend(track);
 
+  const getScrollTop = () => (isElementScroller ? scroller.scrollTop : (doc.scrollTop || document.body.scrollTop));
+  const getScrollHeight = () => (isElementScroller ? scroller.scrollHeight - scroller.clientHeight : doc.scrollHeight - doc.clientHeight);
+
   const updateProgress = () => {
-    const scrollTop = doc.scrollTop || document.body.scrollTop;
-    const scrollHeight = doc.scrollHeight - doc.clientHeight;
+    const scrollTop = getScrollTop();
+    const scrollHeight = getScrollHeight();
     const progress = scrollHeight > 0 ? Math.min(1, Math.max(0, scrollTop / scrollHeight)) : 0;
     fill.style.transform = `scaleX(${progress})`;
   };
 
-  // Section-based navigation state
   const sectionIds = ['hero', 'background', 'philosophy', 'ci', 'history'];
   const navLinks = Array.from(document.querySelectorAll('header .nav-links a[href^="#"]'));
 
   if (navLinks.length) {
-    const sectionMap = new Map(
-      sectionIds
-        .map((id) => [id, document.getElementById(id)])
-        .filter(([, el]) => !!el)
-    );
+    const sectionMap = new Map(sectionIds.map((id) => [id, document.getElementById(id)]).filter(([, el]) => !!el));
 
     const activate = (id) => {
       navLinks.forEach((a) => {
@@ -46,7 +46,7 @@
           if (visible?.target?.id) activate(visible.target.id);
         },
         {
-          root: null,
+          root: isElementScroller ? scroller : null,
           threshold: [0.25, 0.5, 0.75],
           rootMargin: '-20% 0px -55% 0px',
         }
@@ -57,7 +57,48 @@
     }
   }
 
+  // Philosophy shell: internal free-scroll, boundary jumps to neighbor sections
+  const philosophyInner = document.querySelector('.philosophy-inner');
+  const prevSection = document.getElementById('background');
+  const nextSection = document.getElementById('ci');
+  let lock = false;
+
+  const jumpTo = (el) => {
+    if (!el) return;
+    lock = true;
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(() => { lock = false; }, 420);
+  };
+
+  if (philosophyInner && isElementScroller) {
+    philosophyInner.addEventListener(
+      'wheel',
+      (e) => {
+        if (lock) {
+          e.preventDefault();
+          return;
+        }
+
+        const atTop = philosophyInner.scrollTop <= 0;
+        const atBottom = philosophyInner.scrollTop + philosophyInner.clientHeight >= philosophyInner.scrollHeight - 1;
+
+        if (e.deltaY < 0 && atTop) {
+          e.preventDefault();
+          jumpTo(prevSection);
+          return;
+        }
+
+        if (e.deltaY > 0 && atBottom) {
+          e.preventDefault();
+          jumpTo(nextSection);
+          return;
+        }
+      },
+      { passive: false }
+    );
+  }
+
   updateProgress();
-  window.addEventListener('scroll', updateProgress, { passive: true });
+  (isElementScroller ? scroller : window).addEventListener('scroll', updateProgress, { passive: true });
   window.addEventListener('resize', updateProgress);
 })();

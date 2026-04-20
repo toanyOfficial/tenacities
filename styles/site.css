@@ -471,14 +471,15 @@ body { overflow-x: hidden; }
 /* STEP1: main page 5-section snap system */
 body.home-snap {
   height: 100vh;
-  overflow-y: auto;
-  scroll-snap-type: y proximity;
-  scroll-behavior: smooth;
-  scroll-padding-top: 78px;
+  overflow: hidden;
 }
 
 .home-snap .snap-root {
-  min-height: 100vh;
+  height: 100vh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  scroll-padding-top: 78px;
 }
 
 .home-snap .snap-boundary {
@@ -501,12 +502,17 @@ body.home-snap {
   width: min(1100px, calc(100% - 2rem));
 }
 
-/* Brand Philosophy exception: free internal scroll while keeping section boundary snap */
-.home-snap .philosophy-section {
-  display: block;
-  height: auto;
-  min-height: auto;
-  overflow: visible;
+/* Brand Philosophy exception: 100vh shell + internal free scroll */
+.home-snap .philosophy-shell {
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.home-snap .philosophy-inner {
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
   padding-top: clamp(3rem, 5vw, 5rem);
   padding-bottom: clamp(3rem, 5vw, 5rem);
 }
@@ -518,7 +524,8 @@ body.home-snap {
 }
 
 @media (max-width: 767px) {
-  body.home-snap { scroll-padding-top: 92px; }
+  body.home-snap { overflow: hidden; }
+  .home-snap .snap-root { scroll-padding-top: 92px; }
   .home-snap .section-screen {
     height: 100dvh;
     min-height: 100dvh;
