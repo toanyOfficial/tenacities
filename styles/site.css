@@ -472,7 +472,7 @@ body { overflow-x: hidden; }
 body.home-snap {
   height: 100vh;
   overflow-y: auto;
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
   scroll-behavior: smooth;
   scroll-padding-top: 78px;
 }
@@ -481,8 +481,11 @@ body.home-snap {
   min-height: 100vh;
 }
 
-.home-snap .snap-section {
+.home-snap .snap-boundary {
   scroll-snap-align: start;
+}
+
+.home-snap .section-screen.snap-boundary {
   scroll-snap-stop: always;
 }
 
