@@ -344,3 +344,17 @@ footer .container {
 }
 
 .nav-links{flex-wrap:wrap;row-gap:.35rem;}
+
+.doc-main .container {
+  max-width: 760px;
+}
+.doc-heading {
+  margin-top: 1.7rem;
+  margin-bottom: .6rem;
+  font-family: "Newsreader", "Noto Sans KR", serif;
+  font-size: 1.25rem;
+  color: var(--ink-soft);
+}
+.archive-timeline {
+  max-width: 880px;
+}
