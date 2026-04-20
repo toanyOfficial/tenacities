@@ -677,3 +677,10 @@ body.home-snap {
   }
   .ci-block { min-height: 180px; }
 }
+
+/* STEP9 section-based nav state */
+.nav-links a.is-active,
+.nav-links a[aria-current="true"] {
+  color: var(--crimson-dark);
+  text-decoration-color: rgba(122, 15, 29, .65);
+}
