@@ -102,6 +102,13 @@ main > section,
   gap: 1.2rem;
 }
 
+.hero {
+  background:
+    radial-gradient(circle at 88% 16%, rgba(198,161,91,.12), transparent 34%),
+    radial-gradient(circle at 8% 80%, rgba(122,138,109,.10), transparent 33%),
+    #fff;
+}
+
 .context {
   background: var(--ivory);
   border-top: 1px solid var(--line);
@@ -207,3 +214,39 @@ footer .container {
   .split { grid-template-columns: 1fr; }
   .container { width: min(1120px, calc(100% - 1.5rem)); }
 }
+
+
+.tone-plain { background: #fff; }
+.tone-mist {
+  background:
+    linear-gradient(180deg, #faf9f7 0%, #f8f7f5 100%);
+}
+.section-divided { border-top: 1px solid var(--line); }
+
+.reading-width { max-width: 920px; }
+.lead {
+  margin: .2rem 0 0;
+  color: var(--ink-soft);
+  font-size: clamp(1.03rem, 1.6vw, 1.12rem);
+}
+.section-intro {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--ink-soft);
+  max-width: 76ch;
+}
+.eyebrow {
+  margin: 0 0 .35rem;
+  color: var(--gray);
+  font-size: .8rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.surface-soft {
+  background:
+    linear-gradient(180deg, #fff 0%, #fff 58%, rgba(246,243,239,.7) 100%);
+}
+.ci-grid .card { min-height: 100%; }
+.timeline.compact { margin-top: .6rem; }
+
+.hero.tone-plain { border-bottom: 1px solid var(--line); }
