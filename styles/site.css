@@ -467,3 +467,57 @@ body { overflow-x: hidden; }
   .org-frame { padding: .45rem; }
   .org-image { min-width: 540px; }
 }
+
+/* STEP1: main page 5-section snap system */
+body.home-snap {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  scroll-padding-top: 78px;
+}
+
+.home-snap .snap-root {
+  min-height: 100vh;
+}
+
+.home-snap .snap-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.home-snap .section-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.home-snap .section-screen > .container {
+  width: min(1100px, calc(100% - 2rem));
+}
+
+/* Brand Philosophy exception: free internal scroll while keeping section boundary snap */
+.home-snap .philosophy-section {
+  display: block;
+  min-height: auto;
+  padding-top: clamp(3rem, 5vw, 5rem);
+  padding-bottom: clamp(3rem, 5vw, 5rem);
+}
+
+@media (max-width: 1199px) {
+  .home-snap .section-screen > .container {
+    width: min(980px, calc(100% - 1.6rem));
+  }
+}
+
+@media (max-width: 767px) {
+  body.home-snap { scroll-padding-top: 92px; }
+  .home-snap .section-screen {
+    min-height: 100dvh;
+    align-items: flex-start;
+    padding-top: 1.6rem;
+  }
+  .home-snap .section-screen > .container {
+    width: calc(100% - 1.2rem);
+  }
+}
