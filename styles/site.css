@@ -733,3 +733,28 @@ body.home-snap {
     line-height: 1.78;
   }
 }
+
+/* STEP11 final paragraph-fidelity system */
+.source-p,
+.section-intro,
+.lead,
+.doc-main p,
+.ci-line {
+  display: block;
+}
+
+.source-p + .source-p,
+.doc-main p + p {
+  margin-top: .55rem;
+}
+
+.doc-main p,
+.doc-main li {
+  color: var(--ink-soft);
+}
+
+main h1 + p,
+main h2 + p,
+main h3 + p {
+  margin-top: .35rem;
+}
