@@ -684,3 +684,52 @@ body.home-snap {
   color: var(--crimson-dark);
   text-decoration-color: rgba(122, 15, 29, .65);
 }
+
+/* STEP10 responsive paragraph readability */
+.doc-main p,
+.doc-main li,
+.source-p {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+@media (min-width: 1200px) {
+  .source-p {
+    max-width: 70ch;
+    margin-bottom: 1.05rem;
+    line-height: 1.9;
+  }
+  .doc-main .container { max-width: 780px; }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .source-p {
+    max-width: 66ch;
+    margin-bottom: .95rem;
+    line-height: 1.85;
+  }
+  .philosophy-editorial h3 { margin-top: 1.8rem; }
+  .doc-main .container { max-width: 720px; }
+}
+
+@media (max-width: 767px) {
+  .source-p {
+    max-width: 34ch;
+    margin-bottom: .9rem;
+    line-height: 1.88;
+    font-size: 1rem;
+  }
+  #background .source-p,
+  #philosophy .source-p { padding-left: 0; }
+
+  .doc-main .container {
+    max-width: 100%;
+    width: calc(100% - 1rem);
+  }
+
+  .doc-main p,
+  .doc-main li {
+    font-size: .98rem;
+    line-height: 1.78;
+  }
+}
