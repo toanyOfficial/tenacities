@@ -612,3 +612,28 @@ body.home-snap {
     width: min(100%, 900px);
   }
 }
+
+/* STEP6 brand philosophy editorial implementation */
+.philosophy-editorial .reading-width {
+  width: min(100%, 920px);
+  max-width: 920px;
+  margin-inline: auto;
+}
+.philosophy-editorial h3 {
+  margin-top: 2.1rem;
+  margin-bottom: .55rem;
+  font-family: "Newsreader", "Noto Sans KR", serif;
+  font-size: clamp(1.08rem, 1.6vw, 1.28rem);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+.philosophy-editorial .source-p {
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .philosophy-editorial .reading-width {
+    width: min(100%, 900px);
+  }
+}
