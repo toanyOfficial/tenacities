@@ -263,6 +263,14 @@
           end: 0.91,
           delay: -1.8,
         },
+        {
+          node: philosophySection.querySelector('.philosophy-light-node-arc'),
+          path: '#philosophy-arc-path-2',
+          duration: 8.6,
+          start: 0.22,
+          end: 0.82,
+          delay: -2.4,
+        },
       ];
 
       motionNodes.forEach(({ node, path, duration, start, end, delay }) => {

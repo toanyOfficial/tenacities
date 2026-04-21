@@ -982,6 +982,9 @@ body.home-snap {
 #philosophy .philosophy-light-node-3 {
   opacity: 0.76;
 }
+#philosophy .philosophy-light-node-arc {
+  opacity: 0.64;
+}
 #philosophy .philosophy-inner {
   position: relative;
   z-index: 1;
