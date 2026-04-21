@@ -716,6 +716,9 @@ body.home-snap {
     transform: none;
     transition: none;
   }
+  #philosophy .philosophy-layer {
+    animation: none;
+  }
 }
 
 /* STEP5 background section layout */
@@ -928,6 +931,89 @@ body.home-snap {
 }
 
 /* STEP6 brand philosophy editorial implementation */
+#philosophy {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+#philosophy .philosophy-decor {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+#philosophy .philosophy-layer {
+  position: absolute;
+  inset: -6% -4%;
+  opacity: .48;
+  will-change: transform, opacity, background-position;
+}
+#philosophy .philosophy-layer-base {
+  background-image:
+    linear-gradient(to right, rgba(122, 15, 29, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(122, 15, 29, 0.045) 1px, transparent 1px);
+  background-size: 136px 136px, 136px 136px;
+  background-position: 0 0, 0 0;
+  opacity: .34;
+  animation: philosophyGridDrift 15.6s ease-in-out infinite alternate;
+}
+#philosophy .philosophy-layer-structure {
+  background:
+    radial-gradient(120% 130% at 90% 8%, transparent 0 53%, rgba(122, 15, 29, 0.11) 53.4% 54.1%, transparent 54.7%),
+    radial-gradient(110% 120% at 14% 82%, transparent 0 49%, rgba(122, 15, 29, 0.09) 49.2% 49.8%, transparent 50.3%),
+    radial-gradient(90% 95% at 82% 72%, transparent 0 60%, rgba(122, 15, 29, 0.075) 60.4% 60.9%, transparent 61.4%);
+  filter: blur(0.15px);
+  opacity: .42;
+  animation: philosophyArcFlow 11.8s cubic-bezier(0.4, 0.0, 0.2, 1) infinite alternate;
+}
+#philosophy .philosophy-layer-accent {
+  background:
+    linear-gradient(102deg, transparent 0 23%, rgba(122, 15, 29, 0.08) 23.15%, transparent 23.35% 100%),
+    linear-gradient(78deg, transparent 0 76%, rgba(122, 15, 29, 0.06) 76.12%, transparent 76.32% 100%),
+    linear-gradient(to right, transparent 0 18%, rgba(122, 15, 29, 0.07) 18.1%, transparent 18.26% 100%);
+  opacity: .3;
+  animation: philosophyAccentShift 10.2s ease-in-out infinite alternate;
+}
+#philosophy .philosophy-inner {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes philosophyGridDrift {
+  0% {
+    transform: translate3d(0, 0, 0);
+    background-position: 0 0, 0 0;
+    opacity: .32;
+  }
+  100% {
+    transform: translate3d(-0.65rem, -0.35rem, 0);
+    background-position: -24px -14px, -16px -22px;
+    opacity: .4;
+  }
+}
+
+@keyframes philosophyArcFlow {
+  0% {
+    transform: translate3d(-0.35rem, 0.22rem, 0);
+    opacity: .36;
+  }
+  100% {
+    transform: translate3d(0.4rem, -0.25rem, 0);
+    opacity: .46;
+  }
+}
+
+@keyframes philosophyAccentShift {
+  0% {
+    transform: translate3d(0.25rem, -0.15rem, 0);
+    opacity: .24;
+  }
+  100% {
+    transform: translate3d(-0.25rem, 0.18rem, 0);
+    opacity: .34;
+  }
+}
+
 .philosophy-editorial .reading-width {
   width: min(100%, 920px);
   max-width: 920px;
@@ -967,6 +1053,19 @@ body.home-snap {
 }
 
 @media (max-width: 1024px) {
+  #philosophy .philosophy-layer {
+    inset: -5% -7%;
+  }
+  #philosophy .philosophy-layer-base {
+    background-size: 118px 118px, 118px 118px;
+    opacity: .3;
+  }
+  #philosophy .philosophy-layer-structure {
+    opacity: .37;
+  }
+  #philosophy .philosophy-layer-accent {
+    opacity: .25;
+  }
   .philosophy-editorial .reading-width {
     width: min(100%, 900px);
   }
@@ -1070,6 +1169,19 @@ body.home-snap {
   #philosophy .reading-width {
     width: min(94%, 680px);
     margin-inline: auto;
+  }
+  #philosophy .philosophy-layer {
+    inset: -3% -11%;
+  }
+  #philosophy .philosophy-layer-base {
+    background-size: 92px 92px, 92px 92px;
+    opacity: .25;
+  }
+  #philosophy .philosophy-layer-structure {
+    opacity: .31;
+  }
+  #philosophy .philosophy-layer-accent {
+    opacity: .2;
   }
 }
 
