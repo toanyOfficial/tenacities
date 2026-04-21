@@ -276,7 +276,7 @@
             path,
             align: path,
             alignOrigin: [0.5, 0.5],
-            autoRotate: false,
+            autoRotate: true,
             start,
             end,
           },
