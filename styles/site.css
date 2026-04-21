@@ -507,8 +507,9 @@ body.home-snap {
 
 .home-snap .philosophy-inner {
   min-height: 100%;
-  padding-top: clamp(3rem, 5vw, 5rem);
+  padding-top: clamp(2rem, 3.6vw, 3.5rem);
   padding-bottom: clamp(3rem, 5vw, 5rem);
+  display: grid;
 }
 
 @media (max-width: 1199px) {
@@ -1106,4 +1107,5 @@ main h3 + p {
   width: min(100%, 920px);
   max-width: 920px;
   margin-inline: auto;
+  justify-self: center;
 }
