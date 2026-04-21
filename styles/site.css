@@ -775,6 +775,16 @@ body.home-snap {
   }
 }
 
+@media (min-width: 1001px) {
+  .background-section .section-title,
+  .background-section .source-p {
+    width: min(100%, 72ch);
+    max-width: none;
+    justify-self: stretch;
+    margin-inline: auto;
+  }
+}
+
 @media (max-width: 767px) {
   .background-section .reading-width {
     --bg-content-width: 96%;
