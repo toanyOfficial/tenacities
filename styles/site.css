@@ -739,7 +739,7 @@ body.home-snap {
   height: clamp(15rem, 22vw, 20rem);
   top: 8%;
   left: -4%;
-  animation: bgOrbBreathA 24s ease-in-out infinite;
+  animation: bgOrbBreathA 24s ease-in-out -6s infinite alternate;
 }
 .background-section .orb-2 {
   width: clamp(11rem, 17vw, 15rem);
@@ -748,7 +748,7 @@ body.home-snap {
   right: 9%;
   opacity: 0.32;
   filter: blur(2px);
-  animation: bgOrbBreathB 29s ease-in-out infinite;
+  animation: bgOrbBreathB 29s ease-in-out -11s infinite alternate;
 }
 .background-section .orb-3 {
   width: clamp(16rem, 24vw, 22rem);
@@ -756,7 +756,7 @@ body.home-snap {
   right: -6%;
   bottom: 7%;
   opacity: 0.36;
-  animation: bgOrbBreathC 26s ease-in-out infinite;
+  animation: bgOrbBreathC 26s ease-in-out -3s infinite alternate;
 }
 .background-section .orb-4 {
   width: clamp(9rem, 14vw, 12rem);
@@ -765,7 +765,7 @@ body.home-snap {
   bottom: 10%;
   opacity: 0.27;
   filter: blur(2.4px);
-  animation: bgOrbBreathB 21s ease-in-out infinite reverse;
+  animation: bgOrbBreathB 21s ease-in-out -14s infinite alternate-reverse;
 }
 .background-section .orb-5 {
   width: clamp(12rem, 19vw, 17rem);
@@ -774,7 +774,7 @@ body.home-snap {
   top: -7%;
   opacity: 0.24;
   filter: blur(3px);
-  animation: bgOrbBreathA 33s ease-in-out infinite reverse;
+  animation: bgOrbBreathA 33s ease-in-out -18s infinite alternate-reverse;
 }
 
 .background-section .reading-width {
@@ -783,15 +783,15 @@ body.home-snap {
 }
 @keyframes bgOrbBreathA {
   0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.34; }
-  50% { transform: translate3d(0.4rem, -0.35rem, 0) scale(1.05); opacity: 0.42; }
+  50% { transform: translate3d(0.28rem, -0.24rem, 0) scale(1.03); opacity: 0.42; }
 }
 @keyframes bgOrbBreathB {
   0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.27; }
-  50% { transform: translate3d(-0.45rem, 0.3rem, 0) scale(0.95); opacity: 0.34; }
+  50% { transform: translate3d(-0.3rem, 0.22rem, 0) scale(0.98); opacity: 0.34; }
 }
 @keyframes bgOrbBreathC {
   0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.31; }
-  50% { transform: translate3d(0.3rem, 0.4rem, 0) scale(1.04); opacity: 0.39; }
+  50% { transform: translate3d(0.22rem, 0.28rem, 0) scale(1.03); opacity: 0.39; }
 }
 .home-snap .background-section.section-screen {
   display: grid;
