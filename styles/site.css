@@ -605,8 +605,8 @@ body.home-snap {
   width: clamp(200px, 38vw, 300px);
   height: auto;
   margin: 0;
-  opacity: 0;
-  animation: heroLogoFadeIn 1.35s cubic-bezier(0.22, 1, 0.36, 1) .45s forwards;
+  opacity: 0.06;
+  animation: heroLogoFadeIn 3.8s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards;
   will-change: opacity;
 }
 .hero-concepts-group {

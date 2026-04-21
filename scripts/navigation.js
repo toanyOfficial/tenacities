@@ -126,9 +126,10 @@
 
   const el = document.querySelector('.hero-logo');
   if (el) {
+    el.style.opacity = '0.06';
     el.style.animation = 'none';
     el.offsetHeight; // reflow
-    el.style.animation = 'heroLogoFadeIn 2.6s cubic-bezier(0.16, 1, 0.3, 1) 1.5s forwards';
+    el.style.animation = 'heroLogoFadeIn 3.8s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards';
   }
 
   updateProgress();
