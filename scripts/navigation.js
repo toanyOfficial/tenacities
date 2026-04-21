@@ -66,11 +66,21 @@
   let boundaryArmedAt = 0;
   const NEXT_INPUT_GAP = 140;
 
+  const getSnapPaddingTop = () => {
+    if (!isElementScroller) return 0;
+    const raw = getComputedStyle(scroller).scrollPaddingTop || '0px';
+    const parsed = parseFloat(raw);
+    return Number.isFinite(parsed) ? parsed : 0;
+  };
+
   const jumpTo = (el) => {
-    if (!el) return;
+    if (!el || !isElementScroller) return;
     lock = true;
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    setTimeout(() => { lock = false; }, 420);
+    const targetTop = Math.max(0, el.offsetTop - getSnapPaddingTop());
+    scroller.scrollTo({ top: targetTop, behavior: 'auto' });
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => { lock = false; });
+    });
   };
 
   if (philosophyInner && isElementScroller) {
