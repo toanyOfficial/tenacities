@@ -648,7 +648,7 @@ body.home-snap {
     --hero-box-gap: 1rem;
     --hero-box-height: clamp(6.8rem, 8.2vw, 8.5rem);
     --hero-lockup-height: calc((var(--hero-box-height) * 2) + var(--hero-box-gap));
-    grid-template-columns: minmax(240px, 34vw) minmax(360px, 42vw);
+    grid-template-columns: max-content max-content;
     grid-template-areas:
       "title title"
       "logo concepts";
