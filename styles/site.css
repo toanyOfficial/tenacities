@@ -742,6 +742,7 @@ body.home-snap {
   margin-inline: 0;
   padding-inline: 0;
 }
+.background-section .section-title,
 .background-section .source-p {
   margin: 0;
   font-size: var(--bg-font-size);
@@ -772,16 +773,6 @@ body.home-snap {
   .background-section .section-title,
   .background-section .source-p {
     text-align: left;
-  }
-}
-
-@media (min-width: 1001px) {
-  .background-section .section-title,
-  .background-section .source-p {
-    width: min(100%, 72ch);
-    max-width: none;
-    justify-self: stretch;
-    margin-inline: auto;
   }
 }
 
