@@ -571,6 +571,13 @@ body.home-snap {
   margin-top: calc(var(--header-height) * -1);
   text-align: center;
 }
+
+@media (max-width: 767px) {
+  #hero .hero-copy {
+    padding-top: 130px;
+  }
+}
+
 .hero-title {
   grid-area: title;
   margin: 0;
@@ -583,8 +590,9 @@ body.home-snap {
 .hero-title-main {
   display: block;
   font-size: clamp(1.58rem, 3.3vw, 2.45rem);
-  font-weight: 600;
-  letter-spacing: -0.014em;
+  font-family: "Spoqa Han Sans Neo", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 .hero-title-sub {
   display: block;
