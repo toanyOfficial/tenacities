@@ -639,7 +639,7 @@ body.home-snap {
 }
 
 @keyframes heroLogoFadeIn {
-  from { opacity: 0; }
+  from { opacity: 0.06; }
   to { opacity: 1; }
 }
 
