@@ -125,7 +125,6 @@
       const applyScale = (scale) => {
         const bodyFont = baseFontRem * scale;
         backgroundContent.style.setProperty('--bg-font-size', `${bodyFont.toFixed(4)}rem`);
-        backgroundContent.style.setProperty('--bg-title-size', `${(bodyFont * 1.2).toFixed(4)}rem`);
         backgroundContent.style.setProperty('--bg-line-height', `${(baseLineHeight * (0.94 + (scale * 0.06))).toFixed(4)}`);
         backgroundContent.style.setProperty('--bg-paragraph-gap', `${(baseGapRem * (0.8 + (scale * 0.2))).toFixed(4)}rem`);
       };
