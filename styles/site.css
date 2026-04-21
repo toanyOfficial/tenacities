@@ -566,30 +566,59 @@ body.home-snap {
 .hero-copy {
   width: min(980px, 100%);
   display: grid;
-  gap: clamp(.8rem, 1.5vw, 1.2rem);
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "title"
+    "logo"
+    "concepts";
   justify-items: center;
+  row-gap: clamp(1.2rem, 3.6vh, 2.5rem);
+  padding-block: clamp(.8rem, 4.4vh, 2.6rem);
   text-align: center;
 }
 .hero-title {
+  grid-area: title;
   margin: 0;
+  display: grid;
+  gap: clamp(.28rem, 1.1vh, .55rem);
   font-family: "Newsreader", "Noto Sans KR", serif;
-  font-size: clamp(1.45rem, 3.2vw, 2.35rem);
-  font-weight: 600;
-  letter-spacing: -0.012em;
   color: var(--text);
+  line-height: 1.18;
+}
+.hero-title-main {
+  display: block;
+  font-size: clamp(1.58rem, 3.3vw, 2.45rem);
+  font-weight: 600;
+  letter-spacing: -0.014em;
+}
+.hero-title-sub {
+  display: block;
+  font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  font-size: clamp(1rem, 1.95vw, 1.3rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+  color: rgba(11, 11, 13, .86);
 }
 .hero-logo {
+  grid-area: logo;
   width: clamp(200px, 38vw, 300px);
   height: auto;
-  margin: .1rem 0 .35rem;
+  margin: 0;
   opacity: 0;
   transform: translateY(4px);
   filter: blur(2px);
   animation: heroLogoFadeIn .85s cubic-bezier(0.22, 1, 0.36, 1) .14s forwards;
   will-change: opacity, transform, filter;
 }
-.hero-concept-box {
+.hero-concepts-group {
+  grid-area: concepts;
   width: min(100%, 36rem);
+  display: grid;
+  gap: clamp(.7rem, 1.4vh, 1rem);
+}
+.hero-concept-box {
+  width: 100%;
   border: 1px solid rgba(11, 11, 13, .08);
   background: rgba(250, 249, 247, .8);
   border-radius: 10px;
@@ -625,31 +654,29 @@ body.home-snap {
 
 @media (min-width: 768px) {
   .hero-copy {
-    grid-template-columns: minmax(240px, .95fr) minmax(360px, 1.05fr);
+    grid-template-columns: minmax(250px, .9fr) minmax(390px, 1.1fr);
     grid-template-areas:
       "title title"
-      "logo boxes";
+      "logo concepts";
+    column-gap: clamp(2.4rem, 5vw, 5rem);
+    row-gap: clamp(1.8rem, 4vh, 3rem);
     align-items: center;
-    justify-items: stretch;
-    column-gap: clamp(2rem, 4.8vw, 4.5rem);
-    row-gap: clamp(1rem, 2.2vw, 1.5rem);
   }
 
   .hero-title {
-    grid-area: title;
-    text-align: center;
+    justify-self: center;
   }
 
   .hero-logo {
-    grid-area: logo;
     justify-self: center;
+    align-self: center;
     width: clamp(230px, 26vw, 300px);
-    margin: 0;
   }
 
-  .hero-copy .hero-concept-box {
-    grid-column: 2;
-    width: min(100%, 34rem);
+  .hero-concepts-group {
+    width: min(100%, 35rem);
+    justify-self: start;
+    align-self: center;
   }
 }
 
