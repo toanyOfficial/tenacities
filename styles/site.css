@@ -614,6 +614,7 @@ body.home-snap {
   width: min(100%, 36rem);
   display: grid;
   gap: clamp(.7rem, 1.4vh, 1rem);
+  margin-top: clamp(.9rem, 3vh, 1.7rem);
 }
 .hero-concept-box {
   width: 100%;
@@ -644,12 +645,14 @@ body.home-snap {
 
 @media (min-width: 768px) {
   .hero-copy {
-    --hero-lockup-height: clamp(190px, 20vw, 250px);
+    --hero-box-gap: 1rem;
+    --hero-box-height: clamp(6.9rem, 7.3rem, 7.6rem);
+    --hero-lockup-height: calc((var(--hero-box-height) * 2) + var(--hero-box-gap));
     grid-template-columns: minmax(250px, .9fr) minmax(390px, 1.1fr);
     grid-template-areas:
       "title title"
       "logo concepts";
-    column-gap: clamp(2.8rem, 5.8vw, 5.8rem);
+    column-gap: 3.2rem;
     row-gap: clamp(2.4rem, 6.5vh, 4.2rem);
     align-items: start;
     padding-block: clamp(2rem, 11vh, 6.2rem);
@@ -667,12 +670,19 @@ body.home-snap {
   }
 
   .hero-concepts-group {
-    width: min(100%, 35rem);
+    width: min(100%, 36rem);
     height: var(--hero-lockup-height);
     justify-self: start;
     align-self: start;
-    gap: 0;
-    align-content: space-between;
+    margin-top: 0;
+    grid-template-rows: repeat(2, minmax(0, var(--hero-box-height)));
+    gap: var(--hero-box-gap);
+    align-content: normal;
+  }
+
+  .hero-concept-box {
+    min-height: var(--hero-box-height);
+    padding: 1rem 1.2rem;
   }
 }
 
