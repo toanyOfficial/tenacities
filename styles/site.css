@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Newsreader:opsz,wght@6..72,400;6..72,600&display=swap');
 
 :root {
+  --header-height: 72px;
   --crimson: #E71D36;
   --crimson-deep: #B0172A;
   --crimson-dark: #7A0F1D;
@@ -378,8 +379,6 @@ footer .container {
   opacity: .8;
 }
 
-header { top: 3px; }
-
 /* Subtle motion */
 a,
 .card,
@@ -420,6 +419,8 @@ body { overflow-x: hidden; }
 
 /* Mobile (readability-first, no cramped hierarchy) */
 @media (max-width: 767px) {
+  :root { --header-height: 92px; }
+
   .container { width: calc(100% - 1.25rem); }
 
   .nav {
@@ -470,49 +471,42 @@ body { overflow-x: hidden; }
 
 /* STEP1: main page 5-section snap system */
 body.home-snap {
-  height: 100vh;
+  min-height: 100dvh;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-snap header {
+  flex: 0 0 auto;
 }
 
 .home-snap .snap-root {
-  height: 100vh;
+  flex: 1 1 auto;
+  min-height: 0;
   overflow-y: auto;
+  overflow-x: hidden;
   scroll-snap-type: y mandatory;
-  scroll-behavior: auto;
-  scroll-padding-top: 78px;
+  scroll-behavior: smooth;
+  overscroll-behavior-y: contain;
 }
 
 .home-snap .snap-boundary {
   scroll-snap-align: start;
-}
-
-.home-snap .section-screen.snap-boundary {
   scroll-snap-stop: always;
 }
 
 .home-snap .section-screen {
-  height: 100vh;
-  min-height: 100vh;
+  min-height: calc(100dvh - var(--header-height));
   display: flex;
   align-items: center;
-  overflow: hidden;
 }
 
 .home-snap .section-screen > .container {
   width: min(1100px, calc(100% - 2rem));
 }
 
-/* Brand Philosophy exception: 100vh shell + internal free scroll */
-.home-snap .philosophy-shell {
-  height: 100vh;
-  min-height: 100vh;
-  overflow: hidden;
-}
-
 .home-snap .philosophy-inner {
-  height: 100%;
-  overflow-y: auto;
-  overscroll-behavior: contain;
   padding-top: clamp(3rem, 5vw, 5rem);
   padding-bottom: clamp(3rem, 5vw, 5rem);
 }
@@ -524,14 +518,11 @@ body.home-snap {
 }
 
 @media (max-width: 767px) {
-  body.home-snap { overflow: hidden; }
-  .home-snap .snap-root { scroll-padding-top: 92px; }
   .home-snap .section-screen {
-    height: 100dvh;
-    min-height: 100dvh;
     align-items: flex-start;
     padding-top: 1.6rem;
   }
+
   .home-snap .section-screen > .container {
     width: calc(100% - 1.2rem);
   }

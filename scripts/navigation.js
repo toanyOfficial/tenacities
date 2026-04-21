@@ -1,7 +1,17 @@
 (() => {
   const doc = document.documentElement;
-  const scroller = document.querySelector('.home-snap .snap-root') || window;
-  const isElementScroller = scroller !== window;
+  const homeSnap = document.body.classList.contains('home-snap');
+  const scroller = homeSnap ? document.querySelector('.snap-root') : null;
+  const isElementScroller = !!scroller;
+  const header = document.querySelector('header');
+
+  const syncHeaderHeight = () => {
+    if (!homeSnap || !header) return;
+    doc.style.setProperty('--header-height', `${Math.round(header.getBoundingClientRect().height)}px`);
+  };
+
+  syncHeaderHeight();
+  window.addEventListener('resize', syncHeaderHeight);
 
   const track = document.createElement('div');
   track.className = 'progress-track';
@@ -22,127 +32,80 @@
     fill.style.transform = `scaleX(${progress})`;
   };
 
-  const sectionIds = ['hero', 'background', 'philosophy', 'ci', 'history'];
   const navLinks = Array.from(document.querySelectorAll('header .nav-links a[href^="#"]'));
+  const sectionMap = new Map(
+    navLinks
+      .map((link) => link.getAttribute('href')?.slice(1))
+      .filter(Boolean)
+      .map((id) => [id, document.getElementById(id)])
+      .filter(([, el]) => !!el)
+  );
 
-  if (navLinks.length) {
-    const sectionMap = new Map(sectionIds.map((id) => [id, document.getElementById(id)]).filter(([, el]) => !!el));
-
-    const activate = (id) => {
-      navLinks.forEach((a) => {
-        const hit = a.getAttribute('href') === `#${id}`;
-        a.classList.toggle('is-active', hit);
-        if (hit) a.setAttribute('aria-current', 'true');
-        else a.removeAttribute('aria-current');
-      });
-    };
-
-    if (sectionMap.size) {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          const visible = entries
-            .filter((e) => e.isIntersecting)
-            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-          if (visible?.target?.id) activate(visible.target.id);
-        },
-        {
-          root: isElementScroller ? scroller : null,
-          threshold: [0.25, 0.5, 0.75],
-          rootMargin: '-20% 0px -55% 0px',
-        }
-      );
-
-      sectionMap.forEach((el) => observer.observe(el));
-      activate(sectionMap.keys().next().value);
-    }
-  }
-
-  // Philosophy shell: internal free-scroll, boundary jumps to neighbor sections
-  const philosophyInner = document.querySelector('.philosophy-inner');
-  const prevSection = document.getElementById('background');
-  const nextSection = document.getElementById('ci');
-  let lock = false;
-  let boundaryArmed = null; // 'top' | 'bottom' | null
-  let boundaryArmedAt = 0;
-  const NEXT_INPUT_GAP = 140;
-
-  const getSnapPaddingTop = () => {
-    if (!isElementScroller) return 0;
-    const raw = getComputedStyle(scroller).scrollPaddingTop || '0px';
-    const parsed = parseFloat(raw);
-    return Number.isFinite(parsed) ? parsed : 0;
-  };
-
-  const jumpTo = (el) => {
-    if (!el || !isElementScroller) return;
-    lock = true;
-    const targetTop = Math.max(0, el.offsetTop - getSnapPaddingTop());
-    scroller.scrollTo({ top: targetTop, behavior: 'auto' });
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => { lock = false; });
+  const activate = (id) => {
+    navLinks.forEach((a) => {
+      const hit = a.getAttribute('href') === `#${id}`;
+      a.classList.toggle('is-active', hit);
+      if (hit) a.setAttribute('aria-current', 'true');
+      else a.removeAttribute('aria-current');
     });
   };
 
-  if (philosophyInner && isElementScroller) {
-    philosophyInner.addEventListener(
-      'wheel',
-      (e) => {
-        if (lock) {
-          e.preventDefault();
-          return;
-        }
-
-        const now = performance.now();
-        const atTop = philosophyInner.scrollTop <= 0;
-        const atBottom = philosophyInner.scrollTop + philosophyInner.clientHeight >= philosophyInner.scrollHeight - 1;
-
-        // reset arm while actively reading inside content
-        if (!atTop && !atBottom) {
-          boundaryArmed = null;
-          return;
-        }
-
-        if (e.deltaY < 0 && atTop) {
-          e.preventDefault();
-          if (boundaryArmed === 'top' && now - boundaryArmedAt > NEXT_INPUT_GAP) {
-            boundaryArmed = null;
-            jumpTo(prevSection);
-          } else {
-            boundaryArmed = 'top';
-            boundaryArmedAt = now;
-          }
-          return;
-        }
-
-        if (e.deltaY > 0 && atBottom) {
-          e.preventDefault();
-          if (boundaryArmed === 'bottom' && now - boundaryArmedAt > NEXT_INPUT_GAP) {
-            boundaryArmed = null;
-            jumpTo(nextSection);
-          } else {
-            boundaryArmed = 'bottom';
-            boundaryArmedAt = now;
-          }
-          return;
-        }
-
-        // opposite-direction input at boundary disarms
-        boundaryArmed = null;
+  if (sectionMap.size) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible?.target?.id) activate(visible.target.id);
       },
-      { passive: false }
+      {
+        root: isElementScroller ? scroller : null,
+        threshold: [0.35, 0.6, 0.8],
+      }
     );
-  }
 
+    sectionMap.forEach((el) => observer.observe(el));
+    activate(sectionMap.keys().next().value);
+
+    const scrollToHash = (hash, behavior = 'smooth') => {
+      const id = hash?.replace('#', '');
+      const target = id ? sectionMap.get(id) : null;
+      if (!target) return;
+
+      if (isElementScroller) {
+        target.scrollIntoView({ behavior, block: 'start' });
+      } else {
+        target.scrollIntoView({ behavior, block: 'start' });
+      }
+
+      activate(id);
+    };
+
+    navLinks.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        if (!href?.startsWith('#')) return;
+        e.preventDefault();
+        history.pushState(null, '', href);
+        scrollToHash(href, 'smooth');
+      });
+    });
+
+    window.addEventListener('hashchange', () => scrollToHash(window.location.hash, 'auto'));
+
+    if (window.location.hash) {
+      requestAnimationFrame(() => scrollToHash(window.location.hash, 'auto'));
+    }
+  }
 
   const el = document.querySelector('.hero-logo');
   if (el) {
     el.style.opacity = '0.06';
     el.style.animation = 'none';
-    el.offsetHeight; // reflow
+    el.offsetHeight;
     el.style.animation = 'heroLogoFadeIn 3.8s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards';
   }
 
   updateProgress();
   (isElementScroller ? scroller : window).addEventListener('scroll', updateProgress, { passive: true });
-  window.addEventListener('resize', updateProgress);
 })();
