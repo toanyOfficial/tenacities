@@ -66,11 +66,21 @@
   let boundaryArmedAt = 0;
   const NEXT_INPUT_GAP = 140;
 
+  const getSnapPaddingTop = () => {
+    if (!isElementScroller) return 0;
+    const raw = getComputedStyle(scroller).scrollPaddingTop || '0px';
+    const parsed = parseFloat(raw);
+    return Number.isFinite(parsed) ? parsed : 0;
+  };
+
   const jumpTo = (el) => {
-    if (!el) return;
+    if (!el || !isElementScroller) return;
     lock = true;
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    setTimeout(() => { lock = false; }, 420);
+    const targetTop = Math.max(0, el.offsetTop - getSnapPaddingTop());
+    scroller.scrollTo({ top: targetTop, behavior: 'auto' });
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => { lock = false; });
+    });
   };
 
   if (philosophyInner && isElementScroller) {
@@ -121,6 +131,15 @@
       },
       { passive: false }
     );
+  }
+
+
+  const el = document.querySelector('.hero-logo');
+  if (el) {
+    el.style.opacity = '0.06';
+    el.style.animation = 'none';
+    el.offsetHeight; // reflow
+    el.style.animation = 'heroLogoFadeIn 3.8s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards';
   }
 
   updateProgress();
