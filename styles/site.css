@@ -568,6 +568,7 @@ body.home-snap {
   justify-items: center;
   row-gap: clamp(1.8rem, 5.5vh, 3.7rem);
   padding-block: clamp(1.4rem, 9vh, 5.4rem);
+  margin-top: calc(var(--header-height) * -1);
   text-align: center;
 }
 .hero-title {
