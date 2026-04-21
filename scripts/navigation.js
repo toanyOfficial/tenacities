@@ -219,8 +219,8 @@
           },
           {
             root: isElementScroller ? snapRoot : null,
-            threshold: 0.42,
-            rootMargin: isElementScroller ? '0px' : `-${getHeaderHeightPx()}px 0px -34% 0px`,
+            threshold: 0.01,
+            rootMargin: isElementScroller ? '0px 0px -12% 0px' : `-${getHeaderHeightPx()}px 0px -12% 0px`,
           }
         );
         philosophyObserver.observe(philosophySection);

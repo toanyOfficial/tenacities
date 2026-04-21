@@ -1067,7 +1067,8 @@ body.home-snap {
   }
 
   #philosophy .reading-width {
-    padding-inline: .45rem;
+    width: min(94%, 680px);
+    margin-inline: auto;
   }
 }
 
