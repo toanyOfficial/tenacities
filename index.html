@@ -65,11 +65,52 @@
 
   <!-- 3. Brand Philosophy -->
   <section id="philosophy" class="context tone-ivory section-divided section-screen snap-boundary philosophy-shell">
-    <div class="philosophy-decor" aria-hidden="true">
-      <span class="philosophy-layer philosophy-layer-base"></span>
-      <span class="philosophy-layer philosophy-layer-structure"></span>
-      <span class="philosophy-layer philosophy-layer-accent"></span>
-      <span class="philosophy-layer philosophy-layer-signal"></span>
+    <div class="philosophy-graphic" aria-hidden="true">
+      <svg class="philosophy-graphic-svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="presentation" focusable="false">
+        <g class="philosophy-graphic-main" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path id="philosophy-path-1" d="M 360 -90 C 324 118, 414 278, 368 470 C 332 640, 420 806, 388 992" />
+          <path id="philosophy-path-2" d="M 808 -110 C 774 92, 868 266, 824 456 C 786 624, 878 790, 842 988" />
+          <path id="philosophy-path-3" d="M 1248 -88 C 1214 108, 1306 286, 1262 474 C 1222 644, 1310 812, 1276 998" />
+        </g>
+        <g class="philosophy-graphic-support" fill="none" stroke-linecap="round">
+          <path d="M 336 172 L 520 212 L 742 188" />
+          <path d="M 792 334 L 970 374 L 1186 352" />
+          <path d="M 362 534 L 568 578 L 794 556" />
+          <path d="M 840 708 L 1024 748 L 1246 724" />
+          <line x1="404" y1="276" x2="458" y2="438" />
+          <line x1="846" y1="238" x2="898" y2="402" />
+          <line x1="1278" y1="304" x2="1336" y2="470" />
+          <line x1="870" y1="560" x2="922" y2="724" />
+        </g>
+        <g class="philosophy-graphic-arcs" fill="none" stroke-linecap="round">
+          <path id="philosophy-arc-path-1" d="M 278 468 A 148 148 0 0 1 430 338" />
+          <path id="philosophy-arc-path-2" d="M 1018 536 A 176 176 0 0 1 1188 392" />
+          <path d="M 724 762 A 122 122 0 0 1 862 656" />
+          <path d="M 1160 288 A 108 108 0 0 1 1284 198" />
+        </g>
+        <g class="philosophy-graphic-motion" aria-hidden="true">
+          <g class="philosophy-light-node philosophy-light-node-1">
+            <ellipse class="philosophy-light-tail" cx="-8.2" cy="0" rx="7.4" ry="2.5" />
+            <circle class="philosophy-light-glow" cx="0" cy="0" r="7.4" />
+            <circle class="philosophy-light-core" cx="0" cy="0" r="4.3" />
+          </g>
+          <g class="philosophy-light-node philosophy-light-node-2">
+            <ellipse class="philosophy-light-tail" cx="-7.2" cy="0" rx="6.5" ry="2.2" />
+            <circle class="philosophy-light-glow" cx="0" cy="0" r="6.5" />
+            <circle class="philosophy-light-core" cx="0" cy="0" r="3.8" />
+          </g>
+          <g class="philosophy-light-node philosophy-light-node-3">
+            <ellipse class="philosophy-light-tail" cx="-6.4" cy="0" rx="5.8" ry="2" />
+            <circle class="philosophy-light-glow" cx="0" cy="0" r="5.8" />
+            <circle class="philosophy-light-core" cx="0" cy="0" r="3.4" />
+          </g>
+          <g class="philosophy-light-node philosophy-light-node-arc">
+            <ellipse class="philosophy-light-tail" cx="-4.2" cy="0" rx="3.8" ry="1.45" />
+            <circle class="philosophy-light-glow" cx="0" cy="0" r="4.1" />
+            <circle class="philosophy-light-core" cx="0" cy="0" r="2.35" />
+          </g>
+        </g>
+      </svg>
     </div>
     <div class="philosophy-inner philosophy-section philosophy-editorial">
       <div class="container reading-width">
@@ -143,6 +184,8 @@
 <footer>
   <div class="container">Built from source material in <code>examples/</code>, rebuilt as a refined multi-depth brand website.</div>
 </footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
 <script src="scripts/navigation.js"></script>
 </body>
 </html>
