@@ -14,6 +14,7 @@
   --ivory: #F6F3EF;
   --gold: #C6A15B;
   --olive: #7A8A6D;
+  --header-height: 75px;
 }
 
 * { box-sizing: border-box; }
@@ -470,20 +471,15 @@ body { overflow-x: hidden; }
 
 /* STEP1: main page 5-section snap system */
 body.home-snap {
-  height: 100vh;
-  overflow: hidden;
-}
-
-.home-snap .snap-root {
-  height: 100vh;
-  overflow-y: auto;
+  overflow-x: hidden;
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
-  scroll-padding-top: 78px;
+  scroll-padding-top: var(--header-height);
 }
 
 .home-snap .snap-boundary {
   scroll-snap-align: start;
+  scroll-margin-top: var(--header-height);
 }
 
 .home-snap .section-screen.snap-boundary {
@@ -491,11 +487,9 @@ body.home-snap {
 }
 
 .home-snap .section-screen {
-  height: 100vh;
-  min-height: 100vh;
+  min-height: calc(100dvh - var(--header-height));
   display: flex;
   align-items: center;
-  overflow: hidden;
 }
 
 .home-snap .section-screen > .container {
@@ -504,15 +498,11 @@ body.home-snap {
 
 /* Brand Philosophy exception: 100vh shell + internal free scroll */
 .home-snap .philosophy-shell {
-  height: 100vh;
-  min-height: 100vh;
-  overflow: hidden;
+  min-height: calc(100dvh - var(--header-height));
 }
 
 .home-snap .philosophy-inner {
-  height: 100%;
-  overflow-y: auto;
-  overscroll-behavior: contain;
+  min-height: 100%;
   padding-top: clamp(3rem, 5vw, 5rem);
   padding-bottom: clamp(3rem, 5vw, 5rem);
 }
@@ -524,10 +514,7 @@ body.home-snap {
 }
 
 @media (max-width: 767px) {
-  body.home-snap { overflow: hidden; }
-  .home-snap .snap-root { scroll-padding-top: 92px; }
   .home-snap .section-screen {
-    height: 100dvh;
     min-height: 100dvh;
     align-items: flex-start;
     padding-top: 1.6rem;
@@ -881,13 +868,4 @@ main h3 + p {
   width: min(100%, 920px);
   max-width: 920px;
   margin-inline: auto;
-}
-
-/* STEP13-2 hide philosophy internal scrollbar, keep scroll behavior */
-.home-snap .philosophy-inner {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-.home-snap .philosophy-inner::-webkit-scrollbar {
-  display: none;
 }

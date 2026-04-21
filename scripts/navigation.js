@@ -1,7 +1,6 @@
 (() => {
   const doc = document.documentElement;
-  const scroller = document.querySelector('.home-snap .snap-root') || window;
-  const isElementScroller = scroller !== window;
+  const header = document.querySelector('header');
 
   const track = document.createElement('div');
   track.className = 'progress-track';
@@ -12,8 +11,18 @@
   track.appendChild(fill);
   document.body.prepend(track);
 
-  const getScrollTop = () => (isElementScroller ? scroller.scrollTop : (doc.scrollTop || document.body.scrollTop));
-  const getScrollHeight = () => (isElementScroller ? scroller.scrollHeight - scroller.clientHeight : doc.scrollHeight - doc.clientHeight);
+  const updateHeaderHeightVar = () => {
+    if (!header) return;
+    const next = Math.round(header.getBoundingClientRect().height) + 3;
+    doc.style.setProperty('--header-height', `${next}px`);
+  };
+  const getHeaderHeightPx = () => {
+    if (!header) return 0;
+    return Math.round(header.getBoundingClientRect().height) + 3;
+  };
+
+  const getScrollTop = () => doc.scrollTop || document.body.scrollTop || window.scrollY || 0;
+  const getScrollHeight = () => Math.max(0, doc.scrollHeight - window.innerHeight);
 
   const updateProgress = () => {
     const scrollTop = getScrollTop();
@@ -46,9 +55,9 @@
           if (visible?.target?.id) activate(visible.target.id);
         },
         {
-          root: isElementScroller ? scroller : null,
+          root: null,
           threshold: [0.25, 0.5, 0.75],
-          rootMargin: '-20% 0px -55% 0px',
+          rootMargin: `-${getHeaderHeightPx()}px 0px -55% 0px`,
         }
       );
 
@@ -56,73 +65,6 @@
       activate(sectionMap.keys().next().value);
     }
   }
-
-  // Philosophy shell: internal free-scroll, boundary jumps to neighbor sections
-  const philosophyInner = document.querySelector('.philosophy-inner');
-  const prevSection = document.getElementById('background');
-  const nextSection = document.getElementById('ci');
-  let lock = false;
-  let boundaryArmed = null; // 'top' | 'bottom' | null
-  let boundaryArmedAt = 0;
-  const NEXT_INPUT_GAP = 140;
-
-  const jumpTo = (el) => {
-    if (!el) return;
-    lock = true;
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    setTimeout(() => { lock = false; }, 420);
-  };
-
-  if (philosophyInner && isElementScroller) {
-    philosophyInner.addEventListener(
-      'wheel',
-      (e) => {
-        if (lock) {
-          e.preventDefault();
-          return;
-        }
-
-        const now = performance.now();
-        const atTop = philosophyInner.scrollTop <= 0;
-        const atBottom = philosophyInner.scrollTop + philosophyInner.clientHeight >= philosophyInner.scrollHeight - 1;
-
-        // reset arm while actively reading inside content
-        if (!atTop && !atBottom) {
-          boundaryArmed = null;
-          return;
-        }
-
-        if (e.deltaY < 0 && atTop) {
-          e.preventDefault();
-          if (boundaryArmed === 'top' && now - boundaryArmedAt > NEXT_INPUT_GAP) {
-            boundaryArmed = null;
-            jumpTo(prevSection);
-          } else {
-            boundaryArmed = 'top';
-            boundaryArmedAt = now;
-          }
-          return;
-        }
-
-        if (e.deltaY > 0 && atBottom) {
-          e.preventDefault();
-          if (boundaryArmed === 'bottom' && now - boundaryArmedAt > NEXT_INPUT_GAP) {
-            boundaryArmed = null;
-            jumpTo(nextSection);
-          } else {
-            boundaryArmed = 'bottom';
-            boundaryArmedAt = now;
-          }
-          return;
-        }
-
-        // opposite-direction input at boundary disarms
-        boundaryArmed = null;
-      },
-      { passive: false }
-    );
-  }
-
 
   const el = document.querySelector('.hero-logo');
   if (el) {
@@ -132,7 +74,16 @@
     el.style.animation = 'heroLogoFadeIn 3.8s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards';
   }
 
+  updateHeaderHeightVar();
+  if (header && 'ResizeObserver' in window) {
+    const ro = new ResizeObserver(updateHeaderHeightVar);
+    ro.observe(header);
+  }
+
   updateProgress();
-  (isElementScroller ? scroller : window).addEventListener('scroll', updateProgress, { passive: true });
-  window.addEventListener('resize', updateProgress);
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', () => {
+    updateHeaderHeightVar();
+    updateProgress();
+  });
 })();
