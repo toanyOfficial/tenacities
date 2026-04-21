@@ -945,16 +945,16 @@ body.home-snap {
   display: block;
 }
 #philosophy .philosophy-graphic-main {
-  stroke: rgba(122, 15, 29, 0.27);
-  stroke-width: 2.3;
+  stroke: rgba(122, 15, 29, 0.34);
+  stroke-width: 2.45;
 }
 #philosophy .philosophy-graphic-support {
-  stroke: rgba(122, 15, 29, 0.2);
-  stroke-width: 1.45;
+  stroke: rgba(122, 15, 29, 0.26);
+  stroke-width: 1.62;
 }
 #philosophy .philosophy-graphic-arcs {
-  stroke: rgba(122, 15, 29, 0.24);
-  stroke-width: 1.9;
+  stroke: rgba(122, 15, 29, 0.31);
+  stroke-width: 2.05;
 }
 #philosophy .philosophy-light-node {
   pointer-events: none;
@@ -962,28 +962,28 @@ body.home-snap {
   transform-origin: center;
 }
 #philosophy .philosophy-light-tail {
-  fill: rgba(255, 243, 220, 0.56);
+  fill: rgba(248, 228, 196, 0.74);
 }
 #philosophy .philosophy-light-glow {
-  fill: rgba(255, 248, 238, 0.52);
+  fill: rgba(255, 246, 231, 0.66);
 }
 #philosophy .philosophy-light-core {
-  fill: rgba(255, 252, 246, 0.98);
-  stroke: rgba(122, 15, 29, 0.28);
-  stroke-width: 0.6;
-  filter: drop-shadow(0 0 5px rgba(255, 246, 230, 0.48));
+  fill: rgba(255, 252, 246, 1);
+  stroke: rgba(122, 15, 29, 0.4);
+  stroke-width: 0.72;
+  filter: drop-shadow(0 0 4px rgba(221, 187, 145, 0.34));
 }
 #philosophy .philosophy-light-node-1 {
-  opacity: 0.95;
+  opacity: 0.98;
 }
 #philosophy .philosophy-light-node-2 {
-  opacity: 0.82;
+  opacity: 0.9;
 }
 #philosophy .philosophy-light-node-3 {
-  opacity: 0.76;
+  opacity: 0.86;
 }
 #philosophy .philosophy-light-node-arc {
-  opacity: 0.64;
+  opacity: 0.78;
 }
 #philosophy .philosophy-inner {
   position: relative;
