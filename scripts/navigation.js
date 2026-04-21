@@ -256,14 +256,6 @@
           delay: -7.1,
         },
         {
-          node: philosophySection.querySelector('.philosophy-light-node-3'),
-          path: '#philosophy-path-3',
-          duration: 15.2,
-          start: 0.11,
-          end: 0.91,
-          delay: -1.8,
-        },
-        {
           node: philosophySection.querySelector('.philosophy-light-node-arc'),
           path: '#philosophy-arc-path-2',
           duration: 8.6,
