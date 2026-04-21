@@ -710,6 +710,11 @@ body.home-snap {
     animation: none;
     opacity: 1;
   }
+  .philosophy-editorial .philosophy-block {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 /* STEP5 background section layout */
@@ -927,6 +932,12 @@ body.home-snap {
   max-width: 920px;
   margin-inline: auto;
 }
+.philosophy-editorial .philosophy-note {
+  margin-bottom: 1.4rem;
+}
+.philosophy-editorial .philosophy-topic + .philosophy-topic {
+  margin-top: .2rem;
+}
 .philosophy-editorial h3 {
   margin-top: 2.1rem;
   margin-bottom: .55rem;
@@ -936,8 +947,22 @@ body.home-snap {
   line-height: 1.4;
   color: var(--ink-soft);
 }
+.philosophy-editorial .philosophy-topic h3 {
+  margin-top: 0;
+}
 .philosophy-editorial .source-p {
   margin-bottom: 1rem;
+}
+.philosophy-editorial .philosophy-block {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity .64s cubic-bezier(0.22, 1, 0.36, 1), transform .64s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--philosophy-sequence, 0) * .36s);
+  will-change: opacity, transform;
+}
+.philosophy-editorial.philosophy-visible .philosophy-block {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 @media (max-width: 1024px) {
@@ -1039,6 +1064,11 @@ body.home-snap {
   .doc-main li {
     font-size: .98rem;
     line-height: 1.78;
+  }
+
+  #philosophy .reading-width {
+    width: min(94%, 680px);
+    margin-inline: auto;
   }
 }
 
