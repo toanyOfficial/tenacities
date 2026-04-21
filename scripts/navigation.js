@@ -196,6 +196,40 @@
     }
   }
 
+  const philosophySection = document.getElementById('philosophy');
+  if (philosophySection) {
+    const philosophyInner = philosophySection.querySelector('.philosophy-editorial');
+    const philosophyBlocks = Array.from(philosophySection.querySelectorAll('.philosophy-block'));
+    philosophyBlocks.forEach((block, index) => {
+      const order = Number(block.getAttribute('data-philosophy-order'));
+      block.style.setProperty('--philosophy-sequence', String(Number.isFinite(order) ? order : index));
+    });
+
+    if (philosophyInner) {
+      if ('IntersectionObserver' in window) {
+        let played = false;
+        const philosophyObserver = new IntersectionObserver(
+          (entries) => {
+            if (played) return;
+            const entry = entries[0];
+            if (!entry?.isIntersecting) return;
+            philosophyInner.classList.add('philosophy-visible');
+            played = true;
+            philosophyObserver.disconnect();
+          },
+          {
+            root: isElementScroller ? snapRoot : null,
+            threshold: 0.01,
+            rootMargin: isElementScroller ? '0px 0px -12% 0px' : `-${getHeaderHeightPx()}px 0px -12% 0px`,
+          }
+        );
+        philosophyObserver.observe(philosophySection);
+      } else {
+        philosophyInner.classList.add('philosophy-visible');
+      }
+    }
+  }
+
   updateHeaderHeightVar();
   if (header && 'ResizeObserver' in window) {
     const ro = new ResizeObserver(updateHeaderHeightVar);
