@@ -974,6 +974,38 @@ body.home-snap {
   opacity: .3;
   animation: philosophyAccentShift 10.2s ease-in-out infinite alternate;
 }
+#philosophy .philosophy-layer-signal {
+  background:
+    linear-gradient(102deg,
+      transparent 0%,
+      transparent 22.8%,
+      rgba(250, 245, 236, 0.0) 23.02%,
+      rgba(250, 245, 236, 0.42) 23.12%,
+      rgba(250, 245, 236, 0.0) 23.24%,
+      transparent 23.4%,
+      transparent 100%),
+    linear-gradient(78deg,
+      transparent 0%,
+      transparent 75.88%,
+      rgba(250, 245, 236, 0.0) 76.04%,
+      rgba(250, 245, 236, 0.36) 76.16%,
+      rgba(250, 245, 236, 0.0) 76.28%,
+      transparent 76.42%,
+      transparent 100%),
+    linear-gradient(to right,
+      transparent 0%,
+      transparent 17.98%,
+      rgba(250, 245, 236, 0.0) 18.06%,
+      rgba(250, 245, 236, 0.34) 18.16%,
+      rgba(250, 245, 236, 0.0) 18.26%,
+      transparent 18.36%,
+      transparent 100%);
+  background-size: 210% 210%, 195% 195%, 185% 185%;
+  background-position: -78% 128%, 136% -64%, -60% 58%;
+  opacity: .2;
+  filter: blur(0.2px);
+  animation: philosophySignalFlow 4.8s linear infinite;
+}
 #philosophy .philosophy-inner {
   position: relative;
   z-index: 1;
@@ -1011,6 +1043,20 @@ body.home-snap {
   100% {
     transform: translate3d(-0.25rem, 0.18rem, 0);
     opacity: .34;
+  }
+}
+
+@keyframes philosophySignalFlow {
+  0% {
+    background-position: -78% 128%, 136% -64%, -60% 58%;
+    opacity: .12;
+  }
+  30% {
+    opacity: .2;
+  }
+  100% {
+    background-position: 112% -26%, -42% 136%, 142% 58%;
+    opacity: .13;
   }
 }
 
@@ -1065,6 +1111,9 @@ body.home-snap {
   }
   #philosophy .philosophy-layer-accent {
     opacity: .25;
+  }
+  #philosophy .philosophy-layer-signal {
+    opacity: .17;
   }
   .philosophy-editorial .reading-width {
     width: min(100%, 900px);
@@ -1182,6 +1231,10 @@ body.home-snap {
   }
   #philosophy .philosophy-layer-accent {
     opacity: .2;
+  }
+  #philosophy .philosophy-layer-signal {
+    opacity: .13;
+    background-size: 200% 200%, 180% 180%, 170% 170%;
   }
 }
 
