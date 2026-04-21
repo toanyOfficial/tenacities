@@ -107,6 +107,34 @@
     el.style.animation = 'heroLogoFadeIn 3.8s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards';
   }
 
+  const backgroundSection = document.getElementById('background');
+  if (backgroundSection) {
+    const paragraphs = Array.from(backgroundSection.querySelectorAll('.source-p'));
+    paragraphs.forEach((p, index) => p.style.setProperty('--bg-fade-index', String(index)));
+
+    if ('IntersectionObserver' in window) {
+      let played = false;
+      const backgroundObserver = new IntersectionObserver(
+        (entries) => {
+          if (played) return;
+          const entry = entries[0];
+          if (!entry?.isIntersecting) return;
+          backgroundSection.classList.add('bg-visible');
+          played = true;
+          backgroundObserver.disconnect();
+        },
+        {
+          root: isElementScroller ? snapRoot : null,
+          threshold: 0.45,
+          rootMargin: isElementScroller ? '0px' : `-${getHeaderHeightPx()}px 0px -35% 0px`,
+        }
+      );
+      backgroundObserver.observe(backgroundSection);
+    } else {
+      backgroundSection.classList.add('bg-visible');
+    }
+  }
+
   updateHeaderHeightVar();
   if (header && 'ResizeObserver' in window) {
     const ro = new ResizeObserver(updateHeaderHeightVar);
