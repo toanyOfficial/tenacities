@@ -652,9 +652,10 @@ body.home-snap {
     grid-template-areas:
       "title title"
       "logo concepts";
-    column-gap: 1.6rem;
+    column-gap: 0.8rem;
     row-gap: clamp(2.4rem, 6.5vh, 4.2rem);
     align-items: start;
+    justify-content: center;
     padding-block: clamp(2rem, 11vh, 6.2rem);
   }
 
@@ -684,8 +685,9 @@ body.home-snap {
     min-height: var(--hero-box-height);
     padding: 1.05rem 1.3rem;
     display: grid;
-    place-content: center;
-    text-align: center;
+    align-content: center;
+    justify-items: start;
+    text-align: left;
     line-height: 1.5;
   }
 
