@@ -727,19 +727,33 @@ body.home-snap {
   z-index: 0;
 }
 .background-section .bg-orb {
+  --orb-min-opacity: 0.24;
+  --orb-max-opacity: 0.36;
+  --orb-scale: 1.02;
+  --orb-drift-x: 0rem;
+  --orb-drift-y: 0rem;
+  --orb-duration: 7.4s;
+  --orb-delay: 0s;
   position: absolute;
   border-radius: 50%;
   background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.44), rgba(231, 29, 54, 0.1) 58%, rgba(122, 15, 29, 0.045) 100%);
   filter: blur(0.8px);
-  opacity: 0.4;
+  opacity: var(--orb-min-opacity);
   will-change: transform, opacity;
+  animation: bgOrbBreathing var(--orb-duration) ease-in-out var(--orb-delay) infinite;
 }
 .background-section .orb-1 {
   width: clamp(15rem, 22vw, 20rem);
   height: clamp(15rem, 22vw, 20rem);
   top: 8%;
   left: -4%;
-  animation: bgOrbBreathA 24s ease-in-out -6s infinite alternate;
+  --orb-duration: 6.8s;
+  --orb-delay: -1.2s;
+  --orb-min-opacity: 0.28;
+  --orb-max-opacity: 0.42;
+  --orb-scale: 1.03;
+  --orb-drift-x: 0.24rem;
+  --orb-drift-y: -0.2rem;
 }
 .background-section .orb-2 {
   width: clamp(11rem, 17vw, 15rem);
@@ -748,7 +762,13 @@ body.home-snap {
   right: 9%;
   opacity: 0.32;
   filter: blur(2px);
-  animation: bgOrbBreathB 29s ease-in-out -11s infinite alternate;
+  --orb-duration: 7.6s;
+  --orb-delay: -3.1s;
+  --orb-min-opacity: 0.24;
+  --orb-max-opacity: 0.34;
+  --orb-scale: 1.018;
+  --orb-drift-x: -0.24rem;
+  --orb-drift-y: 0.18rem;
 }
 .background-section .orb-3 {
   width: clamp(16rem, 24vw, 22rem);
@@ -756,7 +776,13 @@ body.home-snap {
   right: -6%;
   bottom: 7%;
   opacity: 0.36;
-  animation: bgOrbBreathC 26s ease-in-out -3s infinite alternate;
+  --orb-duration: 8.4s;
+  --orb-delay: -5.4s;
+  --orb-min-opacity: 0.27;
+  --orb-max-opacity: 0.39;
+  --orb-scale: 1.028;
+  --orb-drift-x: 0.2rem;
+  --orb-drift-y: 0.26rem;
 }
 .background-section .orb-4 {
   width: clamp(9rem, 14vw, 12rem);
@@ -765,7 +791,13 @@ body.home-snap {
   bottom: 10%;
   opacity: 0.27;
   filter: blur(2.4px);
-  animation: bgOrbBreathB 21s ease-in-out -14s infinite alternate-reverse;
+  --orb-duration: 6.1s;
+  --orb-delay: -2.6s;
+  --orb-min-opacity: 0.2;
+  --orb-max-opacity: 0.3;
+  --orb-scale: 1.016;
+  --orb-drift-x: -0.16rem;
+  --orb-drift-y: 0.14rem;
 }
 .background-section .orb-5 {
   width: clamp(12rem, 19vw, 17rem);
@@ -774,24 +806,27 @@ body.home-snap {
   top: -7%;
   opacity: 0.24;
   filter: blur(3px);
-  animation: bgOrbBreathA 33s ease-in-out -18s infinite alternate-reverse;
+  --orb-duration: 9.2s;
+  --orb-delay: -6.7s;
+  --orb-min-opacity: 0.18;
+  --orb-max-opacity: 0.29;
+  --orb-scale: 1.022;
+  --orb-drift-x: 0.16rem;
+  --orb-drift-y: -0.14rem;
 }
-
 .background-section .reading-width {
   position: relative;
   z-index: 1;
 }
-@keyframes bgOrbBreathA {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.34; }
-  50% { transform: translate3d(0.28rem, -0.24rem, 0) scale(1.03); opacity: 0.42; }
-}
-@keyframes bgOrbBreathB {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.27; }
-  50% { transform: translate3d(-0.3rem, 0.22rem, 0) scale(0.98); opacity: 0.34; }
-}
-@keyframes bgOrbBreathC {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.31; }
-  50% { transform: translate3d(0.22rem, 0.28rem, 0) scale(1.03); opacity: 0.39; }
+@keyframes bgOrbBreathing {
+  0%, 100% {
+    opacity: var(--orb-min-opacity);
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    opacity: var(--orb-max-opacity);
+    transform: translate3d(var(--orb-drift-x), var(--orb-drift-y), 0) scale(var(--orb-scale));
+  }
 }
 .home-snap .background-section.section-screen {
   display: grid;
