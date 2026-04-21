@@ -715,6 +715,7 @@ body.home-snap {
   --bg-font-size: 0.96rem;
   --bg-line-height: 1.32;
   --bg-paragraph-gap: 0.4rem;
+  --bg-title-size: 1.152rem;
   width: min(100%, 980px);
   max-width: 980px;
   margin-inline: auto;
@@ -725,7 +726,8 @@ body.home-snap {
 }
 .background-section .section-title {
   margin-bottom: clamp(.1rem, .42vh, .3rem);
-  font-size: clamp(1rem, 1.3vw, 1.18rem);
+  font-size: var(--bg-title-size);
+  font-weight: 700;
   line-height: 1.2;
 }
 .background-section .source-p {
@@ -751,9 +753,6 @@ body.home-snap {
 @media (max-width: 767px) {
   .background-section .reading-width {
     width: min(100%, 1000px);
-  }
-  .background-section .section-title {
-    font-size: clamp(.92rem, 3.5vw, 1.04rem);
   }
 }
 

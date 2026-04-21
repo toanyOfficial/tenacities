@@ -116,26 +116,36 @@
     const optimizeBackgroundTypography = () => {
       if (!backgroundContent) return;
 
-      const minScale = 0.78;
+      const minScale = 0.58;
       const maxScale = 1.36;
       const baseFontRem = 0.96;
       const baseLineHeight = 1.32;
       const baseGapRem = 0.4;
 
       const applyScale = (scale) => {
-        backgroundContent.style.setProperty('--bg-font-size', `${(baseFontRem * scale).toFixed(4)}rem`);
-        backgroundContent.style.setProperty('--bg-line-height', `${(baseLineHeight * (0.96 + (scale * 0.04))).toFixed(4)}`);
-        backgroundContent.style.setProperty('--bg-paragraph-gap', `${(baseGapRem * (0.86 + (scale * 0.14))).toFixed(4)}rem`);
+        const bodyFont = baseFontRem * scale;
+        backgroundContent.style.setProperty('--bg-font-size', `${bodyFont.toFixed(4)}rem`);
+        backgroundContent.style.setProperty('--bg-title-size', `${(bodyFont * 1.2).toFixed(4)}rem`);
+        backgroundContent.style.setProperty('--bg-line-height', `${(baseLineHeight * (0.94 + (scale * 0.06))).toFixed(4)}`);
+        backgroundContent.style.setProperty('--bg-paragraph-gap', `${(baseGapRem * (0.8 + (scale * 0.2))).toFixed(4)}rem`);
       };
 
       const fits = () => {
-        const available = backgroundSection.clientHeight;
+        const available = Math.floor(window.innerHeight * 0.7);
         const required = backgroundContent.scrollHeight;
         return required <= available;
       };
 
       applyScale(minScale);
-      if (!fits()) return;
+      if (!fits()) {
+        let fallbackScale = minScale;
+        for (let i = 0; i < 6; i += 1) {
+          fallbackScale *= 0.92;
+          applyScale(fallbackScale);
+          if (fits()) break;
+        }
+        return;
+      }
 
       applyScale(maxScale);
       if (fits()) return;
