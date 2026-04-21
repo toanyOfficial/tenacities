@@ -938,7 +938,7 @@ body.home-snap {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.74;
+  opacity: 0.7;
 }
 #philosophy .philosophy-graphic-svg {
   width: 100%;
@@ -947,16 +947,16 @@ body.home-snap {
   pointer-events: none;
 }
 #philosophy .philosophy-graphic-main {
-  stroke: rgba(122, 15, 29, 0.34);
-  stroke-width: 2.45;
+  stroke: rgba(122, 15, 29, 0.31);
+  stroke-width: 2.2;
 }
 #philosophy .philosophy-graphic-support {
-  stroke: rgba(122, 15, 29, 0.26);
-  stroke-width: 1.62;
+  stroke: rgba(122, 15, 29, 0.23);
+  stroke-width: 1.42;
 }
 #philosophy .philosophy-graphic-arcs {
-  stroke: rgba(122, 15, 29, 0.31);
-  stroke-width: 2.05;
+  stroke: rgba(122, 15, 29, 0.28);
+  stroke-width: 1.82;
 }
 #philosophy .philosophy-light-node {
   pointer-events: none;
@@ -964,28 +964,28 @@ body.home-snap {
   transform-origin: center;
 }
 #philosophy .philosophy-light-tail {
-  fill: rgba(248, 228, 196, 0.74);
+  fill: rgba(232, 206, 164, 0.58);
 }
 #philosophy .philosophy-light-glow {
-  fill: rgba(255, 246, 231, 0.66);
+  fill: rgba(255, 247, 236, 0.48);
 }
 #philosophy .philosophy-light-core {
   fill: rgba(255, 252, 246, 1);
-  stroke: rgba(122, 15, 29, 0.4);
-  stroke-width: 0.72;
-  filter: drop-shadow(0 0 4px rgba(221, 187, 145, 0.34));
+  stroke: rgba(122, 15, 29, 0.34);
+  stroke-width: 0.64;
+  filter: drop-shadow(0 0 2px rgba(181, 140, 88, 0.24));
 }
 #philosophy .philosophy-light-node-1 {
-  opacity: 0.98;
+  opacity: 0.92;
 }
 #philosophy .philosophy-light-node-2 {
-  opacity: 0.9;
+  opacity: 0.84;
 }
 #philosophy .philosophy-light-node-3 {
-  opacity: 0.86;
+  opacity: 0.8;
 }
 #philosophy .philosophy-light-node-arc {
-  opacity: 0.78;
+  opacity: 0.7;
 }
 #philosophy .philosophy-inner {
   position: relative;
@@ -1032,7 +1032,7 @@ body.home-snap {
 
 @media (max-width: 1024px) {
   #philosophy .philosophy-graphic {
-    opacity: 0.64;
+    opacity: 0.62;
   }
   #philosophy .philosophy-graphic-main {
     stroke-width: 2.1;
@@ -1161,10 +1161,10 @@ body.home-snap {
     transform: scale(0.92);
   }
   #philosophy .philosophy-graphic {
-    opacity: 0.56;
+    opacity: 0.54;
   }
   #philosophy .philosophy-light-node-arc {
-    opacity: 0.62;
+    opacity: 0.56;
   }
 }
 
