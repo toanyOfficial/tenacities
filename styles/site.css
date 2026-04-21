@@ -564,28 +564,66 @@ body.home-snap {
   place-items: center;
 }
 .hero-copy {
-  text-align: center;
+  width: min(980px, 100%);
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "title"
+    "logo"
+    "concepts";
   justify-items: center;
-  gap: .45rem;
+  row-gap: clamp(1.2rem, 3.6vh, 2.5rem);
+  padding-block: clamp(.8rem, 4.4vh, 2.6rem);
+  text-align: center;
 }
 .hero-title {
+  grid-area: title;
   margin: 0;
+  display: grid;
+  gap: clamp(.28rem, 1.1vh, .55rem);
   font-family: "Newsreader", "Noto Sans KR", serif;
-  font-size: clamp(1.45rem, 3.2vw, 2.35rem);
-  font-weight: 600;
-  letter-spacing: -0.012em;
   color: var(--text);
+  line-height: 1.18;
 }
-.hero-logo-label {
-  margin: .45rem 0 0;
-  font-size: .92rem;
-  color: var(--gray);
+.hero-title-main {
+  display: block;
+  font-size: clamp(1.58rem, 3.3vw, 2.45rem);
+  font-weight: 600;
+  letter-spacing: -0.014em;
+}
+.hero-title-sub {
+  display: block;
+  font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  font-size: clamp(1rem, 1.95vw, 1.3rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+  color: rgba(11, 11, 13, .86);
 }
 .hero-logo {
-  width: min(420px, 78vw);
+  grid-area: logo;
+  width: clamp(200px, 38vw, 300px);
   height: auto;
-  margin: .15rem 0 .85rem;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(4px);
+  filter: blur(2px);
+  animation: heroLogoFadeIn .85s cubic-bezier(0.22, 1, 0.36, 1) .14s forwards;
+  will-change: opacity, transform, filter;
+}
+.hero-concepts-group {
+  grid-area: concepts;
+  width: min(100%, 36rem);
+  display: grid;
+  gap: clamp(.7rem, 1.4vh, 1rem);
+}
+.hero-concept-box {
+  width: 100%;
+  border: 1px solid rgba(11, 11, 13, .08);
+  background: rgba(250, 249, 247, .8);
+  border-radius: 10px;
+  padding: .8rem .95rem;
+  text-align: left;
 }
 .hero-concept,
 .hero-concept-sub {
@@ -597,7 +635,58 @@ body.home-snap {
   font-size: clamp(1rem, 1.4vw, 1.08rem);
 }
 .hero-concept-sub {
+  margin-top: .1rem;
   font-size: clamp(.95rem, 1.2vw, 1.01rem);
+}
+
+@keyframes heroLogoFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-copy {
+    grid-template-columns: minmax(250px, .9fr) minmax(390px, 1.1fr);
+    grid-template-areas:
+      "title title"
+      "logo concepts";
+    column-gap: clamp(2.4rem, 5vw, 5rem);
+    row-gap: clamp(1.8rem, 4vh, 3rem);
+    align-items: center;
+  }
+
+  .hero-title {
+    justify-self: center;
+  }
+
+  .hero-logo {
+    justify-self: center;
+    align-self: center;
+    width: clamp(230px, 26vw, 300px);
+  }
+
+  .hero-concepts-group {
+    width: min(100%, 35rem);
+    justify-self: start;
+    align-self: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-logo {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
 }
 
 /* STEP5 background section layout */
