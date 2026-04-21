@@ -742,6 +742,7 @@ body.home-snap {
   margin-inline: 0;
   padding-inline: 0;
 }
+.background-section .section-title,
 .background-section .source-p {
   margin: 0;
   font-size: var(--bg-font-size);
