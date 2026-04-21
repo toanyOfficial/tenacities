@@ -776,6 +776,7 @@ body.home-snap {
   filter: blur(3px);
   animation: bgOrbBreathA 33s ease-in-out infinite reverse;
 }
+
 .background-section .reading-width {
   position: relative;
   z-index: 1;
