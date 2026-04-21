@@ -1065,6 +1065,10 @@ body.home-snap {
     font-size: .98rem;
     line-height: 1.78;
   }
+
+  #philosophy .reading-width {
+    padding-inline: .45rem;
+  }
 }
 
 /* STEP11 final paragraph-fidelity system */
