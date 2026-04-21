@@ -750,9 +750,21 @@ body.home-snap {
     justify-items: center;
     align-content: center;
   }
+  .background-section .section-title {
+    margin-bottom: clamp(.22rem, .9vh, .58rem);
+  }
   .background-section .section-title,
   .background-section .source-p {
     width: min(100%, 92%);
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1000px) {
+  .background-section .section-title,
+  .background-section .source-p {
+    width: min(100%, 90%);
+    justify-self: center;
+    text-align: left;
   }
 }
 
@@ -761,11 +773,12 @@ body.home-snap {
     width: min(94%, 680px);
     justify-items: center;
     align-content: center;
+    transform: translateY(20%);
   }
   .background-section .section-title,
   .background-section .source-p {
     width: min(100%, 96%);
-    text-align: center;
+    text-align: left;
   }
 }
 
