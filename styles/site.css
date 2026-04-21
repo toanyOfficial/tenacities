@@ -644,6 +644,10 @@ body.home-snap {
 }
 
 @media (min-width: 768px) {
+  .hero-center {
+    align-content: center;
+  }
+
   .hero-copy {
     --hero-box-gap: 1rem;
     --hero-box-height: clamp(6.8rem, 8.2vw, 8.5rem);
@@ -657,6 +661,7 @@ body.home-snap {
     align-items: start;
     justify-content: center;
     padding-block: clamp(2rem, 11vh, 6.2rem);
+    transform: translateY(clamp(.85rem, 2.1vh, 1.55rem));
   }
 
   .hero-title {
