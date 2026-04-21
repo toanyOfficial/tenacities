@@ -109,8 +109,60 @@
 
   const backgroundSection = document.getElementById('background');
   if (backgroundSection) {
+    const backgroundContent = backgroundSection.querySelector('.reading-width');
     const paragraphs = Array.from(backgroundSection.querySelectorAll('.source-p'));
     paragraphs.forEach((p, index) => p.style.setProperty('--bg-fade-index', String(index)));
+
+    const optimizeBackgroundTypography = () => {
+      if (!backgroundContent) return;
+
+      const minScale = 0.78;
+      const maxScale = 1.36;
+      const baseFontRem = 0.96;
+      const baseLineHeight = 1.32;
+      const baseGapRem = 0.4;
+
+      const applyScale = (scale) => {
+        backgroundContent.style.setProperty('--bg-font-size', `${(baseFontRem * scale).toFixed(4)}rem`);
+        backgroundContent.style.setProperty('--bg-line-height', `${(baseLineHeight * (0.96 + (scale * 0.04))).toFixed(4)}`);
+        backgroundContent.style.setProperty('--bg-paragraph-gap', `${(baseGapRem * (0.86 + (scale * 0.14))).toFixed(4)}rem`);
+      };
+
+      const fits = () => {
+        const available = backgroundSection.clientHeight;
+        const required = backgroundContent.scrollHeight;
+        return required <= available;
+      };
+
+      applyScale(minScale);
+      if (!fits()) return;
+
+      applyScale(maxScale);
+      if (fits()) return;
+
+      let low = minScale;
+      let high = maxScale;
+      for (let i = 0; i < 7; i += 1) {
+        const mid = (low + high) / 2;
+        applyScale(mid);
+        if (fits()) low = mid;
+        else high = mid;
+      }
+      applyScale(low);
+    };
+
+    let optimizeTimer = 0;
+    const scheduleBackgroundOptimization = () => {
+      window.cancelAnimationFrame(optimizeTimer);
+      optimizeTimer = window.requestAnimationFrame(() => {
+        optimizeBackgroundTypography();
+        window.requestAnimationFrame(optimizeBackgroundTypography);
+      });
+    };
+
+    scheduleBackgroundOptimization();
+    window.addEventListener('resize', scheduleBackgroundOptimization, { passive: true });
+    window.addEventListener('orientationchange', scheduleBackgroundOptimization, { passive: true });
 
     if ('IntersectionObserver' in window) {
       let played = false;

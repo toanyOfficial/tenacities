@@ -712,13 +712,16 @@ body.home-snap {
     linear-gradient(180deg, #faf9f7 0%, #f6f3ef 100%);
 }
 .background-section .reading-width {
+  --bg-font-size: 0.96rem;
+  --bg-line-height: 1.32;
+  --bg-paragraph-gap: 0.4rem;
   width: min(100%, 980px);
   max-width: 980px;
   margin-inline: auto;
   height: 100%;
   display: grid;
   align-content: center;
-  gap: clamp(.26rem, 0.85vh, .44rem);
+  gap: var(--bg-paragraph-gap);
 }
 .background-section .section-title {
   margin-bottom: clamp(.1rem, .42vh, .3rem);
@@ -727,12 +730,12 @@ body.home-snap {
 }
 .background-section .source-p {
   margin: 0;
-  font-size: clamp(.72rem, 1vw, .93rem);
-  line-height: 1.27;
+  font-size: var(--bg-font-size);
+  line-height: var(--bg-line-height);
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity .52s ease, transform .52s ease;
-  transition-delay: calc(var(--bg-fade-index, 0) * .22s);
+  transition: opacity .78s ease, transform .78s ease;
+  transition-delay: calc(var(--bg-fade-index, 0) * .33s);
 }
 .background-section.bg-visible .source-p {
   opacity: 1;
@@ -742,25 +745,15 @@ body.home-snap {
 @media (max-width: 1024px) {
   .background-section .reading-width {
     width: min(100%, 940px);
-    gap: clamp(.22rem, .8vh, .38rem);
-  }
-  .background-section .source-p {
-    font-size: clamp(.68rem, 1.26vw, .86rem);
-    line-height: 1.24;
   }
 }
 
 @media (max-width: 767px) {
   .background-section .reading-width {
     width: min(100%, 1000px);
-    gap: clamp(.18rem, .68vh, .32rem);
   }
   .background-section .section-title {
     font-size: clamp(.92rem, 3.5vw, 1.04rem);
-  }
-  .background-section .source-p {
-    font-size: clamp(.65rem, 2.65vw, .78rem);
-    line-height: 1.2;
   }
 }
 
