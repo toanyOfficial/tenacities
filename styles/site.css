@@ -728,7 +728,7 @@ body.home-snap {
 }
 .background-section .bg-orb {
   --orb-min-opacity: 0.26;
-  --orb-max-opacity: 0.36;
+  --orb-max-opacity: 0.44;
   --orb-scale: 1.02;
   --orb-drift-x: 0rem;
   --orb-drift-y: 0rem;
@@ -750,7 +750,7 @@ body.home-snap {
   --orb-duration: 6.8s;
   --orb-delay: -1.2s;
   --orb-min-opacity: 0.3;
-  --orb-max-opacity: 0.42;
+  --orb-max-opacity: 0.52;
   --orb-scale: 1.03;
   --orb-drift-x: 0.24rem;
   --orb-drift-y: -0.2rem;
@@ -765,7 +765,7 @@ body.home-snap {
   --orb-duration: 7.6s;
   --orb-delay: -3.1s;
   --orb-min-opacity: 0.26;
-  --orb-max-opacity: 0.38;
+  --orb-max-opacity: 0.46;
   --orb-scale: 1.018;
   --orb-drift-x: -0.24rem;
   --orb-drift-y: 0.18rem;
@@ -779,7 +779,7 @@ body.home-snap {
   --orb-duration: 8.4s;
   --orb-delay: -5.4s;
   --orb-min-opacity: 0.29;
-  --orb-max-opacity: 0.43;
+  --orb-max-opacity: 0.5;
   --orb-scale: 1.028;
   --orb-drift-x: 0.2rem;
   --orb-drift-y: 0.26rem;
@@ -794,7 +794,7 @@ body.home-snap {
   --orb-duration: 6.1s;
   --orb-delay: -2.6s;
   --orb-min-opacity: 0.22;
-  --orb-max-opacity: 0.33;
+  --orb-max-opacity: 0.4;
   --orb-scale: 1.016;
   --orb-drift-x: -0.16rem;
   --orb-drift-y: 0.14rem;
@@ -809,7 +809,7 @@ body.home-snap {
   --orb-duration: 9.2s;
   --orb-delay: -6.7s;
   --orb-min-opacity: 0.2;
-  --orb-max-opacity: 0.31;
+  --orb-max-opacity: 0.37;
   --orb-scale: 1.022;
   --orb-drift-x: 0.16rem;
   --orb-drift-y: -0.14rem;
