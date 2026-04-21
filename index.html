@@ -68,9 +68,9 @@
     <div class="philosophy-graphic" aria-hidden="true">
       <svg class="philosophy-graphic-svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="presentation" focusable="false">
         <g class="philosophy-graphic-main" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M -40 652 C 230 518, 452 596, 680 476 C 886 368, 1082 414, 1316 302 C 1450 238, 1576 182, 1688 118" />
-          <path d="M -80 774 C 208 668, 426 744, 672 622 C 902 508, 1128 548, 1384 438 C 1498 390, 1604 334, 1710 260" />
-          <path d="M 42 188 C 282 138, 496 238, 742 198 C 972 162, 1176 76, 1412 64 C 1518 58, 1624 74, 1718 114" />
+          <path id="philosophy-path-1" d="M -120 260 C 170 216, 410 304, 706 280 C 1008 256, 1270 194, 1720 216" />
+          <path id="philosophy-path-2" d="M -120 474 C 190 424, 442 530, 724 502 C 1022 474, 1286 392, 1712 424" />
+          <path id="philosophy-path-3" d="M -120 694 C 196 646, 448 758, 754 728 C 1048 698, 1314 618, 1720 648" />
         </g>
         <g class="philosophy-graphic-support" fill="none" stroke-linecap="round">
           <path d="M 228 278 L 424 316 L 620 274" />
@@ -87,6 +87,11 @@
           <path d="M 988 454 A 164 164 0 0 1 1188 366" />
           <path d="M 736 700 A 116 116 0 0 1 886 642" />
           <path d="M 1266 252 A 98 98 0 0 1 1388 200" />
+        </g>
+        <g class="philosophy-graphic-motion" aria-hidden="true">
+          <circle class="philosophy-light-node philosophy-light-node-1" cx="0" cy="0" r="6" />
+          <circle class="philosophy-light-node philosophy-light-node-2" cx="0" cy="0" r="5" />
+          <circle class="philosophy-light-node philosophy-light-node-3" cx="0" cy="0" r="4.5" />
         </g>
       </svg>
     </div>
@@ -162,6 +167,8 @@
 <footer>
   <div class="container">Built from source material in <code>examples/</code>, rebuilt as a refined multi-depth brand website.</div>
 </footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
 <script src="scripts/navigation.js"></script>
 </body>
 </html>

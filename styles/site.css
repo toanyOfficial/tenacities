@@ -956,6 +956,21 @@ body.home-snap {
   stroke: rgba(122, 15, 29, 0.24);
   stroke-width: 1.9;
 }
+#philosophy .philosophy-light-node {
+  fill: rgba(255, 248, 238, 0.96);
+  stroke: rgba(122, 15, 29, 0.32);
+  stroke-width: 0.7;
+  filter: drop-shadow(0 0 6px rgba(255, 247, 235, 0.56));
+}
+#philosophy .philosophy-light-node-1 {
+  opacity: 0.95;
+}
+#philosophy .philosophy-light-node-2 {
+  opacity: 0.82;
+}
+#philosophy .philosophy-light-node-3 {
+  opacity: 0.76;
+}
 #philosophy .philosophy-inner {
   position: relative;
   z-index: 1;
@@ -1121,6 +1136,10 @@ body.home-snap {
   }
   #philosophy .philosophy-graphic-arcs {
     stroke-width: 1.55;
+  }
+  #philosophy .philosophy-graphic-motion {
+    transform-origin: center;
+    transform: scale(0.92);
   }
 }
 

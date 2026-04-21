@@ -228,6 +228,61 @@
         philosophyInner.classList.add('philosophy-visible');
       }
     }
+
+    const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    const hasGsapMotionPath =
+      typeof window.gsap !== 'undefined' &&
+      typeof window.MotionPathPlugin !== 'undefined';
+
+    if (!prefersReducedMotion && hasGsapMotionPath) {
+      const { gsap, MotionPathPlugin } = window;
+      gsap.registerPlugin(MotionPathPlugin);
+
+      const motionNodes = [
+        {
+          node: philosophySection.querySelector('.philosophy-light-node-1'),
+          path: '#philosophy-path-1',
+          duration: 13.8,
+          start: 0.06,
+          end: 0.94,
+          delay: -3.2,
+        },
+        {
+          node: philosophySection.querySelector('.philosophy-light-node-2'),
+          path: '#philosophy-path-2',
+          duration: 16.1,
+          start: 0.18,
+          end: 0.89,
+          delay: -7.1,
+        },
+        {
+          node: philosophySection.querySelector('.philosophy-light-node-3'),
+          path: '#philosophy-path-3',
+          duration: 15.2,
+          start: 0.11,
+          end: 0.91,
+          delay: -1.8,
+        },
+      ];
+
+      motionNodes.forEach(({ node, path, duration, start, end, delay }) => {
+        if (!node || !philosophySection.querySelector(path)) return;
+        gsap.to(node, {
+          duration,
+          repeat: -1,
+          ease: 'none',
+          delay,
+          motionPath: {
+            path,
+            align: path,
+            alignOrigin: [0.5, 0.5],
+            autoRotate: false,
+            start,
+            end,
+          },
+        });
+      });
+    }
   }
 
   updateHeaderHeightVar();
