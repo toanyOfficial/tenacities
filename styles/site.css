@@ -716,9 +716,6 @@ body.home-snap {
     transform: none;
     transition: none;
   }
-  #philosophy .philosophy-layer {
-    animation: none;
-  }
 }
 
 /* STEP5 background section layout */
@@ -936,134 +933,61 @@ body.home-snap {
   overflow: hidden;
   isolation: isolate;
 }
-#philosophy .philosophy-decor {
+#philosophy .philosophy-graphic {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
 }
-#philosophy .philosophy-layer {
-  position: absolute;
-  inset: -6% -4%;
-  opacity: .48;
-  will-change: transform, opacity, background-position;
+#philosophy .philosophy-graphic-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
-#philosophy .philosophy-layer-base {
-  background-image:
-    linear-gradient(to right, rgba(122, 15, 29, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(122, 15, 29, 0.045) 1px, transparent 1px);
-  background-size: 136px 136px, 136px 136px;
-  background-position: 0 0, 0 0;
-  opacity: .34;
-  animation: philosophyGridDrift 15.6s ease-in-out infinite alternate;
+#philosophy .philosophy-graphic-main {
+  stroke: rgba(122, 15, 29, 0.34);
+  stroke-width: 2.45;
 }
-#philosophy .philosophy-layer-structure {
-  background:
-    radial-gradient(120% 130% at 90% 8%, transparent 0 53%, rgba(122, 15, 29, 0.11) 53.4% 54.1%, transparent 54.7%),
-    radial-gradient(110% 120% at 14% 82%, transparent 0 49%, rgba(122, 15, 29, 0.09) 49.2% 49.8%, transparent 50.3%),
-    radial-gradient(90% 95% at 82% 72%, transparent 0 60%, rgba(122, 15, 29, 0.075) 60.4% 60.9%, transparent 61.4%);
-  filter: blur(0.15px);
-  opacity: .42;
-  animation: philosophyArcFlow 11.8s cubic-bezier(0.4, 0.0, 0.2, 1) infinite alternate;
+#philosophy .philosophy-graphic-support {
+  stroke: rgba(122, 15, 29, 0.26);
+  stroke-width: 1.62;
 }
-#philosophy .philosophy-layer-accent {
-  background:
-    linear-gradient(102deg, transparent 0 23%, rgba(122, 15, 29, 0.08) 23.15%, transparent 23.35% 100%),
-    linear-gradient(78deg, transparent 0 76%, rgba(122, 15, 29, 0.06) 76.12%, transparent 76.32% 100%),
-    linear-gradient(to right, transparent 0 18%, rgba(122, 15, 29, 0.07) 18.1%, transparent 18.26% 100%);
-  opacity: .3;
-  animation: philosophyAccentShift 10.2s ease-in-out infinite alternate;
+#philosophy .philosophy-graphic-arcs {
+  stroke: rgba(122, 15, 29, 0.31);
+  stroke-width: 2.05;
 }
-#philosophy .philosophy-layer-signal {
-  background:
-    linear-gradient(102deg,
-      transparent 0%,
-      transparent 21.8%,
-      rgba(255, 251, 242, 0.0) 22.2%,
-      rgba(255, 251, 242, 0.62) 23.0%,
-      rgba(255, 251, 242, 0.92) 23.8%,
-      rgba(255, 251, 242, 0.24) 24.9%,
-      rgba(255, 251, 242, 0.0) 26.1%,
-      transparent 26.8%,
-      transparent 100%),
-    linear-gradient(78deg,
-      transparent 0%,
-      transparent 74.9%,
-      rgba(255, 248, 238, 0.0) 75.2%,
-      rgba(255, 248, 238, 0.55) 75.9%,
-      rgba(255, 248, 238, 0.84) 76.8%,
-      rgba(255, 248, 238, 0.18) 77.8%,
-      rgba(255, 248, 238, 0.0) 78.7%,
-      transparent 79.2%,
-      transparent 100%),
-    linear-gradient(to right,
-      transparent 0%,
-      transparent 16.7%,
-      rgba(255, 245, 235, 0.0) 17.0%,
-      rgba(255, 245, 235, 0.58) 17.8%,
-      rgba(255, 245, 235, 0.88) 18.6%,
-      rgba(255, 245, 235, 0.22) 19.5%,
-      rgba(255, 245, 235, 0.0) 20.4%,
-      transparent 20.9%,
-      transparent 100%);
-  background-size: 250% 250%, 228% 228%, 214% 214%;
-  background-position: -78% 128%, 136% -64%, -60% 58%;
-  opacity: .52;
-  filter: blur(0.6px) drop-shadow(0 0 5px rgba(255, 246, 230, 0.28));
-  animation: philosophySignalFlow 3.9s linear infinite;
+#philosophy .philosophy-light-node {
+  pointer-events: none;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+#philosophy .philosophy-light-tail {
+  fill: rgba(248, 228, 196, 0.74);
+}
+#philosophy .philosophy-light-glow {
+  fill: rgba(255, 246, 231, 0.66);
+}
+#philosophy .philosophy-light-core {
+  fill: rgba(255, 252, 246, 1);
+  stroke: rgba(122, 15, 29, 0.4);
+  stroke-width: 0.72;
+  filter: drop-shadow(0 0 4px rgba(221, 187, 145, 0.34));
+}
+#philosophy .philosophy-light-node-1 {
+  opacity: 0.98;
+}
+#philosophy .philosophy-light-node-2 {
+  opacity: 0.9;
+}
+#philosophy .philosophy-light-node-3 {
+  opacity: 0.86;
+}
+#philosophy .philosophy-light-node-arc {
+  opacity: 0.78;
 }
 #philosophy .philosophy-inner {
   position: relative;
   z-index: 1;
-}
-
-@keyframes philosophyGridDrift {
-  0% {
-    transform: translate3d(0, 0, 0);
-    background-position: 0 0, 0 0;
-    opacity: .32;
-  }
-  100% {
-    transform: translate3d(-0.65rem, -0.35rem, 0);
-    background-position: -24px -14px, -16px -22px;
-    opacity: .4;
-  }
-}
-
-@keyframes philosophyArcFlow {
-  0% {
-    transform: translate3d(-0.35rem, 0.22rem, 0);
-    opacity: .36;
-  }
-  100% {
-    transform: translate3d(0.4rem, -0.25rem, 0);
-    opacity: .46;
-  }
-}
-
-@keyframes philosophyAccentShift {
-  0% {
-    transform: translate3d(0.25rem, -0.15rem, 0);
-    opacity: .24;
-  }
-  100% {
-    transform: translate3d(-0.25rem, 0.18rem, 0);
-    opacity: .34;
-  }
-}
-
-@keyframes philosophySignalFlow {
-  0% {
-    background-position: -78% 128%, 136% -64%, -60% 58%;
-    opacity: .24;
-  }
-  35% {
-    opacity: .58;
-  }
-  100% {
-    background-position: 112% -26%, -42% 136%, 142% 58%;
-    opacity: .3;
-  }
 }
 
 .philosophy-editorial .reading-width {
@@ -1105,21 +1029,14 @@ body.home-snap {
 }
 
 @media (max-width: 1024px) {
-  #philosophy .philosophy-layer {
-    inset: -5% -7%;
+  #philosophy .philosophy-graphic-main {
+    stroke-width: 2.1;
   }
-  #philosophy .philosophy-layer-base {
-    background-size: 118px 118px, 118px 118px;
-    opacity: .3;
+  #philosophy .philosophy-graphic-support {
+    stroke-width: 1.3;
   }
-  #philosophy .philosophy-layer-structure {
-    opacity: .37;
-  }
-  #philosophy .philosophy-layer-accent {
-    opacity: .25;
-  }
-  #philosophy .philosophy-layer-signal {
-    opacity: .44;
+  #philosophy .philosophy-graphic-arcs {
+    stroke-width: 1.7;
   }
   .philosophy-editorial .reading-width {
     width: min(100%, 900px);
@@ -1225,22 +1142,18 @@ body.home-snap {
     width: min(94%, 680px);
     margin-inline: auto;
   }
-  #philosophy .philosophy-layer {
-    inset: -3% -11%;
+  #philosophy .philosophy-graphic-main {
+    stroke-width: 1.9;
   }
-  #philosophy .philosophy-layer-base {
-    background-size: 92px 92px, 92px 92px;
-    opacity: .25;
+  #philosophy .philosophy-graphic-support {
+    stroke-width: 1.15;
   }
-  #philosophy .philosophy-layer-structure {
-    opacity: .31;
+  #philosophy .philosophy-graphic-arcs {
+    stroke-width: 1.55;
   }
-  #philosophy .philosophy-layer-accent {
-    opacity: .2;
-  }
-  #philosophy .philosophy-layer-signal {
-    opacity: .35;
-    background-size: 226% 226%, 204% 204%, 192% 192%;
+  #philosophy .philosophy-graphic-motion {
+    transform-origin: center;
+    transform: scale(0.92);
   }
 }
 
