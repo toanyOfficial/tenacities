@@ -123,6 +123,14 @@
     );
   }
 
+
+  const el = document.querySelector('.hero-logo');
+  if (el) {
+    el.style.animation = 'none';
+    el.offsetHeight; // reflow
+    el.style.animation = 'heroLogoFadeIn 2.6s cubic-bezier(0.16, 1, 0.3, 1) 1.5s forwards';
+  }
+
   updateProgress();
   (isElementScroller ? scroller : window).addEventListener('scroll', updateProgress, { passive: true });
   window.addEventListener('resize', updateProgress);
