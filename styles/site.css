@@ -541,7 +541,10 @@ body.home-snap {
   max-width: 72ch;
 }
 
-#background .source-p,
+#background .source-p {
+  padding-left: 0;
+}
+
 #philosophy .source-p {
   padding-left: .1rem;
 }
