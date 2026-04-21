@@ -746,13 +746,26 @@ body.home-snap {
 
 @media (max-width: 1024px) {
   .background-section .reading-width {
-    width: min(100%, 940px);
+    width: min(92%, 860px);
+    justify-items: center;
+    align-content: center;
+  }
+  .background-section .section-title,
+  .background-section .source-p {
+    width: min(100%, 92%);
   }
 }
 
 @media (max-width: 767px) {
   .background-section .reading-width {
-    width: min(100%, 1000px);
+    width: min(94%, 680px);
+    justify-items: center;
+    align-content: center;
+  }
+  .background-section .section-title,
+  .background-section .source-p {
+    width: min(100%, 96%);
+    text-align: center;
   }
 }
 
