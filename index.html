@@ -65,11 +65,45 @@
 
   <!-- 3. Brand Philosophy -->
   <section id="philosophy" class="context tone-ivory section-divided section-screen snap-boundary philosophy-shell">
-    <div class="philosophy-decor" aria-hidden="true">
-      <span class="philosophy-layer philosophy-layer-base"></span>
-      <span class="philosophy-layer philosophy-layer-structure"></span>
-      <span class="philosophy-layer philosophy-layer-accent"></span>
-      <span class="philosophy-layer philosophy-layer-signal"></span>
+    <div class="philosophy-graphic" aria-hidden="true">
+      <svg class="philosophy-graphic-svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="presentation" focusable="false">
+        <g class="philosophy-graphic-main" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path id="philosophy-path-1" d="M -140 398 C 168 256, 392 334, 648 230 C 876 136, 1108 168, 1432 48 C 1544 6, 1664 -18, 1752 -12" />
+          <path id="philosophy-path-2" d="M -120 744 C 204 636, 448 716, 700 596 C 932 486, 1178 522, 1460 402 C 1588 348, 1700 298, 1788 252" />
+          <path id="philosophy-path-3" d="M 74 176 C 316 122, 528 220, 768 184 C 1002 148, 1204 74, 1420 62 C 1526 56, 1632 72, 1730 114" />
+        </g>
+        <g class="philosophy-graphic-support" fill="none" stroke-linecap="round">
+          <path d="M 246 232 C 382 182, 520 214, 658 168" />
+          <path d="M 842 274 C 984 230, 1118 252, 1262 198" />
+          <path d="M 356 618 C 488 572, 634 604, 782 552" />
+          <path d="M 944 546 C 1088 494, 1230 528, 1378 470" />
+          <path d="M 520 426 C 590 396, 648 398, 718 362" />
+          <path d="M 1112 354 C 1186 326, 1252 326, 1328 290" />
+        </g>
+        <g class="philosophy-graphic-arcs" fill="none" stroke-linecap="round">
+          <path id="philosophy-arc-path-1" d="M 578 482 A 152 152 0 0 1 770 386" />
+          <path id="philosophy-arc-path-2" d="M 1024 448 A 168 168 0 0 1 1212 342" />
+          <path d="M 688 764 A 126 126 0 0 1 840 676" />
+          <path d="M 1240 266 A 102 102 0 0 1 1364 196" />
+        </g>
+        <g class="philosophy-graphic-motion" aria-hidden="true">
+          <g class="philosophy-light-node philosophy-light-node-1">
+            <ellipse class="philosophy-light-tail" cx="-8.2" cy="0" rx="7.4" ry="2.5" />
+            <circle class="philosophy-light-glow" cx="0" cy="0" r="7.4" />
+            <circle class="philosophy-light-core" cx="0" cy="0" r="4.3" />
+          </g>
+          <g class="philosophy-light-node philosophy-light-node-2">
+            <ellipse class="philosophy-light-tail" cx="-7.2" cy="0" rx="6.5" ry="2.2" />
+            <circle class="philosophy-light-glow" cx="0" cy="0" r="6.5" />
+            <circle class="philosophy-light-core" cx="0" cy="0" r="3.8" />
+          </g>
+          <g class="philosophy-light-node philosophy-light-node-arc">
+            <ellipse class="philosophy-light-tail" cx="-4.2" cy="0" rx="3.8" ry="1.45" />
+            <circle class="philosophy-light-glow" cx="0" cy="0" r="4.1" />
+            <circle class="philosophy-light-core" cx="0" cy="0" r="2.35" />
+          </g>
+        </g>
+      </svg>
     </div>
     <div class="philosophy-inner philosophy-section philosophy-editorial">
       <div class="container reading-width">
@@ -143,6 +177,8 @@
 <footer>
   <div class="container">Built from source material in <code>examples/</code>, rebuilt as a refined multi-depth brand website.</div>
 </footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
 <script src="scripts/navigation.js"></script>
 </body>
 </html>
