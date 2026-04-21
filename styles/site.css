@@ -727,7 +727,7 @@ body.home-snap {
   z-index: 0;
 }
 .background-section .bg-orb {
-  --orb-min-opacity: 0.24;
+  --orb-min-opacity: 0.26;
   --orb-max-opacity: 0.36;
   --orb-scale: 1.02;
   --orb-drift-x: 0rem;
@@ -749,7 +749,7 @@ body.home-snap {
   left: -4%;
   --orb-duration: 6.8s;
   --orb-delay: -1.2s;
-  --orb-min-opacity: 0.28;
+  --orb-min-opacity: 0.3;
   --orb-max-opacity: 0.42;
   --orb-scale: 1.03;
   --orb-drift-x: 0.24rem;
@@ -760,12 +760,12 @@ body.home-snap {
   height: clamp(11rem, 17vw, 15rem);
   top: 11%;
   right: 9%;
-  opacity: 0.32;
+  opacity: 0.26;
   filter: blur(2px);
   --orb-duration: 7.6s;
   --orb-delay: -3.1s;
-  --orb-min-opacity: 0.24;
-  --orb-max-opacity: 0.34;
+  --orb-min-opacity: 0.26;
+  --orb-max-opacity: 0.38;
   --orb-scale: 1.018;
   --orb-drift-x: -0.24rem;
   --orb-drift-y: 0.18rem;
@@ -775,11 +775,11 @@ body.home-snap {
   height: clamp(16rem, 24vw, 22rem);
   right: -6%;
   bottom: 7%;
-  opacity: 0.36;
+  opacity: 0.29;
   --orb-duration: 8.4s;
   --orb-delay: -5.4s;
-  --orb-min-opacity: 0.27;
-  --orb-max-opacity: 0.39;
+  --orb-min-opacity: 0.29;
+  --orb-max-opacity: 0.43;
   --orb-scale: 1.028;
   --orb-drift-x: 0.2rem;
   --orb-drift-y: 0.26rem;
@@ -789,12 +789,12 @@ body.home-snap {
   height: clamp(9rem, 14vw, 12rem);
   left: 16%;
   bottom: 10%;
-  opacity: 0.27;
+  opacity: 0.22;
   filter: blur(2.4px);
   --orb-duration: 6.1s;
   --orb-delay: -2.6s;
-  --orb-min-opacity: 0.2;
-  --orb-max-opacity: 0.3;
+  --orb-min-opacity: 0.22;
+  --orb-max-opacity: 0.33;
   --orb-scale: 1.016;
   --orb-drift-x: -0.16rem;
   --orb-drift-y: 0.14rem;
@@ -804,12 +804,12 @@ body.home-snap {
   height: clamp(12rem, 19vw, 17rem);
   left: 54%;
   top: -7%;
-  opacity: 0.24;
+  opacity: 0.2;
   filter: blur(3px);
   --orb-duration: 9.2s;
   --orb-delay: -6.7s;
-  --orb-min-opacity: 0.18;
-  --orb-max-opacity: 0.29;
+  --orb-min-opacity: 0.2;
+  --orb-max-opacity: 0.31;
   --orb-scale: 1.022;
   --orb-drift-x: 0.16rem;
   --orb-drift-y: -0.14rem;
