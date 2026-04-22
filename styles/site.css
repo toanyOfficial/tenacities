@@ -933,60 +933,54 @@ body.home-snap {
   overflow: hidden;
   isolation: isolate;
 }
-#philosophy .philosophy-graphic {
+#philosophy .philosophy-decor {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.7;
 }
-#philosophy .philosophy-graphic-svg {
+#philosophy .philosophy-background-svg {
   width: 100%;
   height: 100%;
   display: block;
   pointer-events: none;
 }
-#philosophy .philosophy-graphic-main {
-  stroke: rgba(122, 15, 29, 0.31);
-  stroke-width: 2.2;
-}
-#philosophy .philosophy-graphic-support {
-  stroke: rgba(122, 15, 29, 0.23);
-  stroke-width: 1.42;
-}
-#philosophy .philosophy-graphic-arcs {
-  stroke: rgba(122, 15, 29, 0.28);
-  stroke-width: 1.82;
-}
-#philosophy .philosophy-light-node {
-  pointer-events: none;
-  transform-box: fill-box;
+#philosophy .philosophy-svg-curves {
   transform-origin: center;
+  animation: philosophyCurveDrift 11.8s cubic-bezier(0.4, 0.0, 0.2, 1) infinite alternate;
 }
-#philosophy .philosophy-light-tail {
-  fill: rgba(232, 206, 164, 0.58);
+#philosophy .philosophy-curve {
+  fill: none;
+  stroke-linecap: round;
 }
-#philosophy .philosophy-light-glow {
-  fill: rgba(255, 247, 236, 0.48);
+#philosophy .philosophy-curve-1 {
+  stroke: rgba(122, 15, 29, 0.46);
+  stroke-width: 3.9;
 }
-#philosophy .philosophy-light-core {
-  fill: rgba(255, 252, 246, 1);
-  stroke: rgba(122, 15, 29, 0.34);
-  stroke-width: 0.64;
-  filter: drop-shadow(0 0 2px rgba(181, 140, 88, 0.24));
+#philosophy .philosophy-curve-2 {
+  stroke: rgba(122, 15, 29, 0.38);
+  stroke-width: 3.35;
 }
-#philosophy .philosophy-light-node-1 {
-  opacity: 0.92;
+#philosophy .philosophy-curve-3 {
+  stroke: rgba(122, 15, 29, 0.31);
+  stroke-width: 2.8;
 }
-#philosophy .philosophy-light-node-2 {
-  opacity: 0.84;
-}
-#philosophy .philosophy-light-node-arc {
-  opacity: 0.7;
+#philosophy .philosophy-curve-support {
+  stroke: rgba(122, 15, 29, 0.18);
+  stroke-width: 1.25;
 }
 #philosophy .philosophy-inner {
   position: relative;
-  z-index: 1;
+  z-index: 3;
+}
+
+@keyframes philosophyCurveDrift {
+  0% {
+    transform: translate3d(-0.35rem, 0.22rem, 0);
+  }
+  100% {
+    transform: translate3d(0.4rem, -0.25rem, 0);
+  }
 }
 
 .philosophy-editorial .reading-width {
@@ -1028,17 +1022,18 @@ body.home-snap {
 }
 
 @media (max-width: 1024px) {
-  #philosophy .philosophy-graphic {
-    opacity: 0.62;
+  #philosophy .philosophy-curve-1 {
+    stroke-width: 3.55;
   }
-  #philosophy .philosophy-graphic-main {
-    stroke-width: 2.1;
+  #philosophy .philosophy-curve-2 {
+    stroke-width: 3.05;
   }
-  #philosophy .philosophy-graphic-support {
-    stroke-width: 1.3;
+  #philosophy .philosophy-curve-3 {
+    stroke-width: 2.55;
   }
-  #philosophy .philosophy-graphic-arcs {
-    stroke-width: 1.7;
+  #philosophy .philosophy-curve-support {
+    stroke-width: 1.05;
+    stroke: rgba(122, 15, 29, 0.15);
   }
   .philosophy-editorial .reading-width {
     width: min(100%, 900px);
@@ -1144,24 +1139,18 @@ body.home-snap {
     width: min(94%, 680px);
     margin-inline: auto;
   }
-  #philosophy .philosophy-graphic-main {
-    stroke-width: 1.9;
+  #philosophy .philosophy-curve-1 {
+    stroke-width: 3.2;
   }
-  #philosophy .philosophy-graphic-support {
-    stroke-width: 1.15;
+  #philosophy .philosophy-curve-2 {
+    stroke-width: 2.75;
   }
-  #philosophy .philosophy-graphic-arcs {
-    stroke-width: 1.55;
+  #philosophy .philosophy-curve-3 {
+    stroke-width: 2.3;
   }
-  #philosophy .philosophy-graphic-motion {
-    transform-origin: center;
-    transform: scale(0.92);
-  }
-  #philosophy .philosophy-graphic {
-    opacity: 0.54;
-  }
-  #philosophy .philosophy-light-node-arc {
-    opacity: 0.56;
+  #philosophy .philosophy-curve-support {
+    stroke-width: 0.92;
+    stroke: rgba(122, 15, 29, 0.12);
   }
 }
 
