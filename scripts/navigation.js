@@ -260,18 +260,9 @@
 
       const candidates = points
         .filter((segment) => segment.length >= minSamples)
-        .map((segment) => {
-          const ys = segment.map((p) => p.y);
-          const xs = segment.map((p) => p.x);
-          return {
-            segment,
-            verticalSpan: Math.max(...ys) - Math.min(...ys),
-            horizontalSpan: Math.max(...xs) - Math.min(...xs),
-          };
-        })
-        .sort((a, b) => (b.verticalSpan - b.horizontalSpan) - (a.verticalSpan - a.horizontalSpan));
+        .sort((a, b) => b.length - a.length);
 
-      return candidates[0]?.segment || points.sort((a, b) => b.length - a.length)[0] || [];
+      return candidates[0] || points.sort((a, b) => b.length - a.length)[0] || [];
     };
 
     let sectionWidth = 0;
@@ -280,15 +271,20 @@
       if (!overlaySvg || !geometryLayer || !arcPath1 || !arcPath2 || !arcPath3) return false;
 
       const sectionRect = philosophySection.getBoundingClientRect();
-      const layerRect = geometryLayer.getBoundingClientRect();
       sectionWidth = Math.max(1, sectionRect.width);
       sectionHeight = Math.max(1, sectionRect.height);
       overlaySvg.setAttribute('viewBox', `0 0 ${sectionWidth} ${sectionHeight}`);
 
-      const layerLeft = layerRect.left - sectionRect.left;
-      const layerTop = layerRect.top - sectionRect.top;
-      const layerWidth = layerRect.width;
-      const layerHeight = layerRect.height;
+      const layerStyle = window.getComputedStyle(geometryLayer);
+      const insetLeft = parseFloat(layerStyle.left) || 0;
+      const insetRight = parseFloat(layerStyle.right) || 0;
+      const insetTop = parseFloat(layerStyle.top) || 0;
+      const insetBottom = parseFloat(layerStyle.bottom) || 0;
+
+      const layerLeft = insetLeft;
+      const layerTop = insetTop;
+      const layerWidth = sectionWidth - insetLeft - insetRight;
+      const layerHeight = sectionHeight - insetTop - insetBottom;
 
       const arcDefs = [
         { target: arcPath1, cxPct: 0.90, cyPct: 0.08, sizeXPct: 1.20, sizeYPct: 1.30, ringPct: 0.537 },

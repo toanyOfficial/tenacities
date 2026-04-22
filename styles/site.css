@@ -976,6 +976,7 @@ body.home-snap {
   inset: 0;
   z-index: 1;
   pointer-events: none;
+  animation: philosophyArcSync 11.8s cubic-bezier(0.4, 0.0, 0.2, 1) infinite alternate;
 }
 #philosophy .philosophy-overlay-svg {
   width: 100%;
@@ -1040,6 +1041,15 @@ body.home-snap {
   100% {
     transform: translate3d(0.4rem, -0.25rem, 0);
     opacity: .46;
+  }
+}
+
+@keyframes philosophyArcSync {
+  0% {
+    transform: translate3d(-0.35rem, 0.22rem, 0);
+  }
+  100% {
+    transform: translate3d(0.4rem, -0.25rem, 0);
   }
 }
 
