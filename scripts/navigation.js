@@ -234,6 +234,89 @@
       typeof window.gsap !== 'undefined' &&
       typeof window.MotionPathPlugin !== 'undefined';
 
+    const overlaySvg = philosophySection.querySelector('.philosophy-overlay-svg');
+    const geometryLayer = philosophySection.querySelector('.philosophy-layer-structure');
+    const arcPath1 = philosophySection.querySelector('#philosophy-path-1');
+    const arcPath2 = philosophySection.querySelector('#philosophy-path-2');
+    const arcPath3 = philosophySection.querySelector('#philosophy-path-3');
+
+    const sampleVisibleSegment = ({ cx, cy, rx, ry, minSamples = 18 }) => {
+      const points = [];
+      const step = Math.PI / 180;
+      const segmentPoints = [];
+
+      for (let angle = 0; angle <= (Math.PI * 2) + step; angle += step) {
+        const x = cx + (Math.cos(angle) * rx);
+        const y = cy + (Math.sin(angle) * ry);
+        const inside = x >= 0 && x <= sectionWidth && y >= 0 && y <= sectionHeight;
+        if (inside) {
+          segmentPoints.push({ x, y });
+        } else if (segmentPoints.length) {
+          points.push([...segmentPoints]);
+          segmentPoints.length = 0;
+        }
+      }
+      if (segmentPoints.length) points.push(segmentPoints);
+
+      const candidates = points
+        .filter((segment) => segment.length >= minSamples)
+        .map((segment) => {
+          const ys = segment.map((p) => p.y);
+          const xs = segment.map((p) => p.x);
+          return {
+            segment,
+            verticalSpan: Math.max(...ys) - Math.min(...ys),
+            horizontalSpan: Math.max(...xs) - Math.min(...xs),
+          };
+        })
+        .sort((a, b) => (b.verticalSpan - b.horizontalSpan) - (a.verticalSpan - a.horizontalSpan));
+
+      return candidates[0]?.segment || points.sort((a, b) => b.length - a.length)[0] || [];
+    };
+
+    let sectionWidth = 0;
+    let sectionHeight = 0;
+    const rebuildMotionGuides = () => {
+      if (!overlaySvg || !geometryLayer || !arcPath1 || !arcPath2 || !arcPath3) return false;
+
+      const sectionRect = philosophySection.getBoundingClientRect();
+      const layerRect = geometryLayer.getBoundingClientRect();
+      sectionWidth = Math.max(1, sectionRect.width);
+      sectionHeight = Math.max(1, sectionRect.height);
+      overlaySvg.setAttribute('viewBox', `0 0 ${sectionWidth} ${sectionHeight}`);
+
+      const layerLeft = layerRect.left - sectionRect.left;
+      const layerTop = layerRect.top - sectionRect.top;
+      const layerWidth = layerRect.width;
+      const layerHeight = layerRect.height;
+
+      const arcDefs = [
+        { target: arcPath1, cxPct: 0.90, cyPct: 0.08, sizeXPct: 1.20, sizeYPct: 1.30, ringPct: 0.537 },
+        { target: arcPath2, cxPct: 0.14, cyPct: 0.82, sizeXPct: 1.10, sizeYPct: 1.20, ringPct: 0.495 },
+        { target: arcPath3, cxPct: 0.82, cyPct: 0.72, sizeXPct: 0.90, sizeYPct: 0.95, ringPct: 0.606 },
+      ];
+
+      arcDefs.forEach(({ target, cxPct, cyPct, sizeXPct, sizeYPct, ringPct }) => {
+        const cx = layerLeft + (layerWidth * cxPct);
+        const cy = layerTop + (layerHeight * cyPct);
+        const rx = layerWidth * (sizeXPct / 2) * ringPct;
+        const ry = layerHeight * (sizeYPct / 2) * ringPct;
+
+        const segment = sampleVisibleSegment({ cx, cy, rx, ry });
+        if (segment.length < 2) {
+          target.setAttribute('d', '');
+          return;
+        }
+
+        const d = segment
+          .map((point, idx) => `${idx === 0 ? 'M' : 'L'} ${point.x.toFixed(2)} ${point.y.toFixed(2)}`)
+          .join(' ');
+        target.setAttribute('d', d);
+      });
+
+      return true;
+    };
+
     if (!prefersReducedMotion && hasGsapMotionPath) {
       const { gsap, MotionPathPlugin } = window;
       gsap.registerPlugin(MotionPathPlugin);
@@ -251,37 +334,61 @@
           node: philosophySection.querySelector('.philosophy-light-node-2'),
           path: '#philosophy-path-2',
           duration: 16.1,
-          start: 0.18,
-          end: 0.89,
+          start: 0.1,
+          end: 0.86,
           delay: -7.1,
         },
         {
-          node: philosophySection.querySelector('.philosophy-light-node-arc'),
-          path: '#philosophy-arc-path-2',
-          duration: 8.6,
-          start: 0.22,
-          end: 0.82,
+          node: philosophySection.querySelector('.philosophy-light-node-3'),
+          path: '#philosophy-path-3',
+          duration: 9.4,
+          start: 0.12,
+          end: 0.84,
           delay: -2.4,
         },
       ];
 
-      motionNodes.forEach(({ node, path, duration, start, end, delay }) => {
-        if (!node || !philosophySection.querySelector(path)) return;
-        gsap.to(node, {
-          duration,
-          repeat: -1,
-          ease: 'none',
-          delay,
-          motionPath: {
-            path,
-            align: path,
-            alignOrigin: [0.5, 0.5],
-            autoRotate: true,
-            start,
-            end,
-          },
+      const tweens = [];
+      const refreshMotion = () => {
+        const ready = rebuildMotionGuides();
+        tweens.splice(0).forEach((tween) => tween.kill());
+        if (!ready) return;
+
+        motionNodes.forEach(({ node, path, duration, start, end, delay }) => {
+          const pathNode = philosophySection.querySelector(path);
+          if (!node || !pathNode || !(pathNode.getTotalLength?.() > 0)) return;
+          tweens.push(gsap.to(node, {
+            duration,
+            repeat: -1,
+            ease: 'none',
+            delay,
+            motionPath: {
+              path,
+              align: path,
+              alignOrigin: [0.5, 0.5],
+              autoRotate: true,
+              start,
+              end,
+            },
+          }));
         });
-      });
+      };
+
+      let rafId = 0;
+      const scheduleRefresh = () => {
+        window.cancelAnimationFrame(rafId);
+        rafId = window.requestAnimationFrame(refreshMotion);
+      };
+
+      refreshMotion();
+      window.addEventListener('resize', scheduleRefresh, { passive: true });
+      window.addEventListener('orientationchange', scheduleRefresh, { passive: true });
+      if ('ResizeObserver' in window) {
+        const philosophyResizeObserver = new ResizeObserver(scheduleRefresh);
+        philosophyResizeObserver.observe(philosophySection);
+      }
+    } else {
+      rebuildMotionGuides();
     }
   }
 
