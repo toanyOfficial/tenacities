@@ -241,32 +241,33 @@
       const motionNodes = [
         {
           node: philosophySection.querySelector('.philosophy-light-node-1'),
-          path: '#philosophy-path-1',
+          path: '#philosophy-curve-1',
           duration: 13.8,
-          start: 0.06,
-          end: 0.94,
+          start: 0.08,
+          end: 0.92,
           delay: -3.2,
         },
         {
           node: philosophySection.querySelector('.philosophy-light-node-2'),
-          path: '#philosophy-path-2',
+          path: '#philosophy-curve-2',
           duration: 16.1,
-          start: 0.18,
-          end: 0.89,
+          start: 0.1,
+          end: 0.88,
           delay: -7.1,
         },
         {
-          node: philosophySection.querySelector('.philosophy-light-node-arc'),
-          path: '#philosophy-arc-path-2',
-          duration: 8.6,
-          start: 0.22,
-          end: 0.82,
+          node: philosophySection.querySelector('.philosophy-light-node-3'),
+          path: '#philosophy-curve-3',
+          duration: 9.4,
+          start: 0.14,
+          end: 0.84,
           delay: -2.4,
         },
       ];
 
       motionNodes.forEach(({ node, path, duration, start, end, delay }) => {
-        if (!node || !philosophySection.querySelector(path)) return;
+        const pathNode = philosophySection.querySelector(path);
+        if (!node || !pathNode) return;
         gsap.to(node, {
           duration,
           repeat: -1,
