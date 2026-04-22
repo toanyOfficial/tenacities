@@ -66,17 +66,25 @@
   <!-- 3. Brand Philosophy -->
   <section id="philosophy" class="context tone-ivory section-divided section-screen snap-boundary philosophy-shell">
     <div class="philosophy-decor" aria-hidden="true">
-      <span class="philosophy-layer philosophy-layer-base"></span>
-      <span class="philosophy-layer philosophy-layer-structure"></span>
-      <span class="philosophy-layer philosophy-layer-accent"></span>
+      <svg class="philosophy-background-svg" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice" role="presentation" focusable="false">
+        <defs>
+          <pattern id="philosophy-grid-pattern" width="136" height="136" patternUnits="userSpaceOnUse">
+            <path d="M 136 0 L 0 0 0 136" fill="none" stroke="rgba(122, 15, 29, 0.052)" stroke-width="1" />
+          </pattern>
+          <filter id="philosophy-curve-soften" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="0.24" />
+          </filter>
+        </defs>
+        <rect x="0" y="0" width="1000" height="1000" fill="url(#philosophy-grid-pattern)" opacity="0.52" />
+        <g class="philosophy-svg-curves" filter="url(#philosophy-curve-soften)">
+          <path id="philosophy-curve-1" class="philosophy-curve philosophy-curve-1" d="M 998.40 413.42 A 348.00 391.00 0 0 1 584.85 2.33" />
+          <path id="philosophy-curve-2" class="philosophy-curve philosophy-curve-2" d="M 1.07 549.65 A 294.00 333.00 0 0 1 377.65 999.13" />
+          <path id="philosophy-curve-3" class="philosophy-curve philosophy-curve-3" d="M 659.95 996.64 A 295.00 322.00 0 0 1 997.54 470.39" />
+        </g>
+      </svg>
     </div>
     <div class="philosophy-overlay" aria-hidden="true">
-      <svg class="philosophy-overlay-svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="presentation" focusable="false">
-        <g fill="none">
-          <path id="philosophy-path-1" class="philosophy-motion-guide" />
-          <path id="philosophy-path-2" class="philosophy-motion-guide" />
-          <path id="philosophy-path-3" class="philosophy-motion-guide" />
-        </g>
+      <svg class="philosophy-overlay-svg" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice" role="presentation" focusable="false">
         <g class="philosophy-graphic-motion" aria-hidden="true">
           <g class="philosophy-light-node philosophy-light-node-1">
             <ellipse class="philosophy-light-tail" cx="-8.2" cy="0" rx="7.4" ry="2.5" />

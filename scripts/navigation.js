@@ -320,53 +320,46 @@
       const motionNodes = [
         {
           node: philosophySection.querySelector('.philosophy-light-node-1'),
-          path: '#philosophy-path-1',
+          path: '#philosophy-curve-1',
           duration: 13.8,
-          start: 0.06,
-          end: 0.94,
+          start: 0.08,
+          end: 0.92,
           delay: -3.2,
         },
         {
           node: philosophySection.querySelector('.philosophy-light-node-2'),
-          path: '#philosophy-path-2',
+          path: '#philosophy-curve-2',
           duration: 16.1,
           start: 0.1,
-          end: 0.86,
+          end: 0.88,
           delay: -7.1,
         },
         {
           node: philosophySection.querySelector('.philosophy-light-node-3'),
-          path: '#philosophy-path-3',
+          path: '#philosophy-curve-3',
           duration: 9.4,
-          start: 0.12,
+          start: 0.14,
           end: 0.84,
           delay: -2.4,
         },
       ];
 
-      const tweens = [];
-      const refreshMotion = () => {
-        const ready = rebuildMotionGuides();
-        tweens.splice(0).forEach((tween) => tween.kill());
-        if (!ready) return;
-
-        motionNodes.forEach(({ node, path, duration, start, end, delay }) => {
-          const pathNode = philosophySection.querySelector(path);
-          if (!node || !pathNode || !(pathNode.getTotalLength?.() > 0)) return;
-          tweens.push(gsap.to(node, {
-            duration,
-            repeat: -1,
-            ease: 'none',
-            delay,
-            motionPath: {
-              path,
-              align: path,
-              alignOrigin: [0.5, 0.5],
-              autoRotate: true,
-              start,
-              end,
-            },
-          }));
+      motionNodes.forEach(({ node, path, duration, start, end, delay }) => {
+        const pathNode = philosophySection.querySelector(path);
+        if (!node || !pathNode) return;
+        gsap.to(node, {
+          duration,
+          repeat: -1,
+          ease: 'none',
+          delay,
+          motionPath: {
+            path,
+            align: path,
+            alignOrigin: [0.5, 0.5],
+            autoRotate: true,
+            start,
+            end,
+          },
         });
       };
 
