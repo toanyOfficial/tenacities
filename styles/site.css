@@ -747,7 +747,7 @@ body.home-snap {
   height: auto;
   margin: 0;
   opacity: 0.06;
-  animation: heroLogoFadeIn 3.8s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards;
+  animation: heroLogoFadeIn 7.6s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards;
   will-change: opacity;
 }
 .hero-concepts-group {
@@ -1173,6 +1173,23 @@ body.home-snap {
 #philosophy .philosophy-pulse-aura-3 {
   stroke: url(#philosophy-pulse-hi-3);
   stroke-width: 4.55;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  #philosophy .philosophy-pulse {
+    opacity: 0.86;
+    filter: blur(0.18px) drop-shadow(0 0 0.95px rgba(122, 15, 29, 0.28));
+  }
+  #philosophy .philosophy-pulse-highlight {
+    opacity: 0.54;
+    filter: blur(1.35px) drop-shadow(0 0 1.5px rgba(231, 29, 54, 0.2));
+    mix-blend-mode: normal;
+  }
+  #philosophy .philosophy-pulse-aura {
+    opacity: 0.2;
+    filter: blur(2.45px);
+    mix-blend-mode: normal;
+  }
 }
 #philosophy .philosophy-support {
   position: absolute;

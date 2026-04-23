@@ -187,7 +187,7 @@
       el.style.opacity = '0.06';
       el.style.animation = 'none';
       heroFadeRaf = window.requestAnimationFrame(() => {
-        el.style.animation = 'heroLogoFadeIn 3.8s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards';
+        el.style.animation = 'heroLogoFadeIn 7.6s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards';
       });
     };
     const handleHeroActiveChange = (id) => {
@@ -379,12 +379,15 @@
 
     if (pulseFlowStates.length) {
       let lastTimestamp = performance.now();
+      const pixelRatio = Math.max(1, Math.min(3, window.devicePixelRatio || 1));
+      const isCoarsePointer = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+      const offsetSnap = isCoarsePointer ? (1 / pixelRatio) : 0;
       const stepPulseFlow = (timestamp) => {
-        const dt = Math.min(0.05, Math.max(0.001, (timestamp - lastTimestamp) / 1000));
+        const dt = Math.min(0.033, Math.max(0.001, (timestamp - lastTimestamp) / 1000));
         lastTimestamp = timestamp;
 
         pulseFlowStates.forEach((state, index) => {
-          const smoothing = 1 - Math.exp(-dt * 2.8);
+          const smoothing = 1 - Math.exp(-dt * (isCoarsePointer ? 2.1 : 2.8));
           state.speed += (state.targetSpeed - state.speed) * smoothing;
           state.offset -= state.speed * dt;
 
@@ -393,7 +396,10 @@
             state.targetSpeed = chooseNextTargetSpeed(pulseGroups[index].base);
           }
 
-          const offsetValue = state.offset.toFixed(3);
+          const renderOffset = offsetSnap > 0
+            ? Math.round(state.offset / offsetSnap) * offsetSnap
+            : state.offset;
+          const offsetValue = renderOffset.toFixed(isCoarsePointer ? 2 : 3);
           state.main.style.strokeDashoffset = offsetValue;
           state.highlight.style.strokeDashoffset = offsetValue;
           state.aura.style.strokeDashoffset = offsetValue;
