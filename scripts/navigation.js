@@ -344,31 +344,80 @@
   const philosophySection = document.getElementById('philosophy');
   if (philosophySection) {
     const philosophyInner = philosophySection.querySelector('.philosophy-editorial');
-    const philosophyBlocks = Array.from(philosophySection.querySelectorAll('.philosophy-block'));
-    philosophyBlocks.forEach((block, index) => {
+    const philosophyFadeTargets = Array.from(philosophySection.querySelectorAll('[data-philosophy-fade]'));
+    philosophyFadeTargets.forEach((block, index) => {
       const order = Number(block.getAttribute('data-philosophy-order'));
       block.style.setProperty('--philosophy-sequence', String(Number.isFinite(order) ? order : index));
     });
 
-    if (philosophyInner) {
-      let philosophyActive = false;
-      const replayPhilosophyFade = () => {
-        philosophyInner.classList.remove('philosophy-visible');
-        window.requestAnimationFrame(() => {
-          philosophyInner.classList.add('philosophy-visible');
+    if (philosophyInner && philosophyFadeTargets.length) {
+      const PHILOSOPHY_FADE_CLASS = 'philosophy-visible';
+      let philosophyState = 'idle';
+      let runToken = 0;
+      let enterRaf1 = 0;
+      let enterRaf2 = 0;
+      let settleTimer = 0;
+
+      const clearPhilosophyFadeWork = () => {
+        if (enterRaf1) {
+          window.cancelAnimationFrame(enterRaf1);
+          enterRaf1 = 0;
+        }
+        if (enterRaf2) {
+          window.cancelAnimationFrame(enterRaf2);
+          enterRaf2 = 0;
+        }
+        if (settleTimer) {
+          window.clearTimeout(settleTimer);
+          settleTimer = 0;
+        }
+      };
+
+      const resetPhilosophyFade = () => {
+        runToken += 1;
+        clearPhilosophyFadeWork();
+        philosophyState = 'leaving';
+        philosophyInner.classList.remove(PHILOSOPHY_FADE_CLASS);
+        philosophyFadeTargets.forEach((target) => {
+          target.style.removeProperty('opacity');
+          target.style.removeProperty('transform');
+          target.style.removeProperty('visibility');
+        });
+        philosophyState = 'idle';
+      };
+
+      const startPhilosophyFade = () => {
+        if (philosophyState === 'entering' || philosophyState === 'visible') return;
+        const token = runToken + 1;
+        runToken = token;
+        clearPhilosophyFadeWork();
+        philosophyState = 'entering';
+        philosophyInner.classList.remove(PHILOSOPHY_FADE_CLASS);
+        void philosophyInner.offsetWidth;
+
+        enterRaf1 = window.requestAnimationFrame(() => {
+          enterRaf1 = 0;
+          enterRaf2 = window.requestAnimationFrame(() => {
+            enterRaf2 = 0;
+            if (token !== runToken) return;
+            philosophyInner.classList.add(PHILOSOPHY_FADE_CLASS);
+            settleTimer = window.setTimeout(() => {
+              settleTimer = 0;
+              if (token !== runToken) return;
+              philosophyState = 'visible';
+            }, 3600);
+          });
         });
       };
+
       const handlePhilosophyActiveChange = (id) => {
         if (id === 'philosophy') {
-          if (!philosophyActive) replayPhilosophyFade();
-          philosophyActive = true;
+          startPhilosophyFade();
           return;
         }
-        if (philosophyActive) {
-          philosophyActive = false;
-          philosophyInner.classList.remove('philosophy-visible');
-        }
+        resetPhilosophyFade();
       };
+
       window.addEventListener('tenacities:active-section-change', (event) => {
         handlePhilosophyActiveChange(event.detail?.id || '');
       });
