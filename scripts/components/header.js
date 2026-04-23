@@ -2,7 +2,7 @@
   const MAIN_HEADER_DOM = `
 <header>
   <div class="container nav">
-    <strong><a class="brand-link" href="#hero">Tenacities</a></strong>
+    <strong><a class="brand-link" href="${brandHref}">Tenacities</a></strong>
     <nav class="nav-links">
       <a href="#hero" aria-label="Hero" class=""><span class="tab-label">Hero</span><span class="tab-icon" aria-hidden="true"><img class="tab-icon-logo" src="examples/Tenacities.png" alt="" /></span></a>
       <a href="#background" aria-label="Background" class=""><span class="tab-label">Background</span><span class="tab-icon" aria-hidden="true">🍃</span></a>
