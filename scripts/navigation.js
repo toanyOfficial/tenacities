@@ -344,36 +344,29 @@
   const philosophySection = document.getElementById('philosophy');
   if (philosophySection) {
     const philosophyInner = philosophySection.querySelector('.philosophy-editorial');
-    const philosophyBlocks = Array.from(philosophySection.querySelectorAll('.philosophy-block'));
-    philosophyBlocks.forEach((block, index) => {
+    const philosophyFadeTargets = Array.from(philosophySection.querySelectorAll('[data-philosophy-fade]'));
+    philosophyFadeTargets.forEach((block, index) => {
       const order = Number(block.getAttribute('data-philosophy-order'));
       block.style.setProperty('--philosophy-sequence', String(Number.isFinite(order) ? order : index));
     });
 
-    if (philosophyInner) {
-      let philosophyActive = false;
-      const replayPhilosophyFade = () => {
-        philosophyInner.classList.remove('philosophy-visible');
-        window.requestAnimationFrame(() => {
-          philosophyInner.classList.add('philosophy-visible');
-        });
+    if (philosophyInner && philosophyFadeTargets.length) {
+      const PHILOSOPHY_FADE_CLASS = 'philosophy-visible';
+      let hasPhilosophyTextAppeared = philosophyInner.classList.contains(PHILOSOPHY_FADE_CLASS);
+
+      const revealPhilosophyTextOnce = () => {
+        if (hasPhilosophyTextAppeared) return;
+        hasPhilosophyTextAppeared = true;
+        philosophyInner.classList.add(PHILOSOPHY_FADE_CLASS);
       };
-      const handlePhilosophyActiveChange = (id) => {
-        if (id === 'philosophy') {
-          if (!philosophyActive) replayPhilosophyFade();
-          philosophyActive = true;
-          return;
-        }
-        if (philosophyActive) {
-          philosophyActive = false;
-          philosophyInner.classList.remove('philosophy-visible');
-        }
-      };
+
       window.addEventListener('tenacities:active-section-change', (event) => {
-        handlePhilosophyActiveChange(event.detail?.id || '');
+        if (event.detail?.id !== 'philosophy') return;
+        revealPhilosophyTextOnce();
       });
       window.requestAnimationFrame(() => {
-        handlePhilosophyActiveChange(getCurrentActiveSectionId());
+        if (getCurrentActiveSectionId() !== 'philosophy') return;
+        revealPhilosophyTextOnce();
       });
     }
 
@@ -403,15 +396,16 @@
 
     const makePulseFlowState = (group, index) => {
       const { base, main, highlight, aura } = group;
-      if (!main || !highlight || !aura) return null;
+      if (!main) return null;
+      const lightningEnabled = !isKakaoInApp;
       const randomFactor = isMobilePulseMode ? 1 : (0.9 + (Math.random() * 0.2));
       const baseDuration = Math.max(9, base);
       const currentDuration = baseDuration * randomFactor;
       const startOffset = -((index + 1) * 240);
       return {
         main,
-        highlight,
-        aura,
+        highlight: lightningEnabled ? highlight : null,
+        aura: lightningEnabled ? aura : null,
         offset: startOffset,
         speed: 1000 / currentDuration,
         targetSpeed: 1000 / currentDuration,
@@ -424,14 +418,14 @@
       .filter(Boolean);
 
     const chooseNextTargetSpeed = (baseDuration) => {
-      if (isMobilePulseMode) {
+      if (isMobilePulseMode || isKakaoInApp) {
         return 1000 / Math.max(9, baseDuration);
       }
       const randomFactor = 0.9 + (Math.random() * 0.2);
       return 1000 / (Math.max(9, baseDuration) * randomFactor);
     };
 
-    if (!isKakaoInApp && pulseFlowStates.length) {
+    if (pulseFlowStates.length) {
       let lastTimestamp = performance.now();
       const isCoarsePointer = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
       const stepPulseFlow = (timestamp) => {
@@ -453,8 +447,8 @@
             : state.offset;
           const offsetValue = normalizedOffset.toFixed(isMobilePulseMode ? 0 : 3);
           state.main.style.strokeDashoffset = offsetValue;
-          state.highlight.style.strokeDashoffset = offsetValue;
-          state.aura.style.strokeDashoffset = offsetValue;
+          if (state.highlight) state.highlight.style.strokeDashoffset = offsetValue;
+          if (state.aura) state.aura.style.strokeDashoffset = offsetValue;
         });
 
         window.requestAnimationFrame(stepPulseFlow);
