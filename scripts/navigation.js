@@ -271,16 +271,16 @@
 
     if (lastParagraph) {
       let hasBouncedAtEnd = false;
-      let bounceLock = false;
+      let isBouncing = false;
       let isPhilosophyActive = false;
       let lastParagraphBottom = 0;
       let touchY = null;
-      let bounceUnlockTimer = 0;
       let pendingDelta = 0;
       let endCheckRaf = 0;
 
       const clearBounceClass = () => {
-        philosophySection.classList.remove('philosophy-bounce');
+        if (!philosophyContent) return;
+        philosophyContent.classList.remove('philosophy-bounce');
       };
 
       const measureLastParagraphBottom = () => {
@@ -302,23 +302,17 @@
       const atLastParagraphEnd = () => viewportBottom() >= (lastParagraphBottom - 1);
 
       const triggerPhilosophyBounce = () => {
+        if (!philosophyContent) return;
         hasBouncedAtEnd = true;
-        bounceLock = true;
-        clearTimeout(bounceUnlockTimer);
+        isBouncing = true;
         clearBounceClass();
-        philosophySection.classList.add('philosophy-bounce');
-        requestAnimationFrame(() => {
-          philosophySection.scrollIntoView({ behavior: 'auto', block: 'start' });
-        });
-        bounceUnlockTimer = window.setTimeout(() => {
-          bounceLock = false;
-        }, 460);
+        philosophyContent.classList.add('philosophy-bounce');
       };
 
       const checkBounceTrigger = (deltaY) => {
         if (deltaY <= 0) return;
         if (!isPhilosophyActive) return;
-        if (hasBouncedAtEnd || bounceLock) return;
+        if (hasBouncedAtEnd || isBouncing) return;
         if (!atLastParagraphEnd()) return;
         triggerPhilosophyBounce();
       };
@@ -337,17 +331,21 @@
 
       const resetBounceState = () => {
         hasBouncedAtEnd = false;
-        bounceLock = false;
-        clearTimeout(bounceUnlockTimer);
+        isBouncing = false;
         clearBounceClass();
       };
 
-      philosophySection.addEventListener('animationend', (event) => {
-        if (event.animationName === 'philosophyBounce') clearBounceClass();
-      });
+      if (philosophyContent) {
+        philosophyContent.addEventListener('animationend', (event) => {
+          if (event.animationName !== 'philosophyBounce') return;
+          isBouncing = false;
+          clearBounceClass();
+        });
+      }
 
       const inputTarget = isElementScroller ? snapRoot : window;
       inputTarget.addEventListener('wheel', (event) => {
+        if (isBouncing) return;
         scheduleBounceCheck(event.deltaY);
       }, { passive: true });
 
@@ -358,6 +356,7 @@
 
       inputTarget.addEventListener('touchmove', (event) => {
         if (!event.touches?.length || touchY == null) return;
+        if (isBouncing) return;
         const nextY = event.touches[0].clientY;
         const deltaY = touchY - nextY;
         touchY = nextY;

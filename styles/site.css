@@ -1068,7 +1068,7 @@ body.home-snap {
   max-width: 920px;
   margin-inline: auto;
 }
-#philosophy.philosophy-bounce {
+.philosophy-editorial .philosophy-content.philosophy-bounce {
   animation: philosophyBounce 360ms cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 .philosophy-editorial .philosophy-dummy-end {
