@@ -83,5 +83,115 @@
     "footer": {
       "description": "Built from source material in assets/images/, rebuilt as a refined multi-depth brand website."
     }
+  },
+  "history": {
+    "archive": {
+      "title": "History Archive (2022–2024)",
+      "intro": "세로형 타임라인에서 각 연혁 항목을 열람할 수 있습니다. 각 항목은 별도 상세 페이지와 필요 시 하위 자료 페이지로 연결됩니다.",
+      "entry1": "<strong>2022.03</strong> (주)테너시티즈 설립 및 사업개시",
+      "entry2": "<strong>2022.05</strong> 기술보증기금 2억원 기술심사 승인",
+      "entry3": "<strong>2022.08</strong> Social Metaverse Toany 론칭",
+      "entry4": "<strong>2023.05</strong> NIPA_메타버스초기기업 인프라 지원사업 최종선발",
+      "entry5": "<strong>2023.06</strong> Kpop rhythm game Duet tae-bo",
+      "entry6": "<strong>2023.12</strong> 단기임대중개 플랫폼 나래하우스 외주개발 및 런칭",
+      "entry7": "<strong>2024.06</strong> 단기임대통합관리서비스 Concierge Gangnam",
+      "entry8": "<strong>2024.12</strong> 컨시어지+외식업 연매출 13억 달성",
+      "button": {
+        "backToMain": "메인으로"
+      }
+    },
+    "detail": {
+      "eyebrow": "History Detail",
+      "subpageEyebrow": "History Subpage",
+      "backToHistory": "← 연혁보기",
+      "backToMain": "메인으로",
+      "footer": "Tenacities history archive detail.",
+      "page202203": {
+        "title": "2022.03. (주)테너시티즈 설립 및 사업개시"
+      },
+      "page202205": {
+        "title": "2022.05. 기술보증기금 2억원 기술심사 승인"
+      },
+      "page202208": {
+        "title": "2022.08. Social Metaverse Toany 론칭",
+        "serviceInfo": "Service Info",
+        "item1": "Metaverse 내부에서 F&B 배달을 위한 서비스 연동.",
+        "item2": "Toany를 통해 땡겨요 F&B 주문 시 NFT good 제공",
+        "item3": "3개 투자사(1 ac, 2 vc)사전신청 유저 10인 트위치 스트리머 1인 인베스트뉴스 기자 1인 참석",
+        "item4": "블리스바인 벤처스와 40억 Value 투자협상 진행",
+        "item5": "메타버스 버스킹 버스커 4인, 청중 16인 참가",
+        "item6": "메타버스 단체 소개팅 남성 4인, 여성 4인 참가",
+        "item7": "메타버스 단체 미팅 남녀 4팀 참가(2인 1팀)",
+        "item8": "우리집 포트럭 파티 남성 3팀, 남녀 1인 참가(2인 1팀)",
+        "item9": "대규모 상시 접속 인원이 보장되지 않으면 즐길 콘텐츠가 없다.",
+        "item10": "즐길 콘텐츠가 없으면 상시 접속할 이유가 없다.",
+        "linkedSubpages": "Linked Subpages",
+        "applicationCapture": "Application Capture",
+        "metaverseEvents": "Metaverse Events",
+        "externalReferences": "External References"
+      },
+      "page202305": {
+        "title": "2023.05. NIPA_메타버스초기기업 인프라 지원사업 최종선발",
+        "agreement": "협약서"
+      },
+      "page202306": {
+        "title": "2023.06. Kpop rhythm game Duet tae-bo",
+        "serviceInfo": "Service Info",
+        "item1": "VR appstore 생태계 이해 및 VR 최적화에 실패.",
+        "item2": "출시는 길어지는데 개발자, 디자이너 등을 유지할 수 없는 관계로 출시 포기",
+        "linkedSubpages": "Linked Subpages",
+        "applicationCapture": "Application Capture",
+        "nftPromoRoom": "NFT 홍보룸 구축",
+        "externalReference": "External Reference"
+      },
+      "page202312": {
+        "title": "2023.12. 단기임대중개 플랫폼 나래하우스 외주개발 및 런칭",
+        "applicationCapture": "Application Capture"
+      },
+      "page202406": {
+        "title": "2024.06. 단기임대통합관리서비스 Concierge Gangnam"
+      },
+      "page202412": {
+        "title": "2024.12. 컨시어지+외식업 연매출 13억 달성"
+      },
+      "page202208Application": {
+        "title": "Application Capture"
+      },
+      "page202208Events": {
+        "title": "Metaverse Events"
+      },
+      "page202305Agreement": {
+        "title": "협약서"
+      },
+      "page202306Application": {
+        "title": "Application Capture"
+      },
+      "page202306Nft": {
+        "title": "NFT 홍보룸 구축"
+      },
+      "page202312Application": {
+        "title": "Application Capture"
+      }
+    }
+  },
+  "ci": {
+    "detail": {
+      "title": "CI — Brand Identity System",
+      "logoSystemTitle": "Logo System",
+      "primaryColorLabel": "Primary Color",
+      "primaryColorName": "Crimson Red · #E71D36",
+      "primaryColorDescription": "‘열정’을 상징하되, 단기 집중형 감정이 아닌 장기간에 걸친 ‘의지’를 드러내기 위해 채도를 조정하고 깊이를 더한 색으로 정의됩니다.",
+      "brandMarkLabel": "Brand Mark",
+      "brandMarkName": "Tenacities Emblem",
+      "emblemStructureTitle": "Emblem 의미 구조",
+      "emblemItem1": "<strong>TENACITIES</strong>: 사명 Tenacities의 각 글자를 추상적으로 형상화.",
+      "emblemItem2": "<strong>씨앗부터 열매까지</strong>: 하단 반원(씨앗)–중단 덩굴(줄기)–상단 반원(열매)로 연결되며, ‘修身 齊家 治社 愛天下’ 가치관의 연속성을 상징.",
+      "emblemItem3": "<strong>우직하게 타오르는 불꽃</strong>: 성화의 grip과 불꽃 형상으로, 급격한 성공보다 지속적 정진의 Tenacity를 표현.",
+      "emblemItem4": "<strong>맞잡은 두 손</strong>: 고객과 임직원을 동일한 생태계 구성원으로 보며, 순환적 상생을 지향.",
+      "emblemItem5": "<strong>기타 상징</strong>: 대칭적 butterfly wing, 피라미드/깔대기의 상하 대칭 관념을 통해 책임과 권한의 균형을 표현.",
+      "orgChartTitle": "Organization Chart",
+      "backToMain": "메인으로",
+      "footer": "CI section designed as a structured brand identity area."
+    }
   }
 }
