@@ -1059,8 +1059,7 @@ body.home-snap {
 }
 @keyframes philosophyBounce {
   0% { transform: translateY(0); }
-  30% { transform: translateY(-12px); }
-  60% { transform: translateY(6px); }
+  50% { transform: translateY(-4px); }
   100% { transform: translateY(0); }
 }
 
@@ -1070,10 +1069,10 @@ body.home-snap {
   margin-inline: auto;
 }
 #philosophy.philosophy-bounce {
-  animation: philosophyBounce 420ms cubic-bezier(0.25, 0.8, 0.25, 1);
+  animation: philosophyBounce 360ms cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 .philosophy-editorial .philosophy-dummy-end {
-  height: clamp(120px, 15vh, 240px);
+  height: clamp(40px, 5vh, 80px);
   pointer-events: none;
   opacity: 0;
 }
