@@ -1220,6 +1220,7 @@ body.home-snap {
   height: clamp(62px, 8.2vw, 78px);
   object-fit: contain;
   display: block;
+  border-radius: 12px;
 }
 .ci-line {
   margin: 0;
