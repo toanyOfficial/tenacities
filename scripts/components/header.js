@@ -1,0 +1,17 @@
+export const MAIN_HEADER_TEMPLATE = `
+  <div class="container nav">
+    <strong><a class="brand-link" href="#hero">Tenacities</a></strong>
+    <nav class="nav-links">
+      <a href="#hero" aria-label="Hero"><span class="tab-label">Hero</span><span class="tab-icon" aria-hidden="true"><img class="tab-icon-logo" src="examples/Tenacities.png" alt="" /></span></a>
+      <a href="#background" aria-label="Background"><span class="tab-label">Background</span><span class="tab-icon" aria-hidden="true">🍃</span></a>
+      <a href="#philosophy" aria-label="Philosophy"><span class="tab-label">Philosophy</span><span class="tab-icon" aria-hidden="true">🧭</span></a>
+      <a href="#ci" aria-label="CI"><span class="tab-label">CI</span><span class="tab-icon" aria-hidden="true">🎨</span></a>
+      <a href="#history" aria-label="History"><span class="tab-label">History</span><span class="tab-icon" aria-hidden="true">📜</span></a>
+    </nav>
+  </div>
+`;
+
+export const mountMainHeader = (headerHost = document.querySelector('header')) => {
+  if (!headerHost) return;
+  headerHost.innerHTML = MAIN_HEADER_TEMPLATE;
+};
