@@ -529,6 +529,7 @@ body { overflow-x: hidden; }
     .nav-links a.is-active .tab-label,
     .nav-links a[aria-current="true"] .tab-label {
       display: inline;
+      color: #ffffff;
     }
     .nav-links a.is-active .tab-icon,
     .nav-links a[aria-current="true"] .tab-icon {
