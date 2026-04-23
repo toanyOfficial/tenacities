@@ -7,18 +7,7 @@
   <link rel="stylesheet" href="styles/site.css" />
 </head>
 <body class="home-snap">
-<header>
-  <div class="container nav">
-    <strong><a class="brand-link" href="#hero">Tenacities</a></strong>
-    <nav class="nav-links">
-      <a href="#hero" aria-label="Hero"><span class="tab-label">Hero</span><span class="tab-icon" aria-hidden="true"><img class="tab-icon-logo" src="examples/Tenacities.png" alt="" /></span></a>
-      <a href="#background" aria-label="Background"><span class="tab-label">Background</span><span class="tab-icon" aria-hidden="true">🍃</span></a>
-      <a href="#philosophy" aria-label="Philosophy"><span class="tab-label">Philosophy</span><span class="tab-icon" aria-hidden="true">🧭</span></a>
-      <a href="#ci" aria-label="CI"><span class="tab-label">CI</span><span class="tab-icon" aria-hidden="true">🎨</span></a>
-      <a href="#history" aria-label="History"><span class="tab-label">History</span><span class="tab-icon" aria-hidden="true">📜</span></a>
-    </nav>
-  </div>
-</header>
+<header data-include="header.html"></header>
 
 <main class="snap-root">
   <!-- 1. Hero -->
@@ -237,6 +226,24 @@
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
+<script>
+  (() => {
+    const host = document.querySelector('header[data-include]');
+    if (!host) return;
+    const includePath = host.getAttribute('data-include');
+    if (!includePath) return;
+
+    const request = new XMLHttpRequest();
+    request.open('GET', includePath, false);
+    request.send(null);
+
+    if (request.status >= 200 && request.status < 300) {
+      const parsed = new DOMParser().parseFromString(request.responseText, 'text/html');
+      const sourceHeader = parsed.querySelector('header');
+      host.innerHTML = sourceHeader ? sourceHeader.innerHTML : request.responseText;
+    }
+  })();
+</script>
 <script src="scripts/navigation.js"></script>
 </body>
 </html>
