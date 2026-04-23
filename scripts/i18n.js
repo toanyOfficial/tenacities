@@ -12,12 +12,20 @@
   }
 
   function getSavedLanguage() {
-    const saved = global.localStorage.getItem(STORAGE_KEY);
-    return normalizeLanguage(saved);
+    try {
+      const saved = global.localStorage.getItem(STORAGE_KEY);
+      return normalizeLanguage(saved);
+    } catch (_error) {
+      return DEFAULT_LANGUAGE;
+    }
   }
 
   function setSavedLanguage(lang) {
-    global.localStorage.setItem(STORAGE_KEY, normalizeLanguage(lang));
+    try {
+      global.localStorage.setItem(STORAGE_KEY, normalizeLanguage(lang));
+    } catch (_error) {
+      // no-op in restricted storage environments
+    }
   }
 
   async function loadLocale(lang) {
@@ -41,14 +49,34 @@
 
   function applyTranslations(dict, root) {
     const base = root || global.document;
-    const nodes = base.querySelectorAll('[data-i18n]');
+    const textNodes = base.querySelectorAll('[data-i18n]');
+    const ariaNodes = base.querySelectorAll('[data-i18n-aria-label]');
+    const titleNodes = base.querySelectorAll('[data-i18n-title]');
 
-    nodes.forEach(function (node) {
+    textNodes.forEach(function (node) {
       const key = node.getAttribute('data-i18n');
       const translated = getNestedValue(dict, key);
 
       if (typeof translated === 'string') {
         node.textContent = translated;
+      }
+    });
+
+    ariaNodes.forEach(function (node) {
+      const key = node.getAttribute('data-i18n-aria-label');
+      const translated = getNestedValue(dict, key);
+
+      if (typeof translated === 'string') {
+        node.setAttribute('aria-label', translated);
+      }
+    });
+
+    titleNodes.forEach(function (node) {
+      const key = node.getAttribute('data-i18n-title');
+      const translated = getNestedValue(dict, key);
+
+      if (typeof translated === 'string') {
+        node.setAttribute('title', translated);
       }
     });
   }

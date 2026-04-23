@@ -8,23 +8,80 @@
     },
     "backToMain": "Back to Main"
   },
-  "hero": {
-    "title": "Tenacities",
-    "concept": {
-      "tenacity": "Metaverse"
+  "index": {
+    "nav": {
+      "hero": "Hero",
+      "background": "Background",
+      "philosophy": "Philosophy",
+      "ci": "CI",
+      "history": "History"
+    },
+    "hero": {
+      "companyName": "Tenacities Co., Ltd.",
+      "logoAlt": "Tenacities logo",
+      "concept1Title": "💡 Tenacity + ies",
+      "concept1Body": ": People with tenacity",
+      "concept2Title": "💡 Tena + cities",
+      "concept2Body": ": A Seamless world shaped by people with tenacity"
+    },
+    "background": {
+      "p1": "Tenacities was founded in March 2022 with Metaverse as its goal.",
+      "p2": "Since I was young, I wanted to build a single world. A business, a company itself, is also one world, so I naturally walked the path of entrepreneurship.",
+      "p3": "While repeating attempts and failures, experience and growth, the keyword Metaverse came to me. I did not know it deeply at first, but it felt like a destined keyword. Metaverse itself is one world.",
+      "p4": "Though it may sound old-fashioned, I view the world through the lens of self-cultivation, family order, governance, and peace under heaven.",
+      "p5": "Just as I am one world, my family is one world, and beyond that, a company is also one world.",
+      "p6": "But I have no country to rule and no ambition to conquer all under heaven.",
+      "p7": "So, with my own adaptation — Self-cultivation, Family, Company, Love for the World — I continue expanding my awareness and reach."
+    },
+    "philosophy": {
+      "sectionTitle": "Philosophy",
+      "note": "※ Tenacities aims for Metaverse, but our view may differ significantly from the Metaverse discussed in academia.",
+      "topic1": {
+        "title": "1️⃣ Misunderstandings about Metaverse and its essence",
+        "p1": "Many people confuse Metaverse, 3D World, and virtual reality. Tenacities also started that way.",
+        "p2": "After repeated exploration, we interpreted Seamless world as the essence of Metaverse."
+      },
+      "topic2": {
+        "title": "2️⃣ What Seamless world means",
+        "p1": "The self exists as a continuous being, in a Seamless state, wherever and whenever.",
+        "p2": "When I graduate from elementary school and enter middle school, I cannot function as a member there until my profile is registered and a student number is issued. I am Seamless, but the World is not Seamless because of centralized management systems.",
+        "p3": "The same is true when moving from Korea to the U.S. Without registration in that system, I cannot exist as a member of that society.",
+        "p4": "The inseparable relation between Metaverse and decentralization is not merely political. It reflects human nature that seeks Seamless survival. That is why Coin, NFT, and Block chain are discussed together."
+      },
+      "topic3": {
+        "title": "3️⃣ Tenacities' Seamless World",
+        "p1": "For building a Seamless world, Tenacities defines the three essential foundations as housing, food, and labor.",
+        "p2": "Even in a present and future where many jobs are replaced by AI, if people can sustain the essence of labor and have housing and food ecosystems that support it, they can continue their will to live.",
+        "p3": "Wherever in the world we go, even if humanity migrates to Mars, we aim to build a Seamless world where self-sufficiency in these three dimensions is possible."
+      },
+      "topic4": {
+        "title": "4️⃣ Tenacities and Seamless World",
+        "p1": "Tenacities aspires to a world where people with will are given more opportunities.",
+        "p2": "Tenacities is a collective of people with the will to build better lives.",
+        "p3": "We aim for a Metaverse where people with will can live freely."
+      }
+    },
+    "ci": {
+      "sectionTitle": "CI",
+      "logoSet": "Logo & Color Set",
+      "orgChart": "Organization Chart",
+      "logoSetAria": "View logo and color set details",
+      "orgChartAria": "View organization chart details"
+    },
+    "history": {
+      "sectionTitle": "History",
+      "entry1": "2022.03. Tenacities founded and business operations launched",
+      "entry2": "2022.05. Technology guarantee fund KRW 200M technical review approved",
+      "entry3": "2022.08. Social Metaverse Toany launched",
+      "entry4": "2023.05. Final selection for NIPA Metaverse startup infrastructure support program",
+      "entry5": "2023.06. Kpop rhythm game Duet tae-bo",
+      "entry6": "2023.12. Narae House short-term rental brokerage platform outsourced development and launch",
+      "entry7": "2024.06. Concierge Gangnam short-term rental integrated management service",
+      "entry8": "2024.12. Concierge + food service annual sales reached KRW 1.3B",
+      "archiveCta": "View full history archive →"
+    },
+    "footer": {
+      "description": "Built from source material in assets/images/, rebuilt as a refined multi-depth brand website."
     }
-  },
-  "background": {
-    "paragraph1": "Seamless world"
-  },
-  "philosophy": {
-    "sectionTitle": ""
-  },
-  "history": {
-    "sectionTitle": "History",
-    "archiveButton": ""
-  },
-  "ci": {
-    "sectionTitle": "CI"
   }
 }
