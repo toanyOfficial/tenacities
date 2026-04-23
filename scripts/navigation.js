@@ -343,6 +343,53 @@
 
   const philosophySection = document.getElementById('philosophy');
   if (philosophySection) {
+    const introParts = ['part1', 'part2', 'part3', 'part4']
+      .map((part) => philosophySection.querySelector(`[data-philosophy-intro="${part}"]`))
+      .filter(Boolean);
+
+    if (introParts.length) {
+      let hasPhilosophyIntroPlayed = false;
+      let hasPhilosophyIntroStarted = false;
+      const introTimers = [];
+
+      philosophySection.classList.add('philosophy-intro-pending');
+
+      const playPhilosophyIntroOnce = () => {
+        if (hasPhilosophyIntroPlayed || hasPhilosophyIntroStarted) return;
+        hasPhilosophyIntroStarted = true;
+        const initialDelay = 120;
+        const stepDelay = 560;
+
+        introParts.forEach((part, index) => {
+          const timerId = window.setTimeout(() => {
+            part.classList.add('is-philosophy-intro-visible');
+          }, initialDelay + (index * stepDelay));
+          introTimers.push(timerId);
+        });
+
+        const completeDelay = initialDelay + ((introParts.length - 1) * stepDelay) + 900;
+        const completeTimerId = window.setTimeout(() => {
+          hasPhilosophyIntroPlayed = true;
+          philosophySection.classList.remove('philosophy-intro-pending');
+          philosophySection.classList.add('philosophy-intro-complete');
+          introParts.forEach((part) => {
+            part.classList.add('is-philosophy-intro-visible');
+          });
+          introTimers.length = 0;
+        }, completeDelay);
+        introTimers.push(completeTimerId);
+      };
+
+      window.addEventListener('tenacities:active-section-change', (event) => {
+        if (event.detail?.id !== 'philosophy') return;
+        playPhilosophyIntroOnce();
+      });
+      window.requestAnimationFrame(() => {
+        if (getCurrentActiveSectionId() !== 'philosophy') return;
+        playPhilosophyIntroOnce();
+      });
+    }
+
     const pulseGroups = [
       {
         base: 12.2,

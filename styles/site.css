@@ -862,10 +862,11 @@ body[data-site-language]:not([data-site-language="ko"]) .hero-title-main-transla
     visibility: visible;
     transform: none;
   }
-  .philosophy-editorial [data-philosophy-fade] {
+  .philosophy-editorial [data-philosophy-intro] {
     opacity: 1;
     transform: none;
     transition: none;
+    animation: none;
   }
 }
 
@@ -1313,11 +1314,24 @@ body[data-site-language]:not([data-site-language="ko"]) .hero-title-main-transla
 .philosophy-editorial .source-p {
   margin-bottom: 1rem;
 }
-.philosophy-editorial [data-philosophy-fade] {
+#philosophy [data-philosophy-intro] {
+  opacity: 1;
+  transform: none;
+}
+#philosophy.philosophy-intro-pending [data-philosophy-intro] {
+  opacity: 0;
+  transform: translateY(-12px);
+  transition: opacity .82s cubic-bezier(0.22, 1, 0.36, 1), transform .82s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+#philosophy.philosophy-intro-pending [data-philosophy-intro].is-philosophy-intro-visible {
+  opacity: 1;
+  transform: none;
+}
+#philosophy.philosophy-intro-complete [data-philosophy-intro] {
   opacity: 1;
   transform: none;
   transition: none;
-  animation: none;
   will-change: auto;
 }
 
