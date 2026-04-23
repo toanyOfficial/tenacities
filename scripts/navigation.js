@@ -23,7 +23,7 @@
           link.setAttribute('href', `${rootPrefix}index.html${href}`);
         });
         const logo = headerHost.querySelector('.tab-icon-logo');
-        if (logo) logo.setAttribute('src', `${rootPrefix}examples/Tenacities.png`);
+        if (logo) logo.setAttribute('src', `${rootPrefix}assets/logos/Tenacities.png`);
       })
       .catch(() => {});
   }
