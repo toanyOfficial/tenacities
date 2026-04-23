@@ -268,23 +268,25 @@ footer .container {
 .ci-grid .card { min-height: 100%; }
 .timeline.compact { margin-top: .6rem; }
 #history .history-timeline {
-  padding-left: 4.45rem;
+  padding-left: 1.55rem;
 }
 #history .history-timeline-wrap {
-  padding-left: 7.35rem;
+  padding-left: 0;
 }
 #history .history-timeline-item {
+  display: flex;
+  align-items: flex-start;
+  gap: .9rem;
   margin-bottom: 0;
   margin-top: clamp(.9rem, calc(var(--time-gap, 1) * .48rem), 4.9rem);
-  padding-left: 2.7rem;
+  padding-left: 0;
 }
 #history .history-timeline-item::before {
   display: none;
 }
 #history .history-point-icon {
-  position: absolute;
-  left: -5.58rem;
-  top: -.18rem;
+  position: static;
+  flex: 0 0 auto;
   width: 45px;
   height: 45px;
   object-fit: contain;
@@ -293,28 +295,38 @@ footer .container {
   box-shadow: 0 0 0 4px #fff;
 }
 #history .history-year-start {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: .42rem;
+}
+#history .history-entry-row {
+  display: flex;
+  align-items: flex-start;
+  gap: .9rem;
 }
 #history .history-year-label {
-  position: absolute;
-  left: -11.4rem;
-  top: .52rem;
-  min-width: 5.8rem;
+  position: static;
+  display: block;
+  min-width: 0;
   font-size: 1.03rem;
   line-height: 1;
   font-weight: 600;
   letter-spacing: .05em;
   color: var(--gray);
   opacity: .62;
-  text-align: right;
+  text-align: left;
+}
+#history .history-year-row {
+  width: 100%;
 }
 #history .history-year-only {
   margin-top: clamp(.95rem, calc(var(--time-gap, 1) * .48rem), 4.9rem);
-  min-height: 1.8rem;
-  position: relative;
+  min-height: 0;
+  position: static;
 }
 #history .history-year-only .history-year-label {
-  top: 0;
+  padding-left: calc(45px + .9rem);
 }
 
 .hero.tone-plain { border-bottom: 1px solid var(--line); }
@@ -1103,8 +1115,9 @@ body.home-snap {
 #philosophy .philosophy-pulse-highlight {
   stroke: url(#philosophy-pulse-hi-1);
   stroke-dasharray: 56 944;
-  opacity: 0.36;
-  filter: blur(1.35px) drop-shadow(0 0 0.55px rgba(255, 228, 196, 0.34));
+  opacity: 0.43;
+  filter: blur(1.45px) drop-shadow(0 0 0.75px rgba(255, 228, 196, 0.38)) drop-shadow(0 0 1.75px rgba(231, 29, 54, 0.18));
+  mix-blend-mode: screen;
 }
 #philosophy .philosophy-pulse-1 {
   stroke: url(#philosophy-pulse-grad-1);
@@ -1324,6 +1337,15 @@ body.home-snap {
   border-color: var(--crimson);
   color: #fff;
 }
+.detail-cta-group {
+  margin-top: 1.15rem;
+}
+.detail-cta-group p + p {
+  margin-top: .55rem;
+}
+.ci-bottom-cta {
+  margin: 1.2rem 0 0;
+}
 
 @media (max-width: 767px) {
   .ci-screen .ci-two-blocks {
@@ -1412,20 +1434,18 @@ body.home-snap {
     opacity: 0.58;
   }
   #history .history-timeline {
-    padding-left: 3.25rem;
+    padding-left: 1.25rem;
   }
   #history .history-timeline-wrap {
-    padding-left: 5.45rem;
+    padding-left: 0;
   }
-  #history .history-year-label {
-    left: -8.35rem;
-    min-width: 4.35rem;
-    font-size: .92rem;
-  }
+  #history .history-year-label { font-size: .92rem; }
   #history .history-point-icon {
-    left: -4.15rem;
     width: 42px;
     height: 42px;
+  }
+  #history .history-year-only .history-year-label {
+    padding-left: calc(42px + .9rem);
   }
 }
 
