@@ -229,60 +229,41 @@
       }
     }
 
-    const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-    const hasGsapMotionPath =
-      typeof window.gsap !== 'undefined' &&
-      typeof window.MotionPathPlugin !== 'undefined';
+    const pulseGroups = [
+      {
+        base: 12.2,
+        main: philosophySection.querySelector('.philosophy-pulse-1'),
+        highlight: philosophySection.querySelector('.philosophy-pulse-highlight-1'),
+      },
+      {
+        base: 13.6,
+        main: philosophySection.querySelector('.philosophy-pulse-2'),
+        highlight: philosophySection.querySelector('.philosophy-pulse-highlight-2'),
+      },
+      {
+        base: 11.4,
+        main: philosophySection.querySelector('.philosophy-pulse-3'),
+        highlight: philosophySection.querySelector('.philosophy-pulse-highlight-3'),
+      },
+    ];
 
-    if (!prefersReducedMotion && hasGsapMotionPath) {
-      const { gsap, MotionPathPlugin } = window;
-      gsap.registerPlugin(MotionPathPlugin);
+    const applyPulseRandomTiming = ({ base, main, highlight }) => {
+      if (!main || !highlight) return;
+      const jitter = (Math.random() * 1.5) - 0.75;
+      const duration = Math.max(9, base + jitter);
+      const durationValue = `${duration.toFixed(2)}s`;
+      main.style.setProperty('--pulse-duration', durationValue);
+      highlight.style.setProperty('--pulse-duration', durationValue);
+    };
 
-      const motionNodes = [
-        {
-          node: philosophySection.querySelector('.philosophy-light-node-1'),
-          path: '#philosophy-path-1',
-          duration: 13.8,
-          start: 0.06,
-          end: 0.94,
-          delay: -3.2,
-        },
-        {
-          node: philosophySection.querySelector('.philosophy-light-node-2'),
-          path: '#philosophy-path-2',
-          duration: 16.1,
-          start: 0.18,
-          end: 0.89,
-          delay: -7.1,
-        },
-        {
-          node: philosophySection.querySelector('.philosophy-light-node-arc'),
-          path: '#philosophy-arc-path-2',
-          duration: 8.6,
-          start: 0.22,
-          end: 0.82,
-          delay: -2.4,
-        },
-      ];
-
-      motionNodes.forEach(({ node, path, duration, start, end, delay }) => {
-        if (!node || !philosophySection.querySelector(path)) return;
-        gsap.to(node, {
-          duration,
-          repeat: -1,
-          ease: 'none',
-          delay,
-          motionPath: {
-            path,
-            align: path,
-            alignOrigin: [0.5, 0.5],
-            autoRotate: true,
-            start,
-            end,
-          },
-        });
+    pulseGroups.forEach((group) => {
+      if (!group.main || !group.highlight) return;
+      applyPulseRandomTiming(group);
+      group.main.addEventListener('animationiteration', () => {
+        applyPulseRandomTiming(group);
       });
-    }
+    });
+
   }
 
   updateHeaderHeightVar();
