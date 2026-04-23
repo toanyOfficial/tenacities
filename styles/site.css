@@ -268,23 +268,25 @@ footer .container {
 .ci-grid .card { min-height: 100%; }
 .timeline.compact { margin-top: .6rem; }
 #history .history-timeline {
-  padding-left: 4.45rem;
+  padding-left: 1.55rem;
 }
 #history .history-timeline-wrap {
-  padding-left: 7.35rem;
+  padding-left: 0;
 }
 #history .history-timeline-item {
+  display: flex;
+  align-items: flex-start;
+  gap: .9rem;
   margin-bottom: 0;
   margin-top: clamp(.9rem, calc(var(--time-gap, 1) * .48rem), 4.9rem);
-  padding-left: 2.7rem;
+  padding-left: 0;
 }
 #history .history-timeline-item::before {
   display: none;
 }
 #history .history-point-icon {
-  position: absolute;
-  left: -5.58rem;
-  top: -.18rem;
+  position: static;
+  flex: 0 0 auto;
   width: 45px;
   height: 45px;
   object-fit: contain;
@@ -293,28 +295,38 @@ footer .container {
   box-shadow: 0 0 0 4px #fff;
 }
 #history .history-year-start {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: .42rem;
+}
+#history .history-entry-row {
+  display: flex;
+  align-items: flex-start;
+  gap: .9rem;
 }
 #history .history-year-label {
-  position: absolute;
-  left: -11.4rem;
-  top: .52rem;
-  min-width: 5.8rem;
+  position: static;
+  display: block;
+  min-width: 0;
   font-size: 1.03rem;
   line-height: 1;
   font-weight: 600;
   letter-spacing: .05em;
   color: var(--gray);
   opacity: .62;
-  text-align: right;
+  text-align: left;
+}
+#history .history-year-row {
+  width: 100%;
 }
 #history .history-year-only {
   margin-top: clamp(.95rem, calc(var(--time-gap, 1) * .48rem), 4.9rem);
-  min-height: 1.8rem;
-  position: relative;
+  min-height: 0;
+  position: static;
 }
 #history .history-year-only .history-year-label {
-  top: 0;
+  padding-left: calc(45px + .9rem);
 }
 
 .hero.tone-plain { border-bottom: 1px solid var(--line); }
@@ -735,8 +747,17 @@ body.home-snap {
   height: auto;
   margin: 0;
   opacity: 0.06;
-  animation: heroLogoFadeIn 3.8s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards;
+  animation: none;
+  visibility: hidden;
+  transform: translateZ(0);
+  backface-visibility: hidden;
   will-change: opacity;
+}
+.hero-logo.is-fade-ready {
+  visibility: visible;
+}
+.hero-logo.is-fading {
+  animation: heroLogoFadeIn 7.6s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards;
 }
 .hero-concepts-group {
   grid-area: concepts;
@@ -829,6 +850,8 @@ body.home-snap {
   .hero-logo {
     animation: none;
     opacity: 1;
+    visibility: visible;
+    transform: none;
   }
   .philosophy-editorial .philosophy-block {
     opacity: 1;
@@ -1084,27 +1107,35 @@ body.home-snap {
   stroke-width: 2.8;
 }
 #philosophy .philosophy-pulse,
-#philosophy .philosophy-pulse-highlight {
+#philosophy .philosophy-pulse-highlight,
+#philosophy .philosophy-pulse-aura {
   fill: none;
   stroke-linecap: round;
   stroke-dashoffset: 0;
   pointer-events: none;
   vector-effect: non-scaling-stroke;
   shape-rendering: geometricPrecision;
-  animation: philosophyPulseMove var(--pulse-duration, 12.8s) linear infinite;
-  animation-delay: var(--pulse-delay, 0s);
+  will-change: stroke-dashoffset, opacity, filter;
 }
 #philosophy .philosophy-pulse {
   stroke: url(#philosophy-pulse-grad-1);
   stroke-dasharray: 56 944;
-  opacity: 0.84;
-  filter: blur(0.22px) drop-shadow(0 0 1.05px rgba(122, 15, 29, 0.24));
+  opacity: 0.9;
+  filter: blur(0.26px) drop-shadow(0 0 1.6px rgba(122, 15, 29, 0.36));
 }
 #philosophy .philosophy-pulse-highlight {
   stroke: url(#philosophy-pulse-hi-1);
   stroke-dasharray: 56 944;
-  opacity: 0.36;
-  filter: blur(1.35px) drop-shadow(0 0 0.55px rgba(255, 228, 196, 0.34));
+  opacity: 0.62;
+  filter: blur(1.95px) drop-shadow(0 0 1.65px rgba(255, 228, 196, 0.56)) drop-shadow(0 0 3.2px rgba(231, 29, 54, 0.28));
+  mix-blend-mode: screen;
+}
+#philosophy .philosophy-pulse-aura {
+  stroke: url(#philosophy-pulse-hi-1);
+  stroke-dasharray: 56 944;
+  opacity: 0.28;
+  filter: blur(3.8px) drop-shadow(0 0 3.9px rgba(231, 29, 54, 0.24));
+  mix-blend-mode: screen;
 }
 #philosophy .philosophy-pulse-1 {
   stroke: url(#philosophy-pulse-grad-1);
@@ -1118,6 +1149,10 @@ body.home-snap {
   --pulse-duration: 12.2s;
   --pulse-delay: -1.1s;
 }
+#philosophy .philosophy-pulse-aura-1 {
+  stroke: url(#philosophy-pulse-hi-1);
+  stroke-width: 5.4;
+}
 #philosophy .philosophy-pulse-2 {
   stroke: url(#philosophy-pulse-grad-2);
   stroke-width: 2.5;
@@ -1130,6 +1165,10 @@ body.home-snap {
   --pulse-duration: 13.6s;
   --pulse-delay: -2.9s;
 }
+#philosophy .philosophy-pulse-aura-2 {
+  stroke: url(#philosophy-pulse-hi-2);
+  stroke-width: 4.9;
+}
 #philosophy .philosophy-pulse-3 {
   stroke: url(#philosophy-pulse-grad-3);
   stroke-width: 2.25;
@@ -1141,6 +1180,32 @@ body.home-snap {
   stroke-width: 2.75;
   --pulse-duration: 11.4s;
   --pulse-delay: -1.8s;
+}
+#philosophy .philosophy-pulse-aura-3 {
+  stroke: url(#philosophy-pulse-hi-3);
+  stroke-width: 4.55;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  #philosophy .philosophy-pulse,
+  #philosophy .philosophy-pulse-highlight,
+  #philosophy .philosophy-pulse-aura {
+    shape-rendering: auto;
+  }
+  #philosophy .philosophy-pulse {
+    opacity: 0.88;
+    filter: none;
+  }
+  #philosophy .philosophy-pulse-highlight {
+    opacity: 0.46;
+    filter: blur(0.95px);
+    mix-blend-mode: normal;
+  }
+  #philosophy .philosophy-pulse-aura {
+    opacity: 0.13;
+    filter: blur(1.75px);
+    mix-blend-mode: normal;
+  }
 }
 #philosophy .philosophy-support {
   position: absolute;
@@ -1172,10 +1237,6 @@ body.home-snap {
   z-index: 3;
 }
 
-@keyframes philosophyPulseMove {
-  0% { stroke-dashoffset: 0; }
-  100% { stroke-dashoffset: -1000; }
-}
 @keyframes philosophyBounce {
   0% { transform: translateY(0); }
   50% { transform: translateY(-4px); }
@@ -1324,6 +1385,15 @@ body.home-snap {
   border-color: var(--crimson);
   color: #fff;
 }
+.detail-cta-group {
+  margin-top: 1.15rem;
+}
+.detail-cta-group p + p {
+  margin-top: .55rem;
+}
+.ci-bottom-cta {
+  margin: 1.2rem 0 0;
+}
 
 @media (max-width: 767px) {
   .ci-screen .ci-two-blocks {
@@ -1412,20 +1482,18 @@ body.home-snap {
     opacity: 0.58;
   }
   #history .history-timeline {
-    padding-left: 3.25rem;
+    padding-left: 1.25rem;
   }
   #history .history-timeline-wrap {
-    padding-left: 5.45rem;
+    padding-left: 0;
   }
-  #history .history-year-label {
-    left: -8.35rem;
-    min-width: 4.35rem;
-    font-size: .92rem;
-  }
+  #history .history-year-label { font-size: .92rem; }
   #history .history-point-icon {
-    left: -4.15rem;
     width: 42px;
     height: 42px;
+  }
+  #history .history-year-only .history-year-label {
+    padding-left: calc(42px + .9rem);
   }
 }
 
