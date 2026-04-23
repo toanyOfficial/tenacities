@@ -343,37 +343,50 @@
 
   const philosophySection = document.getElementById('philosophy');
   if (philosophySection) {
-    const philosophyInner = philosophySection.querySelector('.philosophy-editorial');
-    const philosophyBlocks = Array.from(philosophySection.querySelectorAll('.philosophy-block'));
-    philosophyBlocks.forEach((block, index) => {
-      const order = Number(block.getAttribute('data-philosophy-order'));
-      block.style.setProperty('--philosophy-sequence', String(Number.isFinite(order) ? order : index));
-    });
+    const introParts = ['part1', 'part2', 'part3', 'part4']
+      .map((part) => philosophySection.querySelector(`[data-philosophy-intro="${part}"]`))
+      .filter(Boolean);
 
-    if (philosophyInner) {
-      let philosophyActive = false;
-      const replayPhilosophyFade = () => {
-        philosophyInner.classList.remove('philosophy-visible');
-        window.requestAnimationFrame(() => {
-          philosophyInner.classList.add('philosophy-visible');
+    if (introParts.length) {
+      let hasPhilosophyIntroPlayed = false;
+      let hasPhilosophyIntroStarted = false;
+      const introTimers = [];
+
+      philosophySection.classList.add('philosophy-intro-pending');
+
+      const playPhilosophyIntroOnce = () => {
+        if (hasPhilosophyIntroPlayed || hasPhilosophyIntroStarted) return;
+        hasPhilosophyIntroStarted = true;
+        const initialDelay = 120;
+        const stepDelay = 560;
+
+        introParts.forEach((part, index) => {
+          const timerId = window.setTimeout(() => {
+            part.classList.add('is-philosophy-intro-visible');
+          }, initialDelay + (index * stepDelay));
+          introTimers.push(timerId);
         });
+
+        const completeDelay = initialDelay + ((introParts.length - 1) * stepDelay) + 900;
+        const completeTimerId = window.setTimeout(() => {
+          hasPhilosophyIntroPlayed = true;
+          philosophySection.classList.remove('philosophy-intro-pending');
+          philosophySection.classList.add('philosophy-intro-complete');
+          introParts.forEach((part) => {
+            part.classList.add('is-philosophy-intro-visible');
+          });
+          introTimers.length = 0;
+        }, completeDelay);
+        introTimers.push(completeTimerId);
       };
-      const handlePhilosophyActiveChange = (id) => {
-        if (id === 'philosophy') {
-          if (!philosophyActive) replayPhilosophyFade();
-          philosophyActive = true;
-          return;
-        }
-        if (philosophyActive) {
-          philosophyActive = false;
-          philosophyInner.classList.remove('philosophy-visible');
-        }
-      };
+
       window.addEventListener('tenacities:active-section-change', (event) => {
-        handlePhilosophyActiveChange(event.detail?.id || '');
+        if (event.detail?.id !== 'philosophy') return;
+        playPhilosophyIntroOnce();
       });
       window.requestAnimationFrame(() => {
-        handlePhilosophyActiveChange(getCurrentActiveSectionId());
+        if (getCurrentActiveSectionId() !== 'philosophy') return;
+        playPhilosophyIntroOnce();
       });
     }
 
@@ -403,15 +416,16 @@
 
     const makePulseFlowState = (group, index) => {
       const { base, main, highlight, aura } = group;
-      if (!main || !highlight || !aura) return null;
+      if (!main) return null;
+      const lightningEnabled = !isKakaoInApp;
       const randomFactor = isMobilePulseMode ? 1 : (0.9 + (Math.random() * 0.2));
       const baseDuration = Math.max(9, base);
       const currentDuration = baseDuration * randomFactor;
       const startOffset = -((index + 1) * 240);
       return {
         main,
-        highlight,
-        aura,
+        highlight: lightningEnabled ? highlight : null,
+        aura: lightningEnabled ? aura : null,
         offset: startOffset,
         speed: 1000 / currentDuration,
         targetSpeed: 1000 / currentDuration,
@@ -424,14 +438,14 @@
       .filter(Boolean);
 
     const chooseNextTargetSpeed = (baseDuration) => {
-      if (isMobilePulseMode) {
+      if (isMobilePulseMode || isKakaoInApp) {
         return 1000 / Math.max(9, baseDuration);
       }
       const randomFactor = 0.9 + (Math.random() * 0.2);
       return 1000 / (Math.max(9, baseDuration) * randomFactor);
     };
 
-    if (!isKakaoInApp && pulseFlowStates.length) {
+    if (pulseFlowStates.length) {
       let lastTimestamp = performance.now();
       const isCoarsePointer = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
       const stepPulseFlow = (timestamp) => {
@@ -453,144 +467,14 @@
             : state.offset;
           const offsetValue = normalizedOffset.toFixed(isMobilePulseMode ? 0 : 3);
           state.main.style.strokeDashoffset = offsetValue;
-          state.highlight.style.strokeDashoffset = offsetValue;
-          state.aura.style.strokeDashoffset = offsetValue;
+          if (state.highlight) state.highlight.style.strokeDashoffset = offsetValue;
+          if (state.aura) state.aura.style.strokeDashoffset = offsetValue;
         });
 
         window.requestAnimationFrame(stepPulseFlow);
       };
 
       window.requestAnimationFrame(stepPulseFlow);
-    }
-
-    const philosophyContent = philosophySection.querySelector('.philosophy-content');
-    const philosophyParagraphs = philosophyContent
-      ? Array.from(philosophyContent.querySelectorAll('.source-p'))
-      : [];
-    const lastParagraph = philosophyParagraphs.length
-      ? philosophyParagraphs[philosophyParagraphs.length - 1]
-      : null;
-
-    if (lastParagraph) {
-      let hasBouncedAtEnd = false;
-      let isBouncing = false;
-      let isPhilosophyActive = false;
-      let lastParagraphBottom = 0;
-      let touchY = null;
-      let pendingDelta = 0;
-      let endCheckRaf = 0;
-
-      const clearBounceClass = () => {
-        if (!philosophyContent) return;
-        philosophyContent.classList.remove('philosophy-bounce');
-      };
-
-      const measureLastParagraphBottom = () => {
-        const rect = lastParagraph.getBoundingClientRect();
-        if (isElementScroller) {
-          const scrollerRect = snapRoot.getBoundingClientRect();
-          lastParagraphBottom = snapRoot.scrollTop + (rect.bottom - scrollerRect.top);
-          return;
-        }
-        lastParagraphBottom = window.scrollY + rect.bottom;
-      };
-
-      const viewportBottom = () => (
-        isElementScroller
-          ? (snapRoot.scrollTop + snapRoot.clientHeight)
-          : (window.scrollY + window.innerHeight)
-      );
-
-      const atLastParagraphEnd = () => viewportBottom() >= (lastParagraphBottom - 1);
-
-      const triggerPhilosophyBounce = () => {
-        if (!philosophyContent) return;
-        hasBouncedAtEnd = true;
-        isBouncing = true;
-        clearBounceClass();
-        philosophyContent.classList.add('philosophy-bounce');
-      };
-
-      const checkBounceTrigger = (deltaY) => {
-        if (deltaY <= 0) return;
-        if (!isPhilosophyActive) return;
-        if (hasBouncedAtEnd || isBouncing) return;
-        if (!atLastParagraphEnd()) return;
-        triggerPhilosophyBounce();
-      };
-
-      const scheduleBounceCheck = (deltaY) => {
-        if (deltaY <= 0) return;
-        pendingDelta = Math.max(pendingDelta, deltaY);
-        if (endCheckRaf) return;
-        endCheckRaf = window.requestAnimationFrame(() => {
-          endCheckRaf = 0;
-          const nextDelta = pendingDelta;
-          pendingDelta = 0;
-          checkBounceTrigger(nextDelta);
-        });
-      };
-
-      const resetBounceState = () => {
-        hasBouncedAtEnd = false;
-        isBouncing = false;
-        clearBounceClass();
-      };
-
-      if (philosophyContent) {
-        philosophyContent.addEventListener('animationend', (event) => {
-          if (event.animationName !== 'philosophyBounce') return;
-          isBouncing = false;
-          clearBounceClass();
-        });
-      }
-
-      const inputTarget = isElementScroller ? snapRoot : window;
-      inputTarget.addEventListener('wheel', (event) => {
-        if (isBouncing) return;
-        scheduleBounceCheck(event.deltaY);
-      }, { passive: true });
-
-      inputTarget.addEventListener('touchstart', (event) => {
-        if (!event.touches?.length) return;
-        touchY = event.touches[0].clientY;
-      }, { passive: true });
-
-      inputTarget.addEventListener('touchmove', (event) => {
-        if (!event.touches?.length || touchY == null) return;
-        if (isBouncing) return;
-        const nextY = event.touches[0].clientY;
-        const deltaY = touchY - nextY;
-        touchY = nextY;
-        scheduleBounceCheck(deltaY);
-      }, { passive: true });
-
-      inputTarget.addEventListener('touchend', () => {
-        touchY = null;
-      }, { passive: true });
-
-      if ('IntersectionObserver' in window) {
-        const activeObserver = new IntersectionObserver(
-          (entries) => {
-            const entry = entries[0];
-            const active = !!entry?.isIntersecting && entry.intersectionRatio > 0.45;
-            if (!active && isPhilosophyActive) resetBounceState();
-            isPhilosophyActive = active;
-            if (isPhilosophyActive) measureLastParagraphBottom();
-          },
-          {
-            root: isElementScroller ? snapRoot : null,
-            threshold: [0.25, 0.45, 0.6],
-          }
-        );
-        activeObserver.observe(philosophySection);
-      } else {
-        isPhilosophyActive = true;
-      }
-
-      measureLastParagraphBottom();
-      window.addEventListener('resize', measureLastParagraphBottom, { passive: true });
-      window.addEventListener('orientationchange', measureLastParagraphBottom, { passive: true });
     }
 
   }
