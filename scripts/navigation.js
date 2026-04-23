@@ -379,9 +379,7 @@
 
     if (pulseFlowStates.length) {
       let lastTimestamp = performance.now();
-      const pixelRatio = Math.max(1, Math.min(3, window.devicePixelRatio || 1));
       const isCoarsePointer = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
-      const offsetSnap = isCoarsePointer ? (1 / pixelRatio) : 0;
       const stepPulseFlow = (timestamp) => {
         const dt = Math.min(0.033, Math.max(0.001, (timestamp - lastTimestamp) / 1000));
         lastTimestamp = timestamp;
@@ -396,10 +394,7 @@
             state.targetSpeed = chooseNextTargetSpeed(pulseGroups[index].base);
           }
 
-          const renderOffset = offsetSnap > 0
-            ? Math.round(state.offset / offsetSnap) * offsetSnap
-            : state.offset;
-          const offsetValue = renderOffset.toFixed(isCoarsePointer ? 2 : 3);
+          const offsetValue = state.offset.toFixed(3);
           state.main.style.strokeDashoffset = offsetValue;
           state.highlight.style.strokeDashoffset = offsetValue;
           state.aura.style.strokeDashoffset = offsetValue;

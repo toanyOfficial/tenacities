@@ -1176,18 +1176,23 @@ body.home-snap {
 }
 
 @media (hover: none) and (pointer: coarse) {
+  #philosophy .philosophy-pulse,
+  #philosophy .philosophy-pulse-highlight,
+  #philosophy .philosophy-pulse-aura {
+    shape-rendering: auto;
+  }
   #philosophy .philosophy-pulse {
-    opacity: 0.86;
-    filter: blur(0.18px) drop-shadow(0 0 0.95px rgba(122, 15, 29, 0.28));
+    opacity: 0.88;
+    filter: none;
   }
   #philosophy .philosophy-pulse-highlight {
-    opacity: 0.54;
-    filter: blur(1.35px) drop-shadow(0 0 1.5px rgba(231, 29, 54, 0.2));
+    opacity: 0.46;
+    filter: blur(0.95px);
     mix-blend-mode: normal;
   }
   #philosophy .philosophy-pulse-aura {
-    opacity: 0.2;
-    filter: blur(2.45px);
+    opacity: 0.13;
+    filter: blur(1.75px);
     mix-blend-mode: normal;
   }
 }
