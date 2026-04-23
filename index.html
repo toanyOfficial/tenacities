@@ -74,6 +74,24 @@
           <filter id="philosophy-curve-soften" x="-20%" y="-20%" width="140%" height="140%">
             <feGaussianBlur stdDeviation="0.22" />
           </filter>
+          <linearGradient id="philosophy-pulse-grad-1" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="rgba(122, 15, 29, 0.05)" />
+            <stop offset="38%" stop-color="rgba(122, 15, 29, 0.88)" />
+            <stop offset="62%" stop-color="rgba(173, 45, 63, 0.96)" />
+            <stop offset="100%" stop-color="rgba(122, 15, 29, 0.08)" />
+          </linearGradient>
+          <linearGradient id="philosophy-pulse-grad-2" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="rgba(122, 15, 29, 0.05)" />
+            <stop offset="36%" stop-color="rgba(122, 15, 29, 0.84)" />
+            <stop offset="64%" stop-color="rgba(165, 38, 57, 0.92)" />
+            <stop offset="100%" stop-color="rgba(122, 15, 29, 0.08)" />
+          </linearGradient>
+          <linearGradient id="philosophy-pulse-grad-3" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="rgba(122, 15, 29, 0.05)" />
+            <stop offset="40%" stop-color="rgba(122, 15, 29, 0.8)" />
+            <stop offset="60%" stop-color="rgba(158, 34, 52, 0.9)" />
+            <stop offset="100%" stop-color="rgba(122, 15, 29, 0.08)" />
+          </linearGradient>
         </defs>
         <rect x="0" y="0" width="1000" height="1000" fill="url(#philosophy-grid-pattern)" opacity="0.3" />
         <g class="philosophy-svg-curves" filter="url(#philosophy-curve-soften)">
@@ -81,8 +99,11 @@
           <path id="philosophy-curve-2" class="philosophy-curve philosophy-curve-2" d="M 604 -190 C 562 26 590 274 658 454 C 724 634 706 862 742 1188" />
           <path id="philosophy-curve-3" class="philosophy-curve philosophy-curve-3" d="M 842 -200 C 804 64 796 286 820 502 C 842 686 884 862 868 1034 C 860 1110 844 1160 832 1204" />
           <path class="philosophy-pulse philosophy-pulse-1" d="M 516 -190 C 582 20 576 236 498 404 C 436 536 372 690 332 900 C 316 1010 300 1118 284 1210" />
+          <path class="philosophy-pulse-highlight philosophy-pulse-highlight-1" d="M 516 -190 C 582 20 576 236 498 404 C 436 536 372 690 332 900 C 316 1010 300 1118 284 1210" />
           <path class="philosophy-pulse philosophy-pulse-2" d="M 604 -190 C 562 26 590 274 658 454 C 724 634 706 862 742 1188" />
+          <path class="philosophy-pulse-highlight philosophy-pulse-highlight-2" d="M 604 -190 C 562 26 590 274 658 454 C 724 634 706 862 742 1188" />
           <path class="philosophy-pulse philosophy-pulse-3" d="M 842 -200 C 804 64 796 286 820 502 C 842 686 884 862 868 1034 C 860 1110 844 1160 832 1204" />
+          <path class="philosophy-pulse-highlight philosophy-pulse-highlight-3" d="M 842 -200 C 804 64 796 286 820 502 C 842 686 884 862 868 1034 C 860 1110 844 1160 832 1204" />
         </g>
       </svg>
       <span class="philosophy-support philosophy-support-1"></span>

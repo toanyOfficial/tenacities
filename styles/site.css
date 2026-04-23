@@ -964,32 +964,59 @@ body.home-snap {
   stroke: rgba(122, 15, 29, 0.082);
   stroke-width: 2.8;
 }
-#philosophy .philosophy-pulse {
+#philosophy .philosophy-pulse,
+#philosophy .philosophy-pulse-highlight {
   fill: none;
-  stroke: rgba(122, 15, 29, 0.78);
   stroke-linecap: round;
-  stroke-dasharray: 42 230;
   stroke-dashoffset: 0;
-  opacity: 0.88;
   pointer-events: none;
-  filter: drop-shadow(0 0 1.6px rgba(122, 15, 29, 0.34));
-  animation: philosophyPulseMove var(--pulse-duration, 6.4s) linear infinite;
+  animation: philosophyPulseMove var(--pulse-duration, 12.8s) linear infinite;
   animation-delay: var(--pulse-delay, 0s);
 }
+#philosophy .philosophy-pulse {
+  stroke: url(#philosophy-pulse-grad-1);
+  stroke-dasharray: 42 460;
+  opacity: 0.92;
+  filter: drop-shadow(0 0 1.5px rgba(122, 15, 29, 0.34));
+}
+#philosophy .philosophy-pulse-highlight {
+  stroke: rgba(255, 243, 222, 0.9);
+  stroke-dasharray: 12 490;
+  opacity: 0.58;
+  filter: drop-shadow(0 0 1.1px rgba(255, 231, 197, 0.66));
+}
 #philosophy .philosophy-pulse-1 {
+  stroke: url(#philosophy-pulse-grad-1);
   stroke-width: 2.8;
-  --pulse-duration: 6.1s;
-  --pulse-delay: -0.8s;
+  --pulse-duration: 12.2s;
+  --pulse-delay: -1.1s;
+}
+#philosophy .philosophy-pulse-highlight-1 {
+  stroke-width: 1.25;
+  --pulse-duration: 12.2s;
+  --pulse-delay: -1.1s;
 }
 #philosophy .philosophy-pulse-2 {
+  stroke: url(#philosophy-pulse-grad-2);
   stroke-width: 2.5;
-  --pulse-duration: 6.8s;
-  --pulse-delay: -2.2s;
+  --pulse-duration: 13.6s;
+  --pulse-delay: -2.9s;
+}
+#philosophy .philosophy-pulse-highlight-2 {
+  stroke-width: 1.1;
+  --pulse-duration: 13.6s;
+  --pulse-delay: -2.9s;
 }
 #philosophy .philosophy-pulse-3 {
+  stroke: url(#philosophy-pulse-grad-3);
   stroke-width: 2.25;
-  --pulse-duration: 5.7s;
-  --pulse-delay: -1.6s;
+  --pulse-duration: 11.4s;
+  --pulse-delay: -1.8s;
+}
+#philosophy .philosophy-pulse-highlight-3 {
+  stroke-width: 1.0;
+  --pulse-duration: 11.4s;
+  --pulse-delay: -1.8s;
 }
 #philosophy .philosophy-support {
   position: absolute;
@@ -1023,7 +1050,7 @@ body.home-snap {
 
 @keyframes philosophyPulseMove {
   0% { stroke-dashoffset: 0; }
-  100% { stroke-dashoffset: -600; }
+  100% { stroke-dashoffset: -980; }
 }
 
 .philosophy-editorial .reading-width {

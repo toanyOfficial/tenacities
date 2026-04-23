@@ -229,6 +229,41 @@
       }
     }
 
+    const pulseGroups = [
+      {
+        base: 12.2,
+        main: philosophySection.querySelector('.philosophy-pulse-1'),
+        highlight: philosophySection.querySelector('.philosophy-pulse-highlight-1'),
+      },
+      {
+        base: 13.6,
+        main: philosophySection.querySelector('.philosophy-pulse-2'),
+        highlight: philosophySection.querySelector('.philosophy-pulse-highlight-2'),
+      },
+      {
+        base: 11.4,
+        main: philosophySection.querySelector('.philosophy-pulse-3'),
+        highlight: philosophySection.querySelector('.philosophy-pulse-highlight-3'),
+      },
+    ];
+
+    const applyPulseRandomTiming = ({ base, main, highlight }) => {
+      if (!main || !highlight) return;
+      const jitter = (Math.random() * 1.5) - 0.75;
+      const duration = Math.max(9, base + jitter);
+      const durationValue = `${duration.toFixed(2)}s`;
+      main.style.setProperty('--pulse-duration', durationValue);
+      highlight.style.setProperty('--pulse-duration', durationValue);
+    };
+
+    pulseGroups.forEach((group) => {
+      if (!group.main || !group.highlight) return;
+      applyPulseRandomTiming(group);
+      group.main.addEventListener('animationiteration', () => {
+        applyPulseRandomTiming(group);
+      });
+    });
+
   }
 
   updateHeaderHeightVar();
