@@ -229,60 +229,168 @@
       }
     }
 
-    const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-    const hasGsapMotionPath =
-      typeof window.gsap !== 'undefined' &&
-      typeof window.MotionPathPlugin !== 'undefined';
+    const pulseGroups = [
+      {
+        base: 12.2,
+        main: philosophySection.querySelector('.philosophy-pulse-1'),
+        highlight: philosophySection.querySelector('.philosophy-pulse-highlight-1'),
+      },
+      {
+        base: 13.6,
+        main: philosophySection.querySelector('.philosophy-pulse-2'),
+        highlight: philosophySection.querySelector('.philosophy-pulse-highlight-2'),
+      },
+      {
+        base: 11.4,
+        main: philosophySection.querySelector('.philosophy-pulse-3'),
+        highlight: philosophySection.querySelector('.philosophy-pulse-highlight-3'),
+      },
+    ];
 
-    if (!prefersReducedMotion && hasGsapMotionPath) {
-      const { gsap, MotionPathPlugin } = window;
-      gsap.registerPlugin(MotionPathPlugin);
+    const applyPulseRandomTiming = ({ base, main, highlight }) => {
+      if (!main || !highlight) return;
+      const jitter = (Math.random() * 1.5) - 0.75;
+      const duration = Math.max(9, base + jitter);
+      const durationValue = `${duration.toFixed(2)}s`;
+      main.style.setProperty('--pulse-duration', durationValue);
+      highlight.style.setProperty('--pulse-duration', durationValue);
+    };
 
-      const motionNodes = [
-        {
-          node: philosophySection.querySelector('.philosophy-light-node-1'),
-          path: '#philosophy-path-1',
-          duration: 13.8,
-          start: 0.06,
-          end: 0.94,
-          delay: -3.2,
-        },
-        {
-          node: philosophySection.querySelector('.philosophy-light-node-2'),
-          path: '#philosophy-path-2',
-          duration: 16.1,
-          start: 0.18,
-          end: 0.89,
-          delay: -7.1,
-        },
-        {
-          node: philosophySection.querySelector('.philosophy-light-node-arc'),
-          path: '#philosophy-arc-path-2',
-          duration: 8.6,
-          start: 0.22,
-          end: 0.82,
-          delay: -2.4,
-        },
-      ];
+    pulseGroups.forEach((group) => {
+      if (!group.main || !group.highlight) return;
+      applyPulseRandomTiming(group);
+    });
 
-      motionNodes.forEach(({ node, path, duration, start, end, delay }) => {
-        if (!node || !philosophySection.querySelector(path)) return;
-        gsap.to(node, {
-          duration,
-          repeat: -1,
-          ease: 'none',
-          delay,
-          motionPath: {
-            path,
-            align: path,
-            alignOrigin: [0.5, 0.5],
-            autoRotate: true,
-            start,
-            end,
-          },
+    const philosophyContent = philosophySection.querySelector('.philosophy-content');
+    const philosophyParagraphs = philosophyContent
+      ? Array.from(philosophyContent.querySelectorAll('.source-p'))
+      : [];
+    const lastParagraph = philosophyParagraphs.length
+      ? philosophyParagraphs[philosophyParagraphs.length - 1]
+      : null;
+
+    if (lastParagraph) {
+      let hasBouncedAtEnd = false;
+      let isBouncing = false;
+      let isPhilosophyActive = false;
+      let lastParagraphBottom = 0;
+      let touchY = null;
+      let pendingDelta = 0;
+      let endCheckRaf = 0;
+
+      const clearBounceClass = () => {
+        if (!philosophyContent) return;
+        philosophyContent.classList.remove('philosophy-bounce');
+      };
+
+      const measureLastParagraphBottom = () => {
+        const rect = lastParagraph.getBoundingClientRect();
+        if (isElementScroller) {
+          const scrollerRect = snapRoot.getBoundingClientRect();
+          lastParagraphBottom = snapRoot.scrollTop + (rect.bottom - scrollerRect.top);
+          return;
+        }
+        lastParagraphBottom = window.scrollY + rect.bottom;
+      };
+
+      const viewportBottom = () => (
+        isElementScroller
+          ? (snapRoot.scrollTop + snapRoot.clientHeight)
+          : (window.scrollY + window.innerHeight)
+      );
+
+      const atLastParagraphEnd = () => viewportBottom() >= (lastParagraphBottom - 1);
+
+      const triggerPhilosophyBounce = () => {
+        if (!philosophyContent) return;
+        hasBouncedAtEnd = true;
+        isBouncing = true;
+        clearBounceClass();
+        philosophyContent.classList.add('philosophy-bounce');
+      };
+
+      const checkBounceTrigger = (deltaY) => {
+        if (deltaY <= 0) return;
+        if (!isPhilosophyActive) return;
+        if (hasBouncedAtEnd || isBouncing) return;
+        if (!atLastParagraphEnd()) return;
+        triggerPhilosophyBounce();
+      };
+
+      const scheduleBounceCheck = (deltaY) => {
+        if (deltaY <= 0) return;
+        pendingDelta = Math.max(pendingDelta, deltaY);
+        if (endCheckRaf) return;
+        endCheckRaf = window.requestAnimationFrame(() => {
+          endCheckRaf = 0;
+          const nextDelta = pendingDelta;
+          pendingDelta = 0;
+          checkBounceTrigger(nextDelta);
         });
-      });
+      };
+
+      const resetBounceState = () => {
+        hasBouncedAtEnd = false;
+        isBouncing = false;
+        clearBounceClass();
+      };
+
+      if (philosophyContent) {
+        philosophyContent.addEventListener('animationend', (event) => {
+          if (event.animationName !== 'philosophyBounce') return;
+          isBouncing = false;
+          clearBounceClass();
+        });
+      }
+
+      const inputTarget = isElementScroller ? snapRoot : window;
+      inputTarget.addEventListener('wheel', (event) => {
+        if (isBouncing) return;
+        scheduleBounceCheck(event.deltaY);
+      }, { passive: true });
+
+      inputTarget.addEventListener('touchstart', (event) => {
+        if (!event.touches?.length) return;
+        touchY = event.touches[0].clientY;
+      }, { passive: true });
+
+      inputTarget.addEventListener('touchmove', (event) => {
+        if (!event.touches?.length || touchY == null) return;
+        if (isBouncing) return;
+        const nextY = event.touches[0].clientY;
+        const deltaY = touchY - nextY;
+        touchY = nextY;
+        scheduleBounceCheck(deltaY);
+      }, { passive: true });
+
+      inputTarget.addEventListener('touchend', () => {
+        touchY = null;
+      }, { passive: true });
+
+      if ('IntersectionObserver' in window) {
+        const activeObserver = new IntersectionObserver(
+          (entries) => {
+            const entry = entries[0];
+            const active = !!entry?.isIntersecting && entry.intersectionRatio > 0.45;
+            if (!active && isPhilosophyActive) resetBounceState();
+            isPhilosophyActive = active;
+            if (isPhilosophyActive) measureLastParagraphBottom();
+          },
+          {
+            root: isElementScroller ? snapRoot : null,
+            threshold: [0.25, 0.45, 0.6],
+          }
+        );
+        activeObserver.observe(philosophySection);
+      } else {
+        isPhilosophyActive = true;
+      }
+
+      measureLastParagraphBottom();
+      window.addEventListener('resize', measureLastParagraphBottom, { passive: true });
+      window.addEventListener('orientationchange', measureLastParagraphBottom, { passive: true });
     }
+
   }
 
   updateHeaderHeightVar();
