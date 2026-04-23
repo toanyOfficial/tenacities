@@ -966,29 +966,29 @@ body.home-snap {
 }
 #philosophy .philosophy-pulse {
   fill: none;
-  stroke: rgba(255, 247, 234, 0.8);
+  stroke: rgba(255, 247, 234, 0.96);
   stroke-linecap: round;
-  stroke-dasharray: 30 270;
+  stroke-dasharray: 42 230;
   stroke-dashoffset: 0;
   opacity: 0;
   pointer-events: none;
-  filter: drop-shadow(0 0 1.2px rgba(255, 236, 206, 0.42));
+  filter: drop-shadow(0 0 2.6px rgba(255, 236, 206, 0.72));
   animation: philosophyPulseMove var(--pulse-duration, 6.4s) linear infinite,
              philosophyPulseFade var(--pulse-duration, 6.4s) ease-in-out infinite;
   animation-delay: var(--pulse-delay, 0s), var(--pulse-delay, 0s);
 }
 #philosophy .philosophy-pulse-1 {
-  stroke-width: 2.35;
+  stroke-width: 2.8;
   --pulse-duration: 6.1s;
   --pulse-delay: -0.8s;
 }
 #philosophy .philosophy-pulse-2 {
-  stroke-width: 2.1;
+  stroke-width: 2.5;
   --pulse-duration: 6.8s;
   --pulse-delay: -2.2s;
 }
 #philosophy .philosophy-pulse-3 {
-  stroke-width: 1.9;
+  stroke-width: 2.25;
   --pulse-duration: 5.7s;
   --pulse-delay: -1.6s;
 }
@@ -1029,8 +1029,8 @@ body.home-snap {
 
 @keyframes philosophyPulseFade {
   0%, 16%, 100% { opacity: 0; }
-  22%, 34% { opacity: 0.56; }
-  44% { opacity: 0.08; }
+  22%, 36% { opacity: 0.86; }
+  46% { opacity: 0.16; }
 }
 
 .philosophy-editorial .reading-width {
