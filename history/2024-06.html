@@ -12,11 +12,11 @@
   <div class="container nav">
     <strong><a class="brand-link" href="../index.html#hero">Tenacities</a></strong>
     <nav class="nav-links">
-      <a href="../index.html#hero" aria-label="Hero"><span class="tab-label">Hero</span><span class="tab-icon" aria-hidden="true"><img class="tab-icon-logo" src="../assets/logos/Tenacities.png" alt="" /></span></a>
-      <a href="../index.html#background" aria-label="Background"><span class="tab-label">Background</span><span class="tab-icon" aria-hidden="true">🍃</span></a>
-      <a href="../index.html#philosophy" aria-label="Philosophy"><span class="tab-label">Philosophy</span><span class="tab-icon" aria-hidden="true">🧭</span></a>
-      <a href="../index.html#ci" aria-label="CI"><span class="tab-label">CI</span><span class="tab-icon" aria-hidden="true">🎨</span></a>
-      <a href="../index.html#history" class="is-active" aria-label="History" aria-current="true"><span class="tab-label">History</span><span class="tab-icon" aria-hidden="true">📜</span></a>
+      <a href="../index.html#hero" aria-label="Hero" data-i18n-aria-label="index.nav.hero"><span class="tab-label" data-i18n="index.nav.hero">Hero</span><span class="tab-icon" aria-hidden="true"><img class="tab-icon-logo" src="../assets/logos/Tenacities.png" alt="" /></span></a>
+      <a href="../index.html#background" aria-label="Background" data-i18n-aria-label="index.nav.background"><span class="tab-label" data-i18n="index.nav.background">Background</span><span class="tab-icon" aria-hidden="true">🍃</span></a>
+      <a href="../index.html#philosophy" aria-label="Philosophy" data-i18n-aria-label="index.nav.philosophy"><span class="tab-label" data-i18n="index.nav.philosophy">Philosophy</span><span class="tab-icon" aria-hidden="true">🧭</span></a>
+      <a href="../index.html#ci" aria-label="CI" data-i18n-aria-label="index.nav.ci"><span class="tab-label" data-i18n="index.nav.ci">CI</span><span class="tab-icon" aria-hidden="true">🎨</span></a>
+      <a href="../index.html#history" class="is-active" aria-label="History" data-i18n-aria-label="index.nav.history" aria-current="true"><span class="tab-label" data-i18n="index.nav.history">History</span><span class="tab-icon" aria-hidden="true">📜</span></a>
     </nav>
   </div>
 </header>
@@ -24,16 +24,27 @@
 
 <main class="page-title doc-main">
   <div class="container">
-    <p class="eyebrow">History Detail</p>
-    <h1>2024.06. 단기임대통합관리서비스 Concierge Gangnam</h1>
+    <p class="eyebrow" data-i18n="history.detail.eyebrow">History Detail</p>
+    <h1 data-i18n="history.detail.page202406.title">2024.06. 단기임대통합관리서비스 Concierge Gangnam</h1>
     <img class="media" src="../assets/logos/Concierge_logo_C2.png" alt="2024.06 자료" />
 
     <div class="detail-cta-group">
-      <p><a href="index.html">← 연혁보기</a></p>
-      <p><a class="button-link" href="../index.html#history">메인으로</a></p>
+      <p><a href="index.html" data-i18n="history.detail.backToHistory">← 연혁보기</a></p>
+      <p><a class="button-link" href="../index.html#history" data-i18n="history.detail.backToMain">메인으로</a></p>
     </div>
   </div>
 </main>
-<footer><div class="container">Tenacities history archive detail.</div></footer>
+<footer><div class="container" data-i18n="history.detail.footer">Tenacities history archive detail.</div></footer>
+
+<script src="../scripts/i18n.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (window.i18n && typeof window.i18n.initializeI18n === 'function') {
+      window.i18n.initializeI18n().catch(function (error) {
+        console.warn('i18n initialization failed:', error);
+      });
+    }
+  });
+</script>
 </body>
 </html>
