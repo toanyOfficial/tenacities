@@ -1548,8 +1548,8 @@ main h3 + p {
 /* i18n language switcher */
 .lang-switcher {
   position: fixed;
-  right: 1.75rem;
-  bottom: 1.75rem;
+  right: 2.5rem;
+  bottom: 2.5rem;
   z-index: 1200;
   display: flex;
   flex-direction: column;
@@ -1637,21 +1637,10 @@ main h3 + p {
   font-weight: 700;
 }
 
-.sr-only {
-  position: absolute !important;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-}
-
 @media (max-width: 767px) {
   .lang-switcher {
-    right: 1.15rem;
-    bottom: 1.15rem;
+    right: 1.75rem;
+    bottom: 1.75rem;
   }
   .lang-switcher-trigger {
     width: 50px;

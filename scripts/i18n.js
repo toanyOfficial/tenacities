@@ -11,15 +11,13 @@
   const SWITCHER_ROOT_ID = 'language-switcher';
   function getLocalesPath() {
     const script = global.document.currentScript || global.document.querySelector('script[src*="scripts/i18n.js"]');
-    const src = script ? script.getAttribute('src') || '' : '';
-
+    const src = script && script.src ? script.src : '';
     if (!src) {
       return 'locales';
     }
-
-    const normalized = src.split('?')[0];
-    const basePath = normalized.replace(/scripts\/i18n\.js$/, '');
-    return `${basePath}locales`;
+    const scriptUrl = new URL(src, global.location.href);
+    const localesUrl = new URL('../locales/', scriptUrl);
+    return localesUrl.href.replace(/\/$/, '');
   }
 
   let currentLanguage = DEFAULT_LANGUAGE;
@@ -119,16 +117,12 @@
     const meta = LANGUAGE_META[lang] || LANGUAGE_META[DEFAULT_LANGUAGE];
     const trigger = root.querySelector('.lang-switcher-trigger');
     const triggerFlag = root.querySelector('.lang-switcher-trigger-flag');
-    const triggerLabel = root.querySelector('.lang-switcher-trigger-label');
 
     if (trigger) {
       trigger.setAttribute('aria-label', `${meta.label} selected. Change language`);
     }
     if (triggerFlag) {
       triggerFlag.textContent = meta.flag;
-    }
-    if (triggerLabel) {
-      triggerLabel.textContent = meta.label;
     }
 
     root.querySelectorAll('.lang-switcher-option').forEach(function (button) {
@@ -165,7 +159,7 @@
     trigger.className = 'lang-switcher-trigger';
     trigger.setAttribute('aria-haspopup', 'true');
     trigger.setAttribute('aria-expanded', 'false');
-    trigger.innerHTML = '<span class="lang-switcher-trigger-flag" aria-hidden="true">🇰🇷</span><span class="lang-switcher-trigger-label sr-only">한국어</span>';
+    trigger.innerHTML = '<span class="lang-switcher-trigger-flag" aria-hidden="true">🇰🇷</span>';
 
     const panel = global.document.createElement('div');
     panel.className = 'lang-switcher-panel';
@@ -180,14 +174,15 @@
       option.setAttribute('role', 'menuitemradio');
       option.setAttribute('data-lang', lang);
       option.innerHTML = `<span class="lang-switcher-flag" aria-hidden="true">${meta.flag}</span><span class="lang-switcher-label">${meta.label}</span>`;
-      option.addEventListener('click', function (event) {
+      option.addEventListener('click', async function (event) {
         event.preventDefault();
         event.stopPropagation();
-        setLanguage(lang).then(function () {
+        try {
+          await setLanguage(lang);
           closeSwitcherPanel();
-        }).catch(function () {
-          closeSwitcherPanel();
-        });
+        } catch (error) {
+          console.error('[i18n] failed to switch language:', lang, error);
+        }
       });
       panel.appendChild(option);
     });
@@ -226,9 +221,15 @@
     try {
       dict = await loadLocale(normalizedLang);
     } catch (error) {
+      console.error('[i18n] locale load failed:', normalizedLang, error);
       if (normalizedLang !== DEFAULT_LANGUAGE) {
         resolvedLanguage = DEFAULT_LANGUAGE;
-        dict = await loadLocale(DEFAULT_LANGUAGE);
+        try {
+          dict = await loadLocale(DEFAULT_LANGUAGE);
+        } catch (fallbackError) {
+          console.error('[i18n] default locale load failed:', DEFAULT_LANGUAGE, fallbackError);
+          throw fallbackError;
+        }
       } else {
         throw error;
       }
