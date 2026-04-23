@@ -58,22 +58,40 @@
     };
 
     if (sectionMap.size) {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          const visible = entries
-            .filter((e) => e.isIntersecting)
-            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-          if (visible?.target?.id) activate(visible.target.id);
-        },
-        {
-          root: isElementScroller ? snapRoot : null,
-          threshold: [0.25, 0.5, 0.75],
-          rootMargin: isElementScroller ? '0px 0px -55% 0px' : `-${getHeaderHeightPx()}px 0px -55% 0px`,
-        }
+      const sections = Array.from(sectionMap.values());
+      const resolveSectionTop = (section) => (
+        isElementScroller
+          ? section.offsetTop
+          : (window.scrollY + section.getBoundingClientRect().top - getHeaderHeightPx())
       );
+      const getSnapAlignedSectionId = () => {
+        const currentTop = isElementScroller
+          ? snapRoot.scrollTop
+          : (window.scrollY + getHeaderHeightPx());
+        let winner = sections[0];
+        let minDistance = Number.POSITIVE_INFINITY;
+        sections.forEach((section) => {
+          const distance = Math.abs(resolveSectionTop(section) - currentTop);
+          if (distance < minDistance) {
+            minDistance = distance;
+            winner = section;
+          }
+        });
+        return winner?.id || sections[0]?.id;
+      };
+      let activeSyncRaf = 0;
+      const syncActiveToSnapPosition = () => {
+        if (activeSyncRaf) return;
+        activeSyncRaf = window.requestAnimationFrame(() => {
+          activeSyncRaf = 0;
+          const nextId = getSnapAlignedSectionId();
+          if (nextId) activate(nextId);
+        });
+      };
 
-      sectionMap.forEach((el) => observer.observe(el));
-      activate(sectionMap.keys().next().value);
+      syncActiveToSnapPosition();
+      scroller.addEventListener('scroll', syncActiveToSnapPosition, { passive: true });
+      window.addEventListener('resize', syncActiveToSnapPosition, { passive: true });
 
       navLinks.forEach((a) => {
         a.addEventListener('click', (e) => {
@@ -82,9 +100,13 @@
           const target = sectionMap.get(href.slice(1));
           if (!target) return;
           e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          if (isElementScroller) {
+            snapRoot.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
+          } else {
+            const top = window.scrollY + target.getBoundingClientRect().top - getHeaderHeightPx();
+            window.scrollTo({ top, behavior: 'smooth' });
+          }
           history.replaceState(null, '', href);
-          activate(target.id);
         });
       });
     }
