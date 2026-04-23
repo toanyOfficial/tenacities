@@ -56,6 +56,7 @@
 
   if (navLinks.length) {
     const sectionMap = new Map(sectionIds.map((id) => [id, document.getElementById(id)]).filter(([, el]) => !!el));
+    const brandLink = document.querySelector('header .brand-link[href="#hero"]');
 
     const activate = (id) => {
       navLinks.forEach((a) => {
@@ -122,6 +123,21 @@
           history.replaceState(null, '', href);
         });
       });
+
+      if (brandLink) {
+        brandLink.addEventListener('click', (e) => {
+          const heroTarget = sectionMap.get('hero');
+          if (!heroTarget) return;
+          e.preventDefault();
+          if (isElementScroller) {
+            snapRoot.scrollTo({ top: heroTarget.offsetTop, behavior: 'smooth' });
+          } else {
+            const top = window.scrollY + heroTarget.getBoundingClientRect().top - getHeaderHeightPx();
+            window.scrollTo({ top, behavior: 'smooth' });
+          }
+          history.replaceState(null, '', '#hero');
+        });
+      }
     }
   }
 
