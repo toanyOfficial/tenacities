@@ -732,6 +732,15 @@ body.home-snap {
   font-weight: 800;
   letter-spacing: -0.02em;
 }
+.hero-title-main-translated {
+  display: none;
+}
+body[data-site-language]:not([data-site-language="ko"]) .hero-title-main-translated {
+  display: block;
+  font-size: clamp(0.96rem, 1.85vw, 1.28rem);
+  font-weight: 700;
+  line-height: 1.28;
+}
 .hero-title-sub {
   display: block;
   font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
@@ -1218,6 +1227,40 @@ body.home-snap {
   0%, 100% { opacity: 0.13; }
   50% { opacity: 0.09; }
 }
+
+.is-kakao-inapp #philosophy .philosophy-svg-curves,
+.is-kakao-inapp #philosophy .philosophy-curve,
+.is-kakao-inapp #philosophy .philosophy-pulse,
+.is-kakao-inapp #philosophy .philosophy-pulse-highlight,
+.is-kakao-inapp #philosophy .philosophy-pulse-aura,
+.is-kakao-inapp #philosophy .philosophy-support {
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+  will-change: auto !important;
+}
+
+.is-kakao-inapp #philosophy .philosophy-pulse-highlight,
+.is-kakao-inapp #philosophy .philosophy-pulse-aura,
+.is-kakao-inapp #philosophy .philosophy-support {
+  display: none !important;
+  opacity: 0 !important;
+}
+
+.is-kakao-inapp #philosophy .philosophy-pulse {
+  opacity: 0.88 !important;
+  stroke-dashoffset: 0 !important;
+  filter: none !important;
+  animation: kakaoPhilosophyOpacityBreath 4.6s ease-in-out infinite !important;
+}
+
+@keyframes kakaoPhilosophyOpacityBreath {
+  0%, 100% { opacity: 0.90; }
+  50% { opacity: 0.80; }
+}
+
 #philosophy .philosophy-support {
   position: absolute;
   inset: -10% -8%;
@@ -1543,4 +1586,119 @@ main h3 + p {
   max-width: 920px;
   margin-inline: auto;
   justify-self: center;
+}
+
+/* i18n language switcher */
+.lang-switcher {
+  position: fixed;
+  right: 2.5rem;
+  bottom: 2.5rem;
+  z-index: 1200;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: .5rem;
+}
+
+.lang-switcher-trigger {
+  border: 1px solid rgba(122, 15, 29, 0.24);
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--ink, #262324);
+  border-radius: 999px;
+  height: 54px;
+  width: 54px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
+  cursor: pointer;
+  box-shadow: 0 12px 28px rgba(14, 9, 10, 0.16);
+  line-height: 1;
+}
+
+.lang-switcher-trigger:hover {
+  transform: translateY(-1px);
+}
+
+.lang-switcher-trigger:active {
+  transform: translateY(0);
+}
+
+.lang-switcher-trigger:focus-visible,
+.lang-switcher-option:focus-visible {
+  outline: 2px solid rgba(231, 29, 54, 0.66);
+  outline-offset: 2px;
+}
+
+.lang-switcher-trigger-flag {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.lang-switcher-panel {
+  display: none;
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + .55rem);
+  width: min(80vw, 190px);
+  border-radius: 14px;
+  border: 1px solid rgba(122, 15, 29, 0.18);
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 18px 34px rgba(18, 11, 13, 0.2);
+  padding: .4rem;
+  backdrop-filter: blur(8px);
+  pointer-events: auto;
+}
+
+.lang-switcher.is-open .lang-switcher-panel {
+  display: grid;
+}
+
+.lang-switcher-option {
+  appearance: none;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: inherit;
+  display: grid;
+  grid-template-columns: 1.6rem 1fr;
+  align-items: center;
+  gap: .45rem;
+  text-align: left;
+  width: 100%;
+  padding: .5rem .55rem;
+  cursor: pointer;
+  font-size: .94rem;
+}
+
+.lang-switcher-flag {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.lang-switcher-option:hover {
+  background: rgba(122, 15, 29, 0.08);
+}
+
+.lang-switcher-option.is-active {
+  background: rgba(231, 29, 54, 0.14);
+  font-weight: 700;
+}
+
+@media (max-width: 767px) {
+  .lang-switcher {
+    right: 1.75rem;
+    bottom: 1.75rem;
+  }
+  .lang-switcher-trigger {
+    width: 50px;
+    height: 50px;
+  }
 }

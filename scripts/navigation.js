@@ -7,6 +7,11 @@
     return '../'.repeat(Math.max(0, depth));
   };
   const rootPrefix = resolveRootPrefix();
+  const isKakaoInApp = /KAKAOTALK/i.test(window.navigator.userAgent || '');
+  if (isKakaoInApp) {
+    document.documentElement.classList.add('is-kakao-inapp');
+    document.body.classList.add('is-kakao-inapp');
+  }
   const isHomePage = document.body.classList.contains('home-snap');
   const headerHost = document.querySelector('header');
   if (headerHost && !isHomePage) {
@@ -426,7 +431,7 @@
       return 1000 / (Math.max(9, baseDuration) * randomFactor);
     };
 
-    if (pulseFlowStates.length) {
+    if (!isKakaoInApp && pulseFlowStates.length) {
       let lastTimestamp = performance.now();
       const isCoarsePointer = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
       const stepPulseFlow = (timestamp) => {
