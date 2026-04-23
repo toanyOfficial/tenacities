@@ -1,0 +1,30 @@
+{
+  "common": {
+    "language": {
+      "ko": "한국어",
+      "ja": "日本語",
+      "en": "English",
+      "zh": "简体中文"
+    },
+    "backToMain": "메인으로 돌아가기"
+  },
+  "hero": {
+    "title": "",
+    "concept": {
+      "tenacity": ""
+    }
+  },
+  "background": {
+    "paragraph1": ""
+  },
+  "philosophy": {
+    "sectionTitle": ""
+  },
+  "history": {
+    "sectionTitle": "연혁",
+    "archiveButton": ""
+  },
+  "ci": {
+    "sectionTitle": "CI"
+  }
+}

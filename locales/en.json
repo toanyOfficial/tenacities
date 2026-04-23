@@ -1,0 +1,30 @@
+{
+  "common": {
+    "language": {
+      "ko": "Korean",
+      "ja": "Japanese",
+      "en": "English",
+      "zh": "Simplified Chinese"
+    },
+    "backToMain": "Back to Main"
+  },
+  "hero": {
+    "title": "Tenacities",
+    "concept": {
+      "tenacity": "Metaverse"
+    }
+  },
+  "background": {
+    "paragraph1": "Seamless world"
+  },
+  "philosophy": {
+    "sectionTitle": ""
+  },
+  "history": {
+    "sectionTitle": "History",
+    "archiveButton": ""
+  },
+  "ci": {
+    "sectionTitle": "CI"
+  }
+}
