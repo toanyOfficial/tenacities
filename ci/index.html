@@ -5,15 +5,34 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Tenacities CI</title>
   <link rel="stylesheet" href="../styles/site.css" />
+  <style>
+    .ci-detail-page .org-frame {
+      overflow-x: hidden;
+      width: 100%;
+    }
+    .ci-detail-page .org-image {
+      display: block;
+      max-width: 100%;
+      width: 100%;
+      height: auto;
+      min-width: 0;
+      object-fit: contain;
+    }
+    .ci-detail-page .section-title {
+      margin-bottom: .65rem;
+    }
+  </style>
 </head>
-<body>
+<body class="ci-detail-page">
 <header>
   <div class="container nav">
-    <strong>Tenacities</strong>
+    <strong><a class="brand-link" href="../index.html#hero">Tenacities</a></strong>
     <nav class="nav-links">
-      <a href="../index.html">Home</a>
-      <a href="index.html">CI</a>
-      <a href="../history/index.html">History</a>
+      <a href="../index.html#hero" aria-label="Hero"><span class="tab-label">Hero</span><span class="tab-icon" aria-hidden="true"><img class="tab-icon-logo" src="../examples/Tenacities.png" alt="" /></span></a>
+      <a href="../index.html#background" aria-label="Background"><span class="tab-label">Background</span><span class="tab-icon" aria-hidden="true">🍃</span></a>
+      <a href="../index.html#philosophy" aria-label="Philosophy"><span class="tab-label">Philosophy</span><span class="tab-icon" aria-hidden="true">🧭</span></a>
+      <a href="../index.html#ci" aria-label="CI"><span class="tab-label">CI</span><span class="tab-icon" aria-hidden="true">🎨</span></a>
+      <a href="../index.html#history" aria-label="History"><span class="tab-label">History</span><span class="tab-icon" aria-hidden="true">📜</span></a>
     </nav>
   </div>
 </header>
@@ -21,7 +40,6 @@
 <main class="page-title">
   <div class="container">
     <h1>🎨 CI — Brand Identity System</h1>
-    <p class="section-intro">CI는 Tenacities의 세계관을 시각적으로 정리한 체계입니다. 아래에서 Logo System과 Organization Chart를 분리해 확인할 수 있습니다.</p>
 
     <nav class="segment-nav" aria-label="CI sections">
       <a href="#logo-system">Logo System</a>
@@ -32,7 +50,6 @@
   <section id="logo-system" class="section-divided tone-plain">
     <div class="container reading-width">
       <h2 class="section-title">Logo System</h2>
-      <p class="section-intro">원본 설명의 의미를 유지하여 색상·엠블럼 개념을 구조적으로 정리했습니다.</p>
 
       <div class="card-grid ci-grid">
         <article class="card">
@@ -69,7 +86,6 @@
   <section id="org-chart" class="section-divided tone-mist">
     <div class="container">
       <h2 class="section-title">Organization Chart</h2>
-      <p class="section-intro">원본 조직도 이미지(`examples/image.png`)를 그대로 사용하며, 가로 비율(16:9 기반)을 보존한 채 반응형으로 표시합니다.</p>
 
       <div class="org-frame" role="region" aria-label="organization chart scroll container">
         <img class="org-image" src="../examples/image.png" alt="Tenacities organization chart" />
