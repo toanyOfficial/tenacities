@@ -1196,17 +1196,27 @@ body.home-snap {
   #philosophy .philosophy-pulse {
     opacity: 0.9;
     filter: none;
+    animation: philosophyMobileGlowBreath 8.8s ease-in-out infinite;
   }
   #philosophy .philosophy-pulse-highlight {
-    opacity: 0.44;
-    filter: blur(0.72px);
-    mix-blend-mode: normal;
+    display: none;
   }
   #philosophy .philosophy-pulse-aura {
-    opacity: 0.1;
+    opacity: 0.11;
     filter: blur(1.2px);
     mix-blend-mode: normal;
+    animation: philosophyMobileAuraBreath 10.4s ease-in-out infinite;
   }
+}
+
+@keyframes philosophyMobileGlowBreath {
+  0%, 100% { opacity: 0.92; }
+  50% { opacity: 0.84; }
+}
+
+@keyframes philosophyMobileAuraBreath {
+  0%, 100% { opacity: 0.13; }
+  50% { opacity: 0.09; }
 }
 #philosophy .philosophy-support {
   position: absolute;
