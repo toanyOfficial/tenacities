@@ -259,9 +259,6 @@
     pulseGroups.forEach((group) => {
       if (!group.main || !group.highlight) return;
       applyPulseRandomTiming(group);
-      group.main.addEventListener('animationiteration', () => {
-        applyPulseRandomTiming(group);
-      });
     });
 
   }
