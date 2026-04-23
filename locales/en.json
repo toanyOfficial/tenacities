@@ -1,0 +1,197 @@
+{
+  "common": {
+    "language": {
+      "ko": "Korean",
+      "ja": "Japanese",
+      "en": "English",
+      "zh": "Simplified Chinese"
+    },
+    "backToMain": "Back to Main"
+  },
+  "index": {
+    "nav": {
+      "hero": "Hero",
+      "background": "Background",
+      "philosophy": "Philosophy",
+      "ci": "CI",
+      "history": "History"
+    },
+    "hero": {
+      "companyName": "Tenacities Co., Ltd.",
+      "logoAlt": "Tenacities logo",
+      "concept1Title": "💡 Tenacity + ies",
+      "concept1Body": ": People with tenacity",
+      "concept2Title": "💡 Tena + cities",
+      "concept2Body": ": A Seamless world shaped by people with tenacity"
+    },
+    "background": {
+      "p1": "Tenacities was founded in March 2022 with Metaverse as its goal.",
+      "p2": "Since I was young, I wanted to build a single world. A business, a company itself, is also one world, so I naturally walked the path of entrepreneurship.",
+      "p3": "While repeating attempts and failures, experience and growth, the keyword Metaverse came to me. I did not know it deeply at first, but it felt like a destined keyword. Metaverse itself is one world.",
+      "p4": "Though it may sound old-fashioned, I view the world through the lens of self-cultivation, family order, governance, and peace under heaven.",
+      "p5": "Just as I am one world, my family is one world, and beyond that, a company is also one world.",
+      "p6": "But I have no country to rule and no ambition to conquer all under heaven.",
+      "p7": "So, with my own adaptation — Self-cultivation, Family, Company, Love for the World — I continue expanding my awareness and reach."
+    },
+    "philosophy": {
+      "sectionTitle": "Philosophy",
+      "note": "※ Tenacities aims for Metaverse, but our view may differ significantly from the Metaverse discussed in academia.",
+      "topic1": {
+        "title": "1️⃣ Misunderstandings about Metaverse and its essence",
+        "p1": "Many people confuse Metaverse, 3D World, and virtual reality. Tenacities also started that way.",
+        "p2": "After repeated exploration, we interpreted Seamless world as the essence of Metaverse."
+      },
+      "topic2": {
+        "title": "2️⃣ What Seamless world means",
+        "p1": "The self exists as a continuous being, in a Seamless state, wherever and whenever.",
+        "p2": "When I graduate from elementary school and enter middle school, I cannot function as a member there until my profile is registered and a student number is issued. I am Seamless, but the World is not Seamless because of centralized management systems.",
+        "p3": "The same is true when moving from Korea to the U.S. Without registration in that system, I cannot exist as a member of that society.",
+        "p4": "The inseparable relation between Metaverse and decentralization is not merely political. It reflects human nature that seeks Seamless survival. That is why Coin, NFT, and Block chain are discussed together."
+      },
+      "topic3": {
+        "title": "3️⃣ Tenacities' Seamless World",
+        "p1": "For building a Seamless world, Tenacities defines the three essential foundations as housing, food, and labor.",
+        "p2": "Even in a present and future where many jobs are replaced by AI, if people can sustain the essence of labor and have housing and food ecosystems that support it, they can continue their will to live.",
+        "p3": "Wherever in the world we go, even if humanity migrates to Mars, we aim to build a Seamless world where self-sufficiency in these three dimensions is possible."
+      },
+      "topic4": {
+        "title": "4️⃣ Tenacities and Seamless World",
+        "p1": "Tenacities aspires to a world where people with will are given more opportunities.",
+        "p2": "Tenacities is a collective of people with the will to build better lives.",
+        "p3": "We aim for a Metaverse where people with will can live freely."
+      }
+    },
+    "ci": {
+      "sectionTitle": "CI",
+      "logoSet": "Logo & Color Set",
+      "orgChart": "Organization Chart",
+      "logoSetAria": "View logo and color set details",
+      "orgChartAria": "View organization chart details"
+    },
+    "history": {
+      "sectionTitle": "History",
+      "entry1": "2022.03. Tenacities founded and business operations launched",
+      "entry2": "2022.05. Technology guarantee fund KRW 200M technical review approved",
+      "entry3": "2022.08. Social Metaverse Toany launched",
+      "entry4": "2023.05. Final selection for NIPA Metaverse startup infrastructure support program",
+      "entry5": "2023.06. Kpop rhythm game Duet tae-bo",
+      "entry6": "2023.12. Narae House short-term rental brokerage platform outsourced development and launch",
+      "entry7": "2024.06. Concierge Gangnam short-term rental integrated management service",
+      "entry8": "2024.12. Concierge + food service annual sales reached KRW 1.3B",
+      "archiveCta": "View full history archive →"
+    },
+    "footer": {
+      "description": "Built from source material in assets/images/, rebuilt as a refined multi-depth brand website."
+    }
+  },
+  "history": {
+    "archive": {
+      "title": "History Archive (2022–2024)",
+      "intro": "You can browse each milestone in the vertical timeline. Each item links to a detail page and related subpages when available.",
+      "entry1": "<strong>2022.03</strong> (주)테너시티즈 설립 및 사업개시",
+      "entry2": "<strong>2022.05</strong> 기술보증기금 2억원 기술심사 승인",
+      "entry3": "<strong>2022.08</strong> Social Metaverse Toany 론칭",
+      "entry4": "<strong>2023.05</strong> NIPA_메타버스초기기업 인프라 지원사업 최종선발",
+      "entry5": "<strong>2023.06</strong> Kpop rhythm game Duet tae-bo",
+      "entry6": "<strong>2023.12</strong> 단기임대중개 플랫폼 나래하우스 외주개발 및 런칭",
+      "entry7": "<strong>2024.06</strong> 단기임대통합관리서비스 Concierge Gangnam",
+      "entry8": "<strong>2024.12</strong> 컨시어지+외식업 연매출 13억 달성",
+      "button": {
+        "backToMain": "Back to Main"
+      }
+    },
+    "detail": {
+      "eyebrow": "History Detail",
+      "subpageEyebrow": "History Subpage",
+      "backToHistory": "← Back to History",
+      "backToMain": "Back to Main",
+      "footer": "Tenacities history archive detail.",
+      "page202203": {
+        "title": "2022.03. (주)테너시티즈 설립 및 사업개시"
+      },
+      "page202205": {
+        "title": "2022.05. 기술보증기금 2억원 기술심사 승인"
+      },
+      "page202208": {
+        "title": "2022.08. Social Metaverse Toany 론칭",
+        "serviceInfo": "Service Info",
+        "item1": "Metaverse 내부에서 F&B 배달을 위한 서비스 연동.",
+        "item2": "Toany를 통해 땡겨요 F&B 주문 시 NFT good 제공",
+        "item3": "3개 투자사(1 ac, 2 vc)사전신청 유저 10인 트위치 스트리머 1인 인베스트뉴스 기자 1인 참석",
+        "item4": "블리스바인 벤처스와 40억 Value 투자협상 진행",
+        "item5": "메타버스 버스킹 버스커 4인, 청중 16인 참가",
+        "item6": "메타버스 단체 소개팅 남성 4인, 여성 4인 참가",
+        "item7": "메타버스 단체 미팅 남녀 4팀 참가(2인 1팀)",
+        "item8": "우리집 포트럭 파티 남성 3팀, 남녀 1인 참가(2인 1팀)",
+        "item9": "대규모 상시 접속 인원이 보장되지 않으면 즐길 콘텐츠가 없다.",
+        "item10": "즐길 콘텐츠가 없으면 상시 접속할 이유가 없다.",
+        "linkedSubpages": "Linked Subpages",
+        "applicationCapture": "Application Capture",
+        "metaverseEvents": "Metaverse Events",
+        "externalReferences": "External References"
+      },
+      "page202305": {
+        "title": "2023.05. NIPA_메타버스초기기업 인프라 지원사업 최종선발",
+        "agreement": "Agreement"
+      },
+      "page202306": {
+        "title": "2023.06. Kpop rhythm game Duet tae-bo",
+        "serviceInfo": "Service Info",
+        "item1": "VR appstore 생태계 이해 및 VR 최적화에 실패.",
+        "item2": "출시는 길어지는데 개발자, 디자이너 등을 유지할 수 없는 관계로 출시 포기",
+        "linkedSubpages": "Linked Subpages",
+        "applicationCapture": "Application Capture",
+        "nftPromoRoom": "NFT Promo Room Build",
+        "externalReference": "External Reference"
+      },
+      "page202312": {
+        "title": "2023.12. 단기임대중개 플랫폼 나래하우스 외주개발 및 런칭",
+        "applicationCapture": "Application Capture"
+      },
+      "page202406": {
+        "title": "2024.06. 단기임대통합관리서비스 Concierge Gangnam"
+      },
+      "page202412": {
+        "title": "2024.12. 컨시어지+외식업 연매출 13억 달성"
+      },
+      "page202208Application": {
+        "title": "Application Capture"
+      },
+      "page202208Events": {
+        "title": "Metaverse Events"
+      },
+      "page202305Agreement": {
+        "title": "Agreement"
+      },
+      "page202306Application": {
+        "title": "Application Capture"
+      },
+      "page202306Nft": {
+        "title": "NFT Promo Room Build"
+      },
+      "page202312Application": {
+        "title": "Application Capture"
+      }
+    }
+  },
+  "ci": {
+    "detail": {
+      "title": "CI — Brand Identity System",
+      "logoSystemTitle": "Logo System",
+      "primaryColorLabel": "Primary Color",
+      "primaryColorName": "Crimson Red · #E71D36",
+      "primaryColorDescription": "‘열정’을 상징하되, 단기 집중형 감정이 아닌 장기간에 걸친 ‘의지’를 드러내기 위해 채도를 조정하고 깊이를 더한 색으로 정의됩니다.",
+      "brandMarkLabel": "Brand Mark",
+      "brandMarkName": "Tenacities Emblem",
+      "emblemStructureTitle": "Emblem Meaning Structure",
+      "emblemItem1": "<strong>TENACITIES</strong>: Abstractly visualizes each letter of the Tenacities name.",
+      "emblemItem2": "<strong>From seed to fruit</strong>: The lower semicircle (seed), middle vine (stem), and upper semicircle (fruit) symbolize continuity in the value of 修身 齊家 治社 愛天下.",
+      "emblemItem3": "<strong>Steady burning flame</strong>: Through the torch grip and flame form, it represents sustained Tenacity over rapid short-term success.",
+      "emblemItem4": "<strong>Two joined hands</strong>: Views customers and team members as equal ecosystem participants, aiming for cyclical co-growth.",
+      "emblemItem5": "<strong>Other symbols</strong>: Expresses balance of responsibility and authority through symmetric butterfly-wing and top-bottom symmetry motifs.",
+      "orgChartTitle": "Organization Chart",
+      "backToMain": "Back to Main",
+      "footer": "CI section designed as a structured brand identity area."
+    }
+  }
+}
