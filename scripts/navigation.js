@@ -1,4 +1,33 @@
 (() => {
+  const resolveRootPrefix = () => {
+    const parts = window.location.pathname.split('/').filter(Boolean);
+    if (!parts.length) return '';
+    const fileLike = parts[parts.length - 1].includes('.');
+    const depth = fileLike ? (parts.length - 1) : parts.length;
+    return '../'.repeat(Math.max(0, depth));
+  };
+  const rootPrefix = resolveRootPrefix();
+  const isHomePage = document.body.classList.contains('home-snap');
+  const headerHost = document.querySelector('header');
+  if (headerHost && !isHomePage) {
+    fetch(`${rootPrefix}index.html`)
+      .then((response) => response.text())
+      .then((html) => {
+        const parsed = new DOMParser().parseFromString(html, 'text/html');
+        const sourceHeader = parsed.querySelector('header');
+        if (!sourceHeader) return;
+        headerHost.innerHTML = sourceHeader.innerHTML;
+        const navLinks = headerHost.querySelectorAll('a[href^="#"]');
+        navLinks.forEach((link) => {
+          const href = link.getAttribute('href') || '';
+          link.setAttribute('href', `${rootPrefix}index.html${href}`);
+        });
+        const logo = headerHost.querySelector('.tab-icon-logo');
+        if (logo) logo.setAttribute('src', `${rootPrefix}examples/Tenacities.png`);
+      })
+      .catch(() => {});
+  }
+
   const doc = document.documentElement;
   const header = document.querySelector('header');
   const snapRoot = document.querySelector('.home-snap .snap-root');
