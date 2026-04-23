@@ -747,8 +747,17 @@ body.home-snap {
   height: auto;
   margin: 0;
   opacity: 0.06;
-  animation: heroLogoFadeIn 7.6s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards;
+  animation: none;
+  visibility: hidden;
+  transform: translateZ(0);
+  backface-visibility: hidden;
   will-change: opacity;
+}
+.hero-logo.is-fade-ready {
+  visibility: visible;
+}
+.hero-logo.is-fading {
+  animation: heroLogoFadeIn 7.6s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards;
 }
 .hero-concepts-group {
   grid-area: concepts;
@@ -841,6 +850,8 @@ body.home-snap {
   .hero-logo {
     animation: none;
     opacity: 1;
+    visibility: visible;
+    transform: none;
   }
   .philosophy-editorial .philosophy-block {
     opacity: 1;

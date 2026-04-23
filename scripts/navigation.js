@@ -182,22 +182,65 @@
   const el = document.querySelector('.hero-logo');
   if (el) {
     let heroFadeRaf = 0;
+    let heroFadeToken = 0;
+    let heroLogoReady = false;
+    let heroActive = false;
+
+    const waitForLogoReady = () => new Promise((resolve) => {
+      const finalize = async () => {
+        if (typeof el.decode === 'function') {
+          try {
+            await el.decode();
+          } catch (_) {
+            // Ignore decode errors and proceed with loaded image.
+          }
+        }
+        resolve();
+      };
+
+      if (el.complete && el.naturalWidth > 0) {
+        finalize();
+        return;
+      }
+
+      const onLoad = () => {
+        el.removeEventListener('error', onError);
+        finalize();
+      };
+      const onError = () => {
+        el.removeEventListener('load', onLoad);
+        resolve();
+      };
+      el.addEventListener('load', onLoad, { once: true });
+      el.addEventListener('error', onError, { once: true });
+    });
+
     const replayHeroLogoFade = () => {
       window.cancelAnimationFrame(heroFadeRaf);
-      el.style.opacity = '0.06';
-      el.style.animation = 'none';
+      heroFadeToken += 1;
+      const currentToken = heroFadeToken;
+      el.classList.add('is-fade-ready');
+      el.classList.remove('is-fading');
+      void el.offsetWidth;
       heroFadeRaf = window.requestAnimationFrame(() => {
-        el.style.animation = 'heroLogoFadeIn 7.6s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards';
+        if (currentToken !== heroFadeToken) return;
+        el.classList.add('is-fading');
       });
     };
     const handleHeroActiveChange = (id) => {
-      if (id === 'hero') replayHeroLogoFade();
+      heroActive = (id === 'hero');
+      if (heroActive && heroLogoReady) replayHeroLogoFade();
     };
     window.addEventListener('tenacities:active-section-change', (event) => {
       handleHeroActiveChange(event.detail?.id || '');
     });
-    window.requestAnimationFrame(() => {
+
+    window.requestAnimationFrame(async () => {
       handleHeroActiveChange(getCurrentActiveSectionId());
+      await waitForLogoReady();
+      heroLogoReady = true;
+      el.classList.add('is-fade-ready');
+      if (heroActive) replayHeroLogoFade();
     });
   }
 
