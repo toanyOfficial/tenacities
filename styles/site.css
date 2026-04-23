@@ -1158,7 +1158,14 @@ body.home-snap {
 }
 .ci-icon {
   margin: 0 0 .55rem;
-  font-size: 1.5rem;
+  font-size: 1.72rem;
+  line-height: 1;
+}
+.ci-logo-icon {
+  width: clamp(62px, 8.2vw, 78px);
+  height: clamp(62px, 8.2vw, 78px);
+  object-fit: contain;
+  display: block;
 }
 .ci-line {
   margin: 0;
@@ -1169,6 +1176,8 @@ body.home-snap {
 @media (max-width: 767px) {
   .ci-screen .ci-two-blocks {
     grid-template-columns: 1fr;
+    min-height: 68vh;
+    align-content: center;
   }
   .ci-block { min-height: 180px; }
 }
