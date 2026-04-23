@@ -1103,8 +1103,9 @@ body.home-snap {
 #philosophy .philosophy-pulse-highlight {
   stroke: url(#philosophy-pulse-hi-1);
   stroke-dasharray: 56 944;
-  opacity: 0.36;
-  filter: blur(1.35px) drop-shadow(0 0 0.55px rgba(255, 228, 196, 0.34));
+  opacity: 0.43;
+  filter: blur(1.45px) drop-shadow(0 0 0.75px rgba(255, 228, 196, 0.38)) drop-shadow(0 0 1.75px rgba(231, 29, 54, 0.18));
+  mix-blend-mode: screen;
 }
 #philosophy .philosophy-pulse-1 {
   stroke: url(#philosophy-pulse-grad-1);
@@ -1323,6 +1324,15 @@ body.home-snap {
   background: var(--crimson);
   border-color: var(--crimson);
   color: #fff;
+}
+.detail-cta-group {
+  margin-top: 1.15rem;
+}
+.detail-cta-group p + p {
+  margin-top: .55rem;
+}
+.ci-bottom-cta {
+  margin: 1.2rem 0 0;
 }
 
 @media (max-width: 767px) {

@@ -349,8 +349,10 @@
 
     const applyPulseRandomTiming = ({ base, main, highlight }) => {
       if (!main || !highlight) return;
-      const jitter = (Math.random() * 1.5) - 0.75;
-      const duration = Math.max(9, base + jitter);
+      const minFactor = 0.9;
+      const maxFactor = 1.1;
+      const randomFactor = minFactor + (Math.random() * (maxFactor - minFactor));
+      const duration = Math.max(9, base * randomFactor);
       const durationValue = `${duration.toFixed(2)}s`;
       main.style.setProperty('--pulse-duration', durationValue);
       highlight.style.setProperty('--pulse-duration', durationValue);
@@ -359,6 +361,9 @@
     pulseGroups.forEach((group) => {
       if (!group.main || !group.highlight) return;
       applyPulseRandomTiming(group);
+      group.main.addEventListener('animationiteration', () => {
+        applyPulseRandomTiming(group);
+      });
     });
 
     const philosophyContent = philosophySection.querySelector('.philosophy-content');
