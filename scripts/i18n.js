@@ -165,7 +165,7 @@
     trigger.className = 'lang-switcher-trigger';
     trigger.setAttribute('aria-haspopup', 'true');
     trigger.setAttribute('aria-expanded', 'false');
-    trigger.innerHTML = '<span class="lang-switcher-trigger-flag" aria-hidden="true">🇰🇷</span><span class="lang-switcher-trigger-label">한국어</span>';
+    trigger.innerHTML = '<span class="lang-switcher-trigger-flag" aria-hidden="true">🇰🇷</span><span class="lang-switcher-trigger-label sr-only">한국어</span>';
 
     const panel = global.document.createElement('div');
     panel.className = 'lang-switcher-panel';
@@ -180,15 +180,21 @@
       option.setAttribute('role', 'menuitemradio');
       option.setAttribute('data-lang', lang);
       option.innerHTML = `<span class="lang-switcher-flag" aria-hidden="true">${meta.flag}</span><span class="lang-switcher-label">${meta.label}</span>`;
-      option.addEventListener('click', function () {
+      option.addEventListener('click', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
         setLanguage(lang).then(function () {
+          closeSwitcherPanel();
+        }).catch(function () {
           closeSwitcherPanel();
         });
       });
       panel.appendChild(option);
     });
 
-    trigger.addEventListener('click', function () {
+    trigger.addEventListener('click', function (event) {
+      event.preventDefault();
+      event.stopPropagation();
       const isOpen = root.classList.toggle('is-open');
       trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
@@ -207,8 +213,8 @@
       }
     });
 
-    root.appendChild(panel);
     root.appendChild(trigger);
+    root.appendChild(panel);
     global.document.body.appendChild(root);
   }
 
