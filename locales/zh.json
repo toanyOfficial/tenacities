@@ -1,0 +1,87 @@
+{
+  "common": {
+    "language": {
+      "ko": "韩语",
+      "ja": "日语",
+      "en": "英语",
+      "zh": "简体中文"
+    },
+    "backToMain": "返回主页"
+  },
+  "index": {
+    "nav": {
+      "hero": "Hero",
+      "background": "Background",
+      "philosophy": "Philosophy",
+      "ci": "CI",
+      "history": "History"
+    },
+    "hero": {
+      "companyName": "腾纳思提兹株式会社",
+      "logoAlt": "Tenacities 标志",
+      "concept1Title": "💡 Tenacity + ies",
+      "concept1Body": ": 拥有意志的人们",
+      "concept2Title": "💡 Tena + cities",
+      "concept2Body": ": 由拥有意志的人们共同打造的 Seamless world"
+    },
+    "background": {
+      "p1": "Tenacities 于 2022 年 3 月成立，以 Metaverse 为目标。",
+      "p2": "我从小就想创造一个“世界”。企业，也就是公司，本身也是“一个世界”，因此我自然而然走上了创业之路。",
+      "p3": "在不断经历尝试与失败、经验与成长的过程中，“元宇宙”这个关键词来到我面前。虽然起初并不了解它，但它像命运般吸引我。因为 Metaverse 本身就是“一个世界”。",
+      "p4": "虽然这句格言有些古典，但我始终通过“修身齐家治国平天下”这副视角看世界。",
+      "p5": "正如我自己是一个世界，我的家庭也是一个世界，进一步说，公司同样是一个世界。",
+      "p6": "但我并没有可以治理的国家，也无意平定天下。",
+      "p7": "因此我以稍作变形的“修身 齐家 治社 爱天下”为价值观，不断扩展自己的认知与边界。"
+    },
+    "philosophy": {
+      "sectionTitle": "Philosophy",
+      "note": "※ Tenacities 以 Metaverse 为目标，但我们的观点可能与学界讨论的 Metaverse 存在较大差异。",
+      "topic1": {
+        "title": "1️⃣ 关于 Metaverse 的误解与本质",
+        "p1": "很多人会混淆 Metaverse、3D World 和虚拟现实。Tenacities 起初也是如此。",
+        "p2": "但经过反复探索，我们将 Seamless world 解释为 Metaverse 的本质。"
+      },
+      "topic2": {
+        "title": "2️⃣ 什么是 Seamless world",
+        "p1": "“我”这一存在，无论何时何地，都以连续且 Seamless 的状态存在。",
+        "p2": "当我小学毕业进入中学时，在学校管理系统登记个人信息并获得学号之前，我无法作为该社会的成员活动。我是 Seamless 的，但 World 不是 Seamless 的，因为系统是中心化管理。",
+        "p3": "从韩国到美国时也是一样。如果美国的管理系统没有登记“我”的信息，我就无法作为成员存在。",
+        "p4": "Metaverse 与去中心化密不可分，并非政治视角，而是源于人类对 Seamless 生存的本能诉求。这也是 Coin、NFT、Block chain 经常被一同讨论的原因。"
+      },
+      "topic3": {
+        "title": "3️⃣ Tenacities 的 Seamless World",
+        "p1": "Tenacities 将构建 Seamless world 的三大核心本质定义为“居住、饮食、劳动”。",
+        "p2": "即使在现在与未来许多工作被 AI 替代的时代，只要人类仍能维系劳动本质，并具备支撑这种本质的居住与饮食生态系统，就能持续保持生活意志。",
+        "p3": "无论我们走到世界任何地方，甚至未来人类迁居火星，我们都以实现这三方面自给自足的 Seamless world 为目标。"
+      },
+      "topic4": {
+        "title": "4️⃣ Tenacities 与 Seamless World",
+        "p1": "Tenacities 向往“让有意志的人获得更多机会的世界”。",
+        "p2": "Tenacities 是由有意愿创造更好生活的人们组成的集体。",
+        "p3": "我们 Tenacities 以让有意志的人自由生活的 Metaverse 为目标。"
+      }
+    },
+    "ci": {
+      "sectionTitle": "CI",
+      "logoSet": "标志与配色",
+      "orgChart": "组织架构",
+      "logoSetAria": "查看标志与配色详情",
+      "orgChartAria": "查看组织架构详情"
+    },
+    "history": {
+      "sectionTitle": "History",
+      "entry1": "2022.03. Tenacities 成立并启动业务",
+      "entry2": "2022.05. 技术担保基金 2 亿韩元技术评审通过",
+      "entry3": "2022.08. Social Metaverse Toany 上线",
+      "entry4": "2023.05. 入选 NIPA 元宇宙初创企业基础设施支持项目",
+      "entry5": "2023.06. Kpop rhythm game Duet tae-bo",
+      "entry6": "2023.12. 短租中介平台 Narae House 外包开发并上线",
+      "entry7": "2024.06. 短租一体化管理服务 Concierge Gangnam",
+      "entry8": "2024.12. 礼宾服务+餐饮业务年销售额达 13 亿韩元",
+      "archiveCta": "查看完整沿革档案 →"
+    },
+    "footer": {
+      "description": "基于 assets/images/ 的源素材，重构为精炼的多层级品牌网站。"
+    }
+  }
+}

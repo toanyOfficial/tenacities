@@ -1,0 +1,87 @@
+{
+  "common": {
+    "language": {
+      "ko": "韓国語",
+      "ja": "日本語",
+      "en": "English",
+      "zh": "簡体字中国語"
+    },
+    "backToMain": "メインに戻る"
+  },
+  "index": {
+    "nav": {
+      "hero": "Hero",
+      "background": "Background",
+      "philosophy": "Philosophy",
+      "ci": "CI",
+      "history": "History"
+    },
+    "hero": {
+      "companyName": "株式会社テナシティーズ",
+      "logoAlt": "Tenacities ロゴ",
+      "concept1Title": "💡 Tenacity + ies",
+      "concept1Body": ": 意志を持つ人々",
+      "concept2Title": "💡 Tena + cities",
+      "concept2Body": ": 意志を持つ人々がつくる Seamless world"
+    },
+    "background": {
+      "p1": "Tenacitiesは2022年3月、Metaverseを目標に設立された会社です。",
+      "p2": "私は幼い頃から一つの「世界」をつくりたいと思っていました。事業体、つまり会社も「一つの世界」なので、自然に起業の道を歩むようになりました。",
+      "p3": "さまざまな挑戦と失敗、経験と成長を繰り返す中で、「メタバース」というキーワードに出会いました。最初は詳しく知りませんでしたが、運命的な言葉に感じました。メタバースそのものが「一つの世界」だからです。",
+      "p4": "古風な格言ですが、私は「修身斉家治国平天下」というレンズで世界を見ています。",
+      "p5": "自分自身が一つの世界であるように、家庭も一つの世界であり、さらに会社も一つの世界だからです。",
+      "p6": "しかし私には治める国もなく、天下を平定するつもりもありません。",
+      "p7": "そこで私は少し言い換えた「修身 斉家 治社 愛天下」という価値観をもとに、認識と外延を広げ続けています。"
+    },
+    "philosophy": {
+      "sectionTitle": "Philosophy",
+      "note": "※ TenacitiesはMetaverseを目指していますが、学界で議論されるMetaverseとは見解が大きく異なる場合があります。",
+      "topic1": {
+        "title": "1️⃣ Metaverseに対する誤解と本質",
+        "p1": "多くの人はMetaverse、3D World、仮想現実を混同しがちです。Tenacitiesも最初は同じでした。",
+        "p2": "しかし探究を重ねた結果、私たちはSeamless worldこそMetaverseの本質だと解釈しました。"
+      },
+      "topic2": {
+        "title": "2️⃣ Seamless worldとは",
+        "p1": "「私」という存在は、いつどこでも連続した、Seamlessな状態で存在します。",
+        "p2": "小学校を卒業して中学校に入学しても、管理システムに個人情報が登録され学籍番号が発行されるまでは、その社会の構成員として活動できません。私はSeamlessでも、WorldはSeamlessではありません。中央集権的な管理システムのためです。",
+        "p3": "韓国からアメリカへ移る時も同じです。管理システムに「私」の情報が登録されなければ、構成員として存在できません。",
+        "p4": "Metaverseと分散化が不可分なのは政治的な理由ではなく、Seamlessな生存を願う人間の本性に関わる話です。Coin、NFT、Block chainが一緒に語られるのも同じ理由です。"
+      },
+      "topic3": {
+        "title": "3️⃣ TenacitiesのSeamless World",
+        "p1": "TenacitiesはSeamless world構築における最重要の三つの本質を「住居・食飲・労働」と定義しました。",
+        "p2": "多くの仕事がAIに代替される現在と未来でも、労働の本質を営み、それを支える住居と食飲のエコシステムが整えば、人間は生きる意志を持ち続けられます。",
+        "p3": "私たちは世界のどこへ行っても、さらには人類が火星へ移住しても、この三つの観点で自給自足が実現するSeamless worldの構築を目指します。"
+      },
+      "topic4": {
+        "title": "4️⃣ TenacitiesとSeamless World",
+        "p1": "Tenacitiesは「意志を持つ人により多くの機会が与えられる世界」を願っています。",
+        "p2": "より良い人生を築く意志を持つ人々が集まった集団、それがTenacitiesです。",
+        "p3": "私たちTenacitiesは、意志を持つ人々が自由に生きられるMetaverseを目指します。"
+      }
+    },
+    "ci": {
+      "sectionTitle": "CI",
+      "logoSet": "ロゴとカラーセット",
+      "orgChart": "組織図",
+      "logoSetAria": "ロゴとカラーセットの詳細を見る",
+      "orgChartAria": "組織図の詳細を見る"
+    },
+    "history": {
+      "sectionTitle": "History",
+      "entry1": "2022.03. 株式会社テナシティーズ設立・事業開始",
+      "entry2": "2022.05. 技術保証基金2億ウォン 技術審査承認",
+      "entry3": "2022.08. Social Metaverse Toany ローンチ",
+      "entry4": "2023.05. NIPAメタバース初期企業インフラ支援事業 最終選抜",
+      "entry5": "2023.06. Kpop rhythm game Duet tae-bo",
+      "entry6": "2023.12. 短期賃貸仲介プラットフォーム Narae House 受託開発・ローンチ",
+      "entry7": "2024.06. 短期賃貸統合管理サービス Concierge Gangnam",
+      "entry8": "2024.12. コンシェルジュ＋外食業 年売上13億ウォン達成",
+      "archiveCta": "沿革アーカイブをすべて見る →"
+    },
+    "footer": {
+      "description": "assets/images/ のソース素材を基に、洗練された多層ブランドサイトとして再構築しました。"
+    }
+  }
+}
