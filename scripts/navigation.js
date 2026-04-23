@@ -182,22 +182,65 @@
   const el = document.querySelector('.hero-logo');
   if (el) {
     let heroFadeRaf = 0;
+    let heroFadeToken = 0;
+    let heroLogoReady = false;
+    let heroActive = false;
+
+    const waitForLogoReady = () => new Promise((resolve) => {
+      const finalize = async () => {
+        if (typeof el.decode === 'function') {
+          try {
+            await el.decode();
+          } catch (_) {
+            // Ignore decode errors and proceed with loaded image.
+          }
+        }
+        resolve();
+      };
+
+      if (el.complete && el.naturalWidth > 0) {
+        finalize();
+        return;
+      }
+
+      const onLoad = () => {
+        el.removeEventListener('error', onError);
+        finalize();
+      };
+      const onError = () => {
+        el.removeEventListener('load', onLoad);
+        resolve();
+      };
+      el.addEventListener('load', onLoad, { once: true });
+      el.addEventListener('error', onError, { once: true });
+    });
+
     const replayHeroLogoFade = () => {
       window.cancelAnimationFrame(heroFadeRaf);
-      el.style.opacity = '0.06';
-      el.style.animation = 'none';
+      heroFadeToken += 1;
+      const currentToken = heroFadeToken;
+      el.classList.add('is-fade-ready');
+      el.classList.remove('is-fading');
+      void el.offsetWidth;
       heroFadeRaf = window.requestAnimationFrame(() => {
-        el.style.animation = 'heroLogoFadeIn 3.8s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards';
+        if (currentToken !== heroFadeToken) return;
+        el.classList.add('is-fading');
       });
     };
     const handleHeroActiveChange = (id) => {
-      if (id === 'hero') replayHeroLogoFade();
+      heroActive = (id === 'hero');
+      if (heroActive && heroLogoReady) replayHeroLogoFade();
     };
     window.addEventListener('tenacities:active-section-change', (event) => {
       handleHeroActiveChange(event.detail?.id || '');
     });
-    window.requestAnimationFrame(() => {
+
+    window.requestAnimationFrame(async () => {
       handleHeroActiveChange(getCurrentActiveSectionId());
+      await waitForLogoReady();
+      heroLogoReady = true;
+      el.classList.add('is-fade-ready');
+      if (heroActive) replayHeroLogoFade();
     });
   }
 
@@ -350,10 +393,13 @@
       },
     ];
 
+    const isMobilePulseMode = window.matchMedia('(max-width: 768px)').matches
+      || window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+
     const makePulseFlowState = (group, index) => {
       const { base, main, highlight, aura } = group;
       if (!main || !highlight || !aura) return null;
-      const randomFactor = 0.9 + (Math.random() * 0.2);
+      const randomFactor = isMobilePulseMode ? 1 : (0.9 + (Math.random() * 0.2));
       const baseDuration = Math.max(9, base);
       const currentDuration = baseDuration * randomFactor;
       const startOffset = -((index + 1) * 240);
@@ -373,18 +419,22 @@
       .filter(Boolean);
 
     const chooseNextTargetSpeed = (baseDuration) => {
+      if (isMobilePulseMode) {
+        return 1000 / Math.max(9, baseDuration);
+      }
       const randomFactor = 0.9 + (Math.random() * 0.2);
       return 1000 / (Math.max(9, baseDuration) * randomFactor);
     };
 
     if (pulseFlowStates.length) {
       let lastTimestamp = performance.now();
+      const isCoarsePointer = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
       const stepPulseFlow = (timestamp) => {
-        const dt = Math.min(0.05, Math.max(0.001, (timestamp - lastTimestamp) / 1000));
+        const dt = Math.min(0.033, Math.max(0.001, (timestamp - lastTimestamp) / 1000));
         lastTimestamp = timestamp;
 
         pulseFlowStates.forEach((state, index) => {
-          const smoothing = 1 - Math.exp(-dt * 2.8);
+          const smoothing = 1 - Math.exp(-dt * (isCoarsePointer ? 2.1 : 2.8));
           state.speed += (state.targetSpeed - state.speed) * smoothing;
           state.offset -= state.speed * dt;
 
@@ -393,7 +443,10 @@
             state.targetSpeed = chooseNextTargetSpeed(pulseGroups[index].base);
           }
 
-          const offsetValue = state.offset.toFixed(3);
+          const normalizedOffset = isMobilePulseMode
+            ? Math.round(state.offset)
+            : state.offset;
+          const offsetValue = normalizedOffset.toFixed(isMobilePulseMode ? 0 : 3);
           state.main.style.strokeDashoffset = offsetValue;
           state.highlight.style.strokeDashoffset = offsetValue;
           state.aura.style.strokeDashoffset = offsetValue;

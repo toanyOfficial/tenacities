@@ -747,8 +747,17 @@ body.home-snap {
   height: auto;
   margin: 0;
   opacity: 0.06;
-  animation: heroLogoFadeIn 3.8s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards;
+  animation: none;
+  visibility: hidden;
+  transform: translateZ(0);
+  backface-visibility: hidden;
   will-change: opacity;
+}
+.hero-logo.is-fade-ready {
+  visibility: visible;
+}
+.hero-logo.is-fading {
+  animation: heroLogoFadeIn 7.6s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards;
 }
 .hero-concepts-group {
   grid-area: concepts;
@@ -841,6 +850,8 @@ body.home-snap {
   .hero-logo {
     animation: none;
     opacity: 1;
+    visibility: visible;
+    transform: none;
   }
   .philosophy-editorial .philosophy-block {
     opacity: 1;
@@ -1173,6 +1184,39 @@ body.home-snap {
 #philosophy .philosophy-pulse-aura-3 {
   stroke: url(#philosophy-pulse-hi-3);
   stroke-width: 4.55;
+}
+
+@media (max-width: 768px), (hover: none) and (pointer: coarse) {
+  #philosophy .philosophy-pulse,
+  #philosophy .philosophy-pulse-highlight,
+  #philosophy .philosophy-pulse-aura {
+    shape-rendering: auto;
+    transition: none;
+  }
+  #philosophy .philosophy-pulse {
+    opacity: 0.9;
+    filter: none;
+    animation: philosophyMobileGlowBreath 8.8s ease-in-out infinite;
+  }
+  #philosophy .philosophy-pulse-highlight {
+    display: none;
+  }
+  #philosophy .philosophy-pulse-aura {
+    opacity: 0.11;
+    filter: blur(1.2px);
+    mix-blend-mode: normal;
+    animation: philosophyMobileAuraBreath 10.4s ease-in-out infinite;
+  }
+}
+
+@keyframes philosophyMobileGlowBreath {
+  0%, 100% { opacity: 0.92; }
+  50% { opacity: 0.84; }
+}
+
+@keyframes philosophyMobileAuraBreath {
+  0%, 100% { opacity: 0.13; }
+  50% { opacity: 0.09; }
 }
 #philosophy .philosophy-support {
   position: absolute;
