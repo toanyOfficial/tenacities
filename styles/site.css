@@ -974,7 +974,7 @@ body.home-snap {
   background: radial-gradient(118% 142% at 24% 11%, transparent 58.2%, rgba(122, 15, 29, 0.12) 58.40% 58.70%, transparent 59.05%);
 }
 #philosophy .philosophy-support-2 {
-  background: radial-gradient(104% 138% at 52% 22%, transparent 61.1%, rgba(122, 15, 29, 0.10) 61.25% 61.58%, transparent 61.95%);
+  background: radial-gradient(104% 138% at 55% 22%, transparent 61.1%, rgba(122, 15, 29, 0.10) 61.25% 61.58%, transparent 61.95%);
 }
 #philosophy .philosophy-support-3 {
   background: radial-gradient(108% 146% at 68% 76%, transparent 56.4%, rgba(122, 15, 29, 0.09) 56.56% 56.86%, transparent 57.18%);
@@ -982,6 +982,29 @@ body.home-snap {
 #philosophy .philosophy-support-4 {
   background: radial-gradient(96% 132% at 88% 34%, transparent 63.1%, rgba(122, 15, 29, 0.085) 63.22% 63.54%, transparent 63.9%);
 }
+#philosophy .philosophy-curve-label {
+  position: absolute;
+  font-size: 0.72rem;
+  line-height: 1;
+  color: rgba(122, 15, 29, 0.72);
+  background: rgba(255, 251, 244, 0.76);
+  border: 1px solid rgba(122, 15, 29, 0.18);
+  border-radius: 999px;
+  width: 1.2rem;
+  height: 1.2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1;
+}
+#philosophy .philosophy-curve-label-1 { left: 25.4%; top: 17%; }
+#philosophy .philosophy-curve-label-2 { left: 31.2%; top: 11%; }
+#philosophy .philosophy-curve-label-3 { left: 44.8%; top: 20%; }
+#philosophy .philosophy-curve-label-4 { left: 52.4%; top: 10%; }
+#philosophy .philosophy-curve-label-5 { left: 63.2%; top: 30%; }
+#philosophy .philosophy-curve-label-6 { left: 75.4%; top: 14%; }
+#philosophy .philosophy-curve-label-7 { left: 86.8%; top: 22%; }
 #philosophy .philosophy-inner {
   position: relative;
   z-index: 3;
@@ -1165,6 +1188,11 @@ body.home-snap {
   #philosophy .philosophy-support-3,
   #philosophy .philosophy-support-4 {
     opacity: 0.58;
+  }
+  #philosophy .philosophy-curve-label {
+    font-size: 0.64rem;
+    width: 1.05rem;
+    height: 1.05rem;
   }
 }
 
