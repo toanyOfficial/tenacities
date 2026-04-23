@@ -1,13 +1,4 @@
-<!doctype html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>2023.05</title>
-  <link rel="stylesheet" href="../styles/site.css" />
-</head>
-<body>
-<header>
+export const MAIN_HEADER_TEMPLATE = `
   <div class="container nav">
     <strong><a class="brand-link" href="#hero">Tenacities</a></strong>
     <nav class="nav-links">
@@ -18,17 +9,4 @@
       <a href="#history" aria-label="History"><span class="tab-label">History</span><span class="tab-icon" aria-hidden="true">📜</span></a>
     </nav>
   </div>
-</header>
-<main class="page-title doc-main">
-  <div class="container">
-    <p class="eyebrow">History Detail</p>
-    <h1>2023.05. NIPA_메타버스초기기업 인프라 지원사업 최종선발</h1>
-    <div class="card"><a href="2023-05/agreement.html">협약서</a></div>
-
-    <p><a href="index.html">← 연혁으로 돌아가기</a></p>
-  </div>
-</main>
-<footer><div class="container">Tenacities history archive detail.</div></footer>
-<script src="../scripts/navigation.js"></script>
-</body>
-</html>
+`;
