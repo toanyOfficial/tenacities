@@ -257,6 +257,52 @@ footer .container {
 }
 .ci-grid .card { min-height: 100%; }
 .timeline.compact { margin-top: .6rem; }
+#history .history-timeline {
+  padding-left: 1.65rem;
+}
+#history .history-timeline-item {
+  margin-bottom: 0;
+  margin-top: clamp(.45rem, calc(var(--time-gap, 1) * .22rem), 2.2rem);
+  padding-left: 1.1rem;
+}
+#history .history-timeline-item::before {
+  display: none;
+}
+#history .history-point-icon {
+  position: absolute;
+  left: -1.98rem;
+  top: .38rem;
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0 0 0 2px #fff;
+}
+#history .history-year-start {
+  position: relative;
+}
+#history .history-year-label {
+  position: absolute;
+  left: -4.95rem;
+  top: .34rem;
+  min-width: 2.9rem;
+  font-size: .68rem;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: .05em;
+  color: var(--gray);
+  opacity: .62;
+  text-align: right;
+}
+#history .history-year-only {
+  margin-top: clamp(.55rem, calc(var(--time-gap, 1) * .22rem), 2.2rem);
+  min-height: .75rem;
+  position: relative;
+}
+#history .history-year-only .history-year-label {
+  top: 0;
+}
 
 .hero.tone-plain { border-bottom: 1px solid var(--line); }
 
@@ -1266,6 +1312,19 @@ body.home-snap {
   #philosophy .philosophy-support-3,
   #philosophy .philosophy-support-4 {
     opacity: 0.58;
+  }
+  #history .history-timeline {
+    padding-left: 1.35rem;
+  }
+  #history .history-year-label {
+    left: -4.15rem;
+    min-width: 2.45rem;
+    font-size: .64rem;
+  }
+  #history .history-point-icon {
+    left: -1.68rem;
+    width: 14px;
+    height: 14px;
   }
 }
 
