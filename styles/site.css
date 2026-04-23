@@ -1041,6 +1041,19 @@ body.home-snap {
 #philosophy .philosophy-support-4 {
   background: radial-gradient(96% 132% at 88% 34%, transparent 63.1%, rgba(122, 15, 29, 0.085) 63.22% 63.54%, transparent 63.9%);
 }
+#philosophy .philosophy-support-3 {
+  background: radial-gradient(108% 146% at 68% 76%, transparent 56.4%, rgba(122, 15, 29, 0.09) 56.56% 56.86%, transparent 57.18%);
+}
+#philosophy .philosophy-support-4 {
+  background: radial-gradient(96% 132% at 88% 34%, transparent 63.1%, rgba(122, 15, 29, 0.085) 63.22% 63.54%, transparent 63.9%);
+}
+#philosophy .philosophy-curve-label-1 { left: 25.4%; top: 17%; }
+#philosophy .philosophy-curve-label-2 { left: 31.2%; top: 11%; }
+#philosophy .philosophy-curve-label-3 { left: 44.8%; top: 20%; }
+#philosophy .philosophy-curve-label-4 { left: 52.4%; top: 10%; }
+#philosophy .philosophy-curve-label-5 { left: 63.2%; top: 30%; }
+#philosophy .philosophy-curve-label-6 { left: 75.4%; top: 14%; }
+#philosophy .philosophy-curve-label-7 { left: 86.8%; top: 22%; }
 #philosophy .philosophy-inner {
   position: relative;
   z-index: 3;
