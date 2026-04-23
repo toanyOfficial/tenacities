@@ -505,7 +505,7 @@ body { overflow-x: hidden; }
     margin: 0;
   }
   .home-snap .nav-links a {
-    --tab-bg: transparent;
+    --tab-bg: #fff;
     --tab-border: var(--crimson-dark);
     text-decoration: none;
     color: var(--crimson-dark);
