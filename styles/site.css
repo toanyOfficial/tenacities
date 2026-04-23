@@ -509,6 +509,10 @@ body { overflow-x: hidden; }
     --tab-border: var(--crimson-dark);
     color: #fff;
   }
+  .nav-links a.is-active .tab-label,
+  .nav-links a[aria-current="true"] .tab-label {
+    color: #ffffff;
+  }
   .nav-links .tab-icon {
     line-height: 1;
   }
