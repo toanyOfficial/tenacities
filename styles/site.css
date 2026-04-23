@@ -862,7 +862,7 @@ body[data-site-language]:not([data-site-language="ko"]) .hero-title-main-transla
     visibility: visible;
     transform: none;
   }
-  .philosophy-editorial .philosophy-block {
+  .philosophy-editorial [data-philosophy-fade] {
     opacity: 1;
     transform: none;
     transition: none;
@@ -1228,32 +1228,23 @@ body[data-site-language]:not([data-site-language="ko"]) .hero-title-main-transla
   50% { opacity: 0.09; }
 }
 
-.is-kakao-inapp #philosophy .philosophy-svg-curves,
-.is-kakao-inapp #philosophy .philosophy-curve,
-.is-kakao-inapp #philosophy .philosophy-pulse,
-.is-kakao-inapp #philosophy .philosophy-pulse-highlight,
-.is-kakao-inapp #philosophy .philosophy-pulse-aura,
-.is-kakao-inapp #philosophy .philosophy-support {
-  animation: none !important;
-  transition: none !important;
-  transform: none !important;
-  filter: none !important;
-  backdrop-filter: none !important;
-  will-change: auto !important;
-}
-
 .is-kakao-inapp #philosophy .philosophy-pulse-highlight,
 .is-kakao-inapp #philosophy .philosophy-pulse-aura,
 .is-kakao-inapp #philosophy .philosophy-support {
   display: none !important;
   opacity: 0 !important;
+  animation: none !important;
+  transition: none !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  will-change: auto !important;
 }
 
 .is-kakao-inapp #philosophy .philosophy-pulse {
-  opacity: 0.88 !important;
-  stroke-dashoffset: 0 !important;
-  filter: none !important;
-  animation: kakaoPhilosophyOpacityBreath 4.6s ease-in-out infinite !important;
+  opacity: 0.86 !important;
+  filter: blur(0.12px) !important;
+  animation: kakaoPhilosophyOpacityBreath 6.4s ease-in-out infinite !important;
+  will-change: stroke-dashoffset, opacity !important;
 }
 
 @keyframes kakaoPhilosophyOpacityBreath {
@@ -1331,14 +1322,14 @@ body[data-site-language]:not([data-site-language="ko"]) .hero-title-main-transla
 .philosophy-editorial .source-p {
   margin-bottom: 1rem;
 }
-.philosophy-editorial .philosophy-block {
+.philosophy-editorial [data-philosophy-fade] {
   opacity: 0;
   transform: translateY(12px);
   transition: opacity .76s cubic-bezier(0.22, 1, 0.36, 1), transform .76s cubic-bezier(0.22, 1, 0.36, 1);
   transition-delay: calc(var(--philosophy-sequence, 0) * .44s);
   will-change: opacity, transform;
 }
-.philosophy-editorial.philosophy-visible .philosophy-block {
+.philosophy-editorial.philosophy-visible [data-philosophy-fade] {
   opacity: 1;
   transform: translateY(0);
 }
