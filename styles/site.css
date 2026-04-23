@@ -61,11 +61,11 @@ header {
   font-weight: 600;
   letter-spacing: 0.01em;
 }
-.home-snap .brand-link {
+.brand-link {
   color: var(--crimson-dark);
   text-decoration: none;
 }
-.home-snap .brand-link:hover {
+.brand-link:hover {
   color: var(--crimson);
 }
 
@@ -74,7 +74,7 @@ header {
   gap: 1.1rem;
   font-size: .95rem;
 }
-.home-snap .nav-links .tab-icon {
+.nav-links .tab-icon {
   display: none;
 }
 
@@ -462,7 +462,7 @@ body { overflow-x: hidden; }
 @media (max-width: 767px) {
   .container { width: calc(100% - 1.25rem); }
 
-  .home-snap header .container.nav {
+  header .container.nav {
     width: 100%;
     margin: 0;
     padding: 0;
@@ -474,7 +474,7 @@ body { overflow-x: hidden; }
     min-height: auto;
     padding: .65rem 0 .75rem;
   }
-  .home-snap .nav strong { display: none; }
+  .nav strong { display: none; }
   .nav-links {
     width: 100%;
     gap: 0;
@@ -484,7 +484,7 @@ body { overflow-x: hidden; }
     padding: 0;
     margin: 0;
   }
-  .home-snap .nav-links a {
+  .nav-links a {
     --tab-bg: #fff;
     --tab-border: var(--crimson-dark);
     text-decoration: none;
@@ -503,35 +503,36 @@ body { overflow-x: hidden; }
     flex: 1 1 0;
     box-shadow: none;
   }
-  .home-snap .nav-links a.is-active,
-  .home-snap .nav-links a[aria-current="true"] {
+  .nav-links a.is-active,
+  .nav-links a[aria-current="true"] {
     --tab-bg: var(--crimson-dark);
     --tab-border: var(--crimson-dark);
     color: #fff;
   }
-  .home-snap .nav-links .tab-icon {
+  .nav-links .tab-icon {
     line-height: 1;
   }
-  .home-snap .nav-links .tab-icon-logo {
+  .nav-links .tab-icon-logo {
     width: 14px;
     height: 14px;
     object-fit: contain;
     display: block;
   }
   @media (max-width: 420px) {
-    .home-snap .nav-links .tab-icon {
+    .nav-links .tab-icon {
       display: inline;
       font-size: .94rem;
     }
-    .home-snap .nav-links .tab-label {
+    .nav-links .tab-label {
       display: none;
     }
-    .home-snap .nav-links a.is-active .tab-label,
-    .home-snap .nav-links a[aria-current="true"] .tab-label {
+    .nav-links a.is-active .tab-label,
+    .nav-links a[aria-current="true"] .tab-label {
       display: inline;
+      color: #ffffff;
     }
-    .home-snap .nav-links a.is-active .tab-icon,
-    .home-snap .nav-links a[aria-current="true"] .tab-icon {
+    .nav-links a.is-active .tab-icon,
+    .nav-links a[aria-current="true"] .tab-icon {
       display: none;
     }
   }
@@ -1296,6 +1297,11 @@ body.home-snap {
 .nav-links a[aria-current="true"] {
   color: var(--crimson-dark);
   text-decoration-color: rgba(122, 15, 29, .65);
+}
+
+.nav-links a.is-active .tab-label,
+.nav-links a[aria-current="true"] .tab-label {
+  color: #ffffff;
 }
 
 /* STEP10 responsive paragraph readability */
