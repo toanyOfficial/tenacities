@@ -65,13 +65,26 @@
     updateBubbleUI();
   };
 
+  const switchLanguage = async (lang) => {
+    try {
+      await setLang(lang);
+    } catch (err) {
+      if (lang !== 'ko') {
+        await setLang('ko');
+      }
+    }
+  };
+
   let bubbleButton;
   let panel;
 
   const updateBubbleUI = () => {
-    if (!bubbleButton || !panel || !currentLocale) return;
+    if (!bubbleButton || !panel) return;
     bubbleButton.textContent = FLAG[activeLang] || '🌐';
-    bubbleButton.setAttribute('aria-label', getByPath(currentLocale, 'lang.pickerAria') || 'Select language');
+    const pickerAria = currentLocale
+      ? getByPath(currentLocale, 'lang.pickerAria')
+      : null;
+    bubbleButton.setAttribute('aria-label', pickerAria || 'Select language');
 
     panel.querySelectorAll('[data-lang-option]').forEach((btn) => {
       btn.classList.toggle('is-active', btn.dataset.langOption === activeLang);
@@ -109,7 +122,7 @@
       btn.addEventListener('click', async () => {
         panel.hidden = true;
         bubbleButton.setAttribute('aria-expanded', 'false');
-        await setLang(code);
+        await switchLanguage(code);
       });
       panel.appendChild(btn);
     });
@@ -133,11 +146,7 @@
 
   document.addEventListener('DOMContentLoaded', async () => {
     buildLanguageUI();
-    try {
-      await setLang(activeLang);
-    } catch (err) {
-      activeLang = 'ko';
-      await setLang('ko');
-    }
+    updateBubbleUI();
+    await switchLanguage(activeLang);
   });
 })();

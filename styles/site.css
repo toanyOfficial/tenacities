@@ -1548,8 +1548,8 @@ main h3 + p {
 /* i18n language bubble */
 .lang-fab-wrap {
   position: fixed;
-  right: 16px;
-  bottom: 16px;
+  right: clamp(16px, calc((100vw - 1120px) / 2 + 20px), 120px);
+  bottom: clamp(16px, 3vh, 28px);
   z-index: 1200;
   display: flex;
   flex-direction: column;
