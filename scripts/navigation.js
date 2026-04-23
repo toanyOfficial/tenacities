@@ -44,6 +44,15 @@
 
   const sectionIds = ['hero', 'background', 'philosophy', 'ci', 'history'];
   const navLinks = Array.from(document.querySelectorAll('header .nav-links a[href^="#"]'));
+  let activeSectionId = '';
+  const emitActiveSectionChange = (id) => {
+    window.dispatchEvent(new CustomEvent('tenacities:active-section-change', { detail: { id } }));
+  };
+  const getCurrentActiveSectionId = () => {
+    const current = navLinks.find((link) => link.getAttribute('aria-current') === 'true');
+    const href = current?.getAttribute('href') || '';
+    return href.startsWith('#') ? href.slice(1) : '';
+  };
 
   if (navLinks.length) {
     const sectionMap = new Map(sectionIds.map((id) => [id, document.getElementById(id)]).filter(([, el]) => !!el));
@@ -55,6 +64,10 @@
         if (hit) a.setAttribute('aria-current', 'true');
         else a.removeAttribute('aria-current');
       });
+      if (id && activeSectionId !== id) {
+        activeSectionId = id;
+        emitActiveSectionChange(id);
+      }
     };
 
     if (sectionMap.size) {
@@ -123,10 +136,24 @@
 
   const el = document.querySelector('.hero-logo');
   if (el) {
-    el.style.opacity = '0.06';
-    el.style.animation = 'none';
-    el.offsetHeight; // reflow
-    el.style.animation = 'heroLogoFadeIn 3.8s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards';
+    let heroFadeRaf = 0;
+    const replayHeroLogoFade = () => {
+      window.cancelAnimationFrame(heroFadeRaf);
+      el.style.opacity = '0.06';
+      el.style.animation = 'none';
+      heroFadeRaf = window.requestAnimationFrame(() => {
+        el.style.animation = 'heroLogoFadeIn 3.8s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards';
+      });
+    };
+    const handleHeroActiveChange = (id) => {
+      if (id === 'hero') replayHeroLogoFade();
+    };
+    window.addEventListener('tenacities:active-section-change', (event) => {
+      handleHeroActiveChange(event.detail?.id || '');
+    });
+    window.requestAnimationFrame(() => {
+      handleHeroActiveChange(getCurrentActiveSectionId());
+    });
   }
 
   const backgroundSection = document.getElementById('background');
@@ -195,27 +222,30 @@
     window.addEventListener('resize', scheduleBackgroundOptimization, { passive: true });
     window.addEventListener('orientationchange', scheduleBackgroundOptimization, { passive: true });
 
-    if ('IntersectionObserver' in window) {
-      let played = false;
-      const backgroundObserver = new IntersectionObserver(
-        (entries) => {
-          if (played) return;
-          const entry = entries[0];
-          if (!entry?.isIntersecting) return;
-          backgroundSection.classList.add('bg-visible');
-          played = true;
-          backgroundObserver.disconnect();
-        },
-        {
-          root: isElementScroller ? snapRoot : null,
-          threshold: 0.45,
-          rootMargin: isElementScroller ? '0px' : `-${getHeaderHeightPx()}px 0px -35% 0px`,
-        }
-      );
-      backgroundObserver.observe(backgroundSection);
-    } else {
-      backgroundSection.classList.add('bg-visible');
-    }
+    let backgroundActive = false;
+    const replayBackgroundFade = () => {
+      backgroundSection.classList.remove('bg-visible');
+      window.requestAnimationFrame(() => {
+        backgroundSection.classList.add('bg-visible');
+      });
+    };
+    const handleBackgroundActiveChange = (id) => {
+      if (id === 'background') {
+        if (!backgroundActive) replayBackgroundFade();
+        backgroundActive = true;
+        return;
+      }
+      if (backgroundActive) {
+        backgroundActive = false;
+        backgroundSection.classList.remove('bg-visible');
+      }
+    };
+    window.addEventListener('tenacities:active-section-change', (event) => {
+      handleBackgroundActiveChange(event.detail?.id || '');
+    });
+    window.requestAnimationFrame(() => {
+      handleBackgroundActiveChange(getCurrentActiveSectionId());
+    });
   }
 
   const philosophySection = document.getElementById('philosophy');
@@ -228,27 +258,30 @@
     });
 
     if (philosophyInner) {
-      if ('IntersectionObserver' in window) {
-        let played = false;
-        const philosophyObserver = new IntersectionObserver(
-          (entries) => {
-            if (played) return;
-            const entry = entries[0];
-            if (!entry?.isIntersecting) return;
-            philosophyInner.classList.add('philosophy-visible');
-            played = true;
-            philosophyObserver.disconnect();
-          },
-          {
-            root: isElementScroller ? snapRoot : null,
-            threshold: 0.01,
-            rootMargin: isElementScroller ? '0px 0px -12% 0px' : `-${getHeaderHeightPx()}px 0px -12% 0px`,
-          }
-        );
-        philosophyObserver.observe(philosophySection);
-      } else {
-        philosophyInner.classList.add('philosophy-visible');
-      }
+      let philosophyActive = false;
+      const replayPhilosophyFade = () => {
+        philosophyInner.classList.remove('philosophy-visible');
+        window.requestAnimationFrame(() => {
+          philosophyInner.classList.add('philosophy-visible');
+        });
+      };
+      const handlePhilosophyActiveChange = (id) => {
+        if (id === 'philosophy') {
+          if (!philosophyActive) replayPhilosophyFade();
+          philosophyActive = true;
+          return;
+        }
+        if (philosophyActive) {
+          philosophyActive = false;
+          philosophyInner.classList.remove('philosophy-visible');
+        }
+      };
+      window.addEventListener('tenacities:active-section-change', (event) => {
+        handlePhilosophyActiveChange(event.detail?.id || '');
+      });
+      window.requestAnimationFrame(() => {
+        handlePhilosophyActiveChange(getCurrentActiveSectionId());
+      });
     }
 
     const pulseGroups = [
