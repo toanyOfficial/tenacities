@@ -187,7 +187,7 @@
       el.style.opacity = '0.06';
       el.style.animation = 'none';
       heroFadeRaf = window.requestAnimationFrame(() => {
-        el.style.animation = 'heroLogoFadeIn 3.8s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards';
+        el.style.animation = 'heroLogoFadeIn 7.6s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards';
       });
     };
     const handleHeroActiveChange = (id) => {
@@ -334,32 +334,77 @@
         base: 12.2,
         main: philosophySection.querySelector('.philosophy-pulse-1'),
         highlight: philosophySection.querySelector('.philosophy-pulse-highlight-1'),
+        aura: philosophySection.querySelector('.philosophy-pulse-aura-1'),
       },
       {
         base: 13.6,
         main: philosophySection.querySelector('.philosophy-pulse-2'),
         highlight: philosophySection.querySelector('.philosophy-pulse-highlight-2'),
+        aura: philosophySection.querySelector('.philosophy-pulse-aura-2'),
       },
       {
         base: 11.4,
         main: philosophySection.querySelector('.philosophy-pulse-3'),
         highlight: philosophySection.querySelector('.philosophy-pulse-highlight-3'),
+        aura: philosophySection.querySelector('.philosophy-pulse-aura-3'),
       },
     ];
 
-    const applyPulseRandomTiming = ({ base, main, highlight }) => {
-      if (!main || !highlight) return;
-      const jitter = (Math.random() * 1.5) - 0.75;
-      const duration = Math.max(9, base + jitter);
-      const durationValue = `${duration.toFixed(2)}s`;
-      main.style.setProperty('--pulse-duration', durationValue);
-      highlight.style.setProperty('--pulse-duration', durationValue);
+    const makePulseFlowState = (group, index) => {
+      const { base, main, highlight, aura } = group;
+      if (!main || !highlight || !aura) return null;
+      const randomFactor = 0.9 + (Math.random() * 0.2);
+      const baseDuration = Math.max(9, base);
+      const currentDuration = baseDuration * randomFactor;
+      const startOffset = -((index + 1) * 240);
+      return {
+        main,
+        highlight,
+        aura,
+        offset: startOffset,
+        speed: 1000 / currentDuration,
+        targetSpeed: 1000 / currentDuration,
+        cycleDistance: 1000,
+      };
     };
 
-    pulseGroups.forEach((group) => {
-      if (!group.main || !group.highlight) return;
-      applyPulseRandomTiming(group);
-    });
+    const pulseFlowStates = pulseGroups
+      .map((group, index) => makePulseFlowState(group, index))
+      .filter(Boolean);
+
+    const chooseNextTargetSpeed = (baseDuration) => {
+      const randomFactor = 0.9 + (Math.random() * 0.2);
+      return 1000 / (Math.max(9, baseDuration) * randomFactor);
+    };
+
+    if (pulseFlowStates.length) {
+      let lastTimestamp = performance.now();
+      const isCoarsePointer = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+      const stepPulseFlow = (timestamp) => {
+        const dt = Math.min(0.033, Math.max(0.001, (timestamp - lastTimestamp) / 1000));
+        lastTimestamp = timestamp;
+
+        pulseFlowStates.forEach((state, index) => {
+          const smoothing = 1 - Math.exp(-dt * (isCoarsePointer ? 2.1 : 2.8));
+          state.speed += (state.targetSpeed - state.speed) * smoothing;
+          state.offset -= state.speed * dt;
+
+          if (state.offset <= -state.cycleDistance) {
+            state.offset += state.cycleDistance;
+            state.targetSpeed = chooseNextTargetSpeed(pulseGroups[index].base);
+          }
+
+          const offsetValue = state.offset.toFixed(3);
+          state.main.style.strokeDashoffset = offsetValue;
+          state.highlight.style.strokeDashoffset = offsetValue;
+          state.aura.style.strokeDashoffset = offsetValue;
+        });
+
+        window.requestAnimationFrame(stepPulseFlow);
+      };
+
+      window.requestAnimationFrame(stepPulseFlow);
+    }
 
     const philosophyContent = philosophySection.querySelector('.philosophy-content');
     const philosophyParagraphs = philosophyContent
