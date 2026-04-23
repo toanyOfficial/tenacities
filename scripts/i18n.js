@@ -259,6 +259,9 @@
     currentLanguage = resolvedLanguage;
     currentDictionary = dict;
     setSavedLanguage(resolvedLanguage);
+    if (global.document && global.document.body) {
+      global.document.body.setAttribute('data-site-language', resolvedLanguage);
+    }
     applyTranslations(dict);
     updateSwitcherUI(resolvedLanguage);
 

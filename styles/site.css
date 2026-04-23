@@ -732,6 +732,15 @@ body.home-snap {
   font-weight: 800;
   letter-spacing: -0.02em;
 }
+.hero-title-main-translated {
+  display: none;
+}
+body[data-site-language]:not([data-site-language="ko"]) .hero-title-main-translated {
+  display: block;
+  font-size: clamp(0.96rem, 1.85vw, 1.28rem);
+  font-weight: 700;
+  line-height: 1.28;
+}
 .hero-title-sub {
   display: block;
   font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
