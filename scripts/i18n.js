@@ -1,5 +1,5 @@
 (function (global) {
-  const STORAGE_KEY = 'site-language';
+  const STORAGE_KEY = 'siteLanguage';
   const DEFAULT_LANGUAGE = 'ko';
   const SUPPORTED_LANGUAGES = ['ko', 'ja', 'en', 'zh'];
   const LANGUAGE_META = {
@@ -214,13 +214,25 @@
 
   async function setLanguage(lang) {
     const normalizedLang = normalizeLanguage(lang);
-    const dict = await loadLocale(normalizedLang);
+    let resolvedLanguage = normalizedLang;
+    let dict;
 
-    currentLanguage = normalizedLang;
+    try {
+      dict = await loadLocale(normalizedLang);
+    } catch (error) {
+      if (normalizedLang !== DEFAULT_LANGUAGE) {
+        resolvedLanguage = DEFAULT_LANGUAGE;
+        dict = await loadLocale(DEFAULT_LANGUAGE);
+      } else {
+        throw error;
+      }
+    }
+
+    currentLanguage = resolvedLanguage;
     currentDictionary = dict;
-    setSavedLanguage(normalizedLang);
+    setSavedLanguage(resolvedLanguage);
     applyTranslations(dict);
-    updateSwitcherUI(normalizedLang);
+    updateSwitcherUI(resolvedLanguage);
 
     return { language: currentLanguage, dictionary: currentDictionary };
   }
