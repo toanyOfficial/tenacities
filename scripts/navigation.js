@@ -393,10 +393,13 @@
       },
     ];
 
+    const isMobilePulseMode = window.matchMedia('(max-width: 768px)').matches
+      || window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+
     const makePulseFlowState = (group, index) => {
       const { base, main, highlight, aura } = group;
       if (!main || !highlight || !aura) return null;
-      const randomFactor = 0.9 + (Math.random() * 0.2);
+      const randomFactor = isMobilePulseMode ? 1 : (0.9 + (Math.random() * 0.2));
       const baseDuration = Math.max(9, base);
       const currentDuration = baseDuration * randomFactor;
       const startOffset = -((index + 1) * 240);
@@ -416,6 +419,9 @@
       .filter(Boolean);
 
     const chooseNextTargetSpeed = (baseDuration) => {
+      if (isMobilePulseMode) {
+        return 1000 / Math.max(9, baseDuration);
+      }
       const randomFactor = 0.9 + (Math.random() * 0.2);
       return 1000 / (Math.max(9, baseDuration) * randomFactor);
     };
@@ -437,7 +443,10 @@
             state.targetSpeed = chooseNextTargetSpeed(pulseGroups[index].base);
           }
 
-          const offsetValue = state.offset.toFixed(3);
+          const normalizedOffset = isMobilePulseMode
+            ? Math.round(state.offset)
+            : state.offset;
+          const offsetValue = normalizedOffset.toFixed(isMobilePulseMode ? 0 : 3);
           state.main.style.strokeDashoffset = offsetValue;
           state.highlight.style.strokeDashoffset = offsetValue;
           state.aura.style.strokeDashoffset = offsetValue;

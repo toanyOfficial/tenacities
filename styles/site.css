@@ -1186,24 +1186,25 @@ body.home-snap {
   stroke-width: 4.55;
 }
 
-@media (hover: none) and (pointer: coarse) {
+@media (max-width: 768px), (hover: none) and (pointer: coarse) {
   #philosophy .philosophy-pulse,
   #philosophy .philosophy-pulse-highlight,
   #philosophy .philosophy-pulse-aura {
     shape-rendering: auto;
+    transition: none;
   }
   #philosophy .philosophy-pulse {
-    opacity: 0.88;
+    opacity: 0.9;
     filter: none;
   }
   #philosophy .philosophy-pulse-highlight {
-    opacity: 0.46;
-    filter: blur(0.95px);
+    opacity: 0.44;
+    filter: blur(0.72px);
     mix-blend-mode: normal;
   }
   #philosophy .philosophy-pulse-aura {
-    opacity: 0.13;
-    filter: blur(1.75px);
+    opacity: 0.1;
+    filter: blur(1.2px);
     mix-blend-mode: normal;
   }
 }
