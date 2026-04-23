@@ -500,7 +500,7 @@ body.home-snap {
   width: min(1100px, calc(100% - 2rem));
 }
 
-/* Brand Philosophy exception: 100vh shell + internal free scroll */
+/* Philosophy exception: 100vh shell + internal free scroll */
 .home-snap .philosophy-shell {
   min-height: 100%;
 }
@@ -1057,11 +1057,25 @@ body.home-snap {
   0% { stroke-dashoffset: 0; }
   100% { stroke-dashoffset: -1000; }
 }
+@keyframes philosophyBounce {
+  0% { transform: translateY(0); }
+  30% { transform: translateY(-12px); }
+  60% { transform: translateY(6px); }
+  100% { transform: translateY(0); }
+}
 
 .philosophy-editorial .reading-width {
   width: min(100%, 920px);
   max-width: 920px;
   margin-inline: auto;
+}
+#philosophy.philosophy-bounce {
+  animation: philosophyBounce 420ms cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.philosophy-editorial .philosophy-dummy-end {
+  height: clamp(120px, 15vh, 240px);
+  pointer-events: none;
+  opacity: 0;
 }
 .philosophy-editorial .philosophy-note {
   margin-bottom: 1.4rem;

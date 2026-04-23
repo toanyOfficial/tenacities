@@ -261,6 +261,137 @@
       applyPulseRandomTiming(group);
     });
 
+    const philosophyContent = philosophySection.querySelector('.philosophy-content');
+    const philosophyParagraphs = philosophyContent
+      ? Array.from(philosophyContent.querySelectorAll('.source-p'))
+      : [];
+    const lastParagraph = philosophyParagraphs.length
+      ? philosophyParagraphs[philosophyParagraphs.length - 1]
+      : null;
+
+    if (lastParagraph) {
+      let hasBouncedAtEnd = false;
+      let bounceLock = false;
+      let isPhilosophyActive = false;
+      let lastParagraphBottom = 0;
+      let touchY = null;
+      let bounceUnlockTimer = 0;
+      let pendingDelta = 0;
+      let endCheckRaf = 0;
+
+      const clearBounceClass = () => {
+        philosophySection.classList.remove('philosophy-bounce');
+      };
+
+      const measureLastParagraphBottom = () => {
+        const rect = lastParagraph.getBoundingClientRect();
+        if (isElementScroller) {
+          const scrollerRect = snapRoot.getBoundingClientRect();
+          lastParagraphBottom = snapRoot.scrollTop + (rect.bottom - scrollerRect.top);
+          return;
+        }
+        lastParagraphBottom = window.scrollY + rect.bottom;
+      };
+
+      const viewportBottom = () => (
+        isElementScroller
+          ? (snapRoot.scrollTop + snapRoot.clientHeight)
+          : (window.scrollY + window.innerHeight)
+      );
+
+      const atLastParagraphEnd = () => viewportBottom() >= (lastParagraphBottom - 1);
+
+      const triggerPhilosophyBounce = () => {
+        hasBouncedAtEnd = true;
+        bounceLock = true;
+        clearTimeout(bounceUnlockTimer);
+        clearBounceClass();
+        philosophySection.classList.add('philosophy-bounce');
+        requestAnimationFrame(() => {
+          philosophySection.scrollIntoView({ behavior: 'auto', block: 'start' });
+        });
+        bounceUnlockTimer = window.setTimeout(() => {
+          bounceLock = false;
+        }, 460);
+      };
+
+      const checkBounceTrigger = (deltaY) => {
+        if (deltaY <= 0) return;
+        if (!isPhilosophyActive) return;
+        if (hasBouncedAtEnd || bounceLock) return;
+        if (!atLastParagraphEnd()) return;
+        triggerPhilosophyBounce();
+      };
+
+      const scheduleBounceCheck = (deltaY) => {
+        if (deltaY <= 0) return;
+        pendingDelta = Math.max(pendingDelta, deltaY);
+        if (endCheckRaf) return;
+        endCheckRaf = window.requestAnimationFrame(() => {
+          endCheckRaf = 0;
+          const nextDelta = pendingDelta;
+          pendingDelta = 0;
+          checkBounceTrigger(nextDelta);
+        });
+      };
+
+      const resetBounceState = () => {
+        hasBouncedAtEnd = false;
+        bounceLock = false;
+        clearTimeout(bounceUnlockTimer);
+        clearBounceClass();
+      };
+
+      philosophySection.addEventListener('animationend', (event) => {
+        if (event.animationName === 'philosophyBounce') clearBounceClass();
+      });
+
+      const inputTarget = isElementScroller ? snapRoot : window;
+      inputTarget.addEventListener('wheel', (event) => {
+        scheduleBounceCheck(event.deltaY);
+      }, { passive: true });
+
+      inputTarget.addEventListener('touchstart', (event) => {
+        if (!event.touches?.length) return;
+        touchY = event.touches[0].clientY;
+      }, { passive: true });
+
+      inputTarget.addEventListener('touchmove', (event) => {
+        if (!event.touches?.length || touchY == null) return;
+        const nextY = event.touches[0].clientY;
+        const deltaY = touchY - nextY;
+        touchY = nextY;
+        scheduleBounceCheck(deltaY);
+      }, { passive: true });
+
+      inputTarget.addEventListener('touchend', () => {
+        touchY = null;
+      }, { passive: true });
+
+      if ('IntersectionObserver' in window) {
+        const activeObserver = new IntersectionObserver(
+          (entries) => {
+            const entry = entries[0];
+            const active = !!entry?.isIntersecting && entry.intersectionRatio > 0.45;
+            if (!active && isPhilosophyActive) resetBounceState();
+            isPhilosophyActive = active;
+            if (isPhilosophyActive) measureLastParagraphBottom();
+          },
+          {
+            root: isElementScroller ? snapRoot : null,
+            threshold: [0.25, 0.45, 0.6],
+          }
+        );
+        activeObserver.observe(philosophySection);
+      } else {
+        isPhilosophyActive = true;
+      }
+
+      measureLastParagraphBottom();
+      window.addEventListener('resize', measureLastParagraphBottom, { passive: true });
+      window.addEventListener('orientationchange', measureLastParagraphBottom, { passive: true });
+    }
+
   }
 
   updateHeaderHeightVar();
