@@ -1184,7 +1184,7 @@ body.home-snap {
 @media (max-width: 767px) {
   .ci-screen .ci-two-blocks {
     grid-template-columns: 1fr;
-    min-height: 68vh;
+    min-height: calc(100svh - var(--header-height));
     align-content: center;
   }
   .ci-block { min-height: 180px; }
