@@ -953,15 +953,15 @@ body.home-snap {
   stroke-linecap: round;
 }
 #philosophy .philosophy-curve-1 {
-  stroke: rgba(122, 15, 29, 0.23);
+  stroke: rgba(122, 15, 29, 0.12);
   stroke-width: 3.9;
 }
 #philosophy .philosophy-curve-2 {
-  stroke: rgba(122, 15, 29, 0.19);
+  stroke: rgba(122, 15, 29, 0.10);
   stroke-width: 3.35;
 }
 #philosophy .philosophy-curve-3 {
-  stroke: rgba(122, 15, 29, 0.155);
+  stroke: rgba(122, 15, 29, 0.082);
   stroke-width: 2.8;
 }
 #philosophy .philosophy-support {
